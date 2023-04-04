@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="Cheating Expung FFN.png">
+<SubTexture name="Cheating Expung FFN idle0000" x="0" y="3013" width="621" height="525" frameX="-35" frameY="-243" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN idle0001" x="621" y="3013" width="616" height="523" frameX="-35" frameY="-243" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN idle0002" x="1237" y="3013" width="585" height="513" frameX="-35" frameY="-234" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN idle0003" x="2647" y="1657" width="569" height="528" frameX="-35" frameY="-193" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN idle0004" x="2333" y="2448" width="561" height="526" frameX="-35" frameY="-186" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN idle0005" x="2333" y="2448" width="561" height="526" frameX="-35" frameY="-186" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN idle0006" x="1769" y="2448" width="564" height="527" frameX="-35" frameY="-193" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN up0000" x="0" y="1281" width="633" height="591" frameX="-61" frameY="-67" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN up0001" x="1267" y="1281" width="635" height="590" frameX="-51" frameY="-73" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN up0002" x="2012" y="0" width="635" height="590" frameX="-47" frameY="-80" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN up0003" x="633" y="1281" width="634" height="591" frameX="-46" frameY="-80" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN up0004" x="633" y="1281" width="634" height="591" frameX="-46" frameY="-80" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN up0005" x="2012" y="590" width="622" height="585" frameX="-40" frameY="-93" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN up0006" x="2012" y="1175" width="601" height="581" frameX="-45" frameY="-112" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN left0000" x="2894" y="2448" width="451" height="526" frameX="-6" frameY="-194" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN left0001" x="2647" y="1128" width="426" height="529" frameX="-35" frameY="-210" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN left0002" x="3073" y="1128" width="427" height="527" frameX="-35" frameY="-222" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN left0003" x="3502" y="0" width="426" height="526" frameX="-35" frameY="-225" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN left0004" x="3502" y="0" width="426" height="526" frameX="-35" frameY="-225" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN left0005" x="2647" y="569" width="414" height="559" frameX="-35" frameY="-228" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN left0006" x="3061" y="569" width="414" height="557" frameX="-35" frameY="-229" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN right0000" x="866" y="2448" width="903" height="552" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN right0001" x="0" y="2448" width="866" height="565" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN right0002" x="2647" y="0" width="855" height="569" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN right0003" x="764" y="1872" width="842" height="572" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN right0004" x="764" y="1872" width="842" height="572" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN right0005" x="1606" y="1872" width="798" height="572" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN right0006" x="0" y="1872" width="764" height="576" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN down0000" x="0" y="0" width="687" height="657" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN down0001" x="687" y="0" width="665" height="629" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN down0002" x="1352" y="0" width="660" height="615" frameX="-63" frameY="-184" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN down0003" x="1352" y="615" width="660" height="611" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN down0004" x="1352" y="615" width="660" height="611" frameX="-63" frameY="-187" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN down0005" x="0" y="657" width="657" height="624" frameX="-62" frameY="-161" frameWidth="967" frameHeight="869" />
+<SubTexture name="Cheating Expung FFN down0006" x="657" y="657" width="655" height="620" frameX="-61" frameY="-156" frameWidth="967" frameHeight="869" />
+</TextureAtlas>

@@ -1,0 +1,23 @@
+{
+	"songs": [
+		["Cypher", "cheating", [17, 154, 43]],
+		["Deceit", "unfair", [255, 0, 0]],
+		["Nether", "expunged", [129, 0, 0]]
+	],
+
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "EXPUNGED'S DIMENSIONAL DEVASTATION",
+	"weekBefore": "week1",
+	"weekName": "Week 2",
+	"weekDifficulties": "Normal",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}
