@@ -1694,7 +1694,7 @@ class PlayState extends MusicBeatState
 		add(creditsWatermark);
 		creditsWatermark.cameras = [camHUD];
 
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "AUTOPLAY", 32);
 		botplayTxt.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
@@ -1732,7 +1732,7 @@ class PlayState extends MusicBeatState
 				engineName = "FNAF ";
 		}
 
-		kadeEngineWatermark = new FlxText(4, textYPos, 0, SONG.song + " - (PE 0.6.2)", 14);
+		kadeEngineWatermark = new FlxText(4, textYPos, 0, SONG.song + " | PE 0.6.2", 14);
 		kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		kadeEngineWatermark.borderSize = 1.25;
@@ -1797,6 +1797,7 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		blackScreendeez.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;

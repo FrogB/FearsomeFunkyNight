@@ -1498,6 +1498,11 @@
 						"Change the Default Camera Zoom",
 						"1.2",
 						""
+					],
+					[
+						"Cinematics",
+						"1",
+						""
 					]
 				]
 			],
@@ -1672,6 +1677,21 @@
 					[
 						"Add Camera Zoom",
 						"",
+						""
+					],
+					[
+						"Flash effect",
+						"0",
+						""
+					],
+					[
+						"Cinematics",
+						"",
+						"2"
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.8",
 						""
 					]
 				]
@@ -3283,6 +3303,11 @@
 						"Change the Default Camera Zoom",
 						"1",
 						""
+					],
+					[
+						"Flash effect",
+						"0",
+						""
 					]
 				]
 			],
@@ -3302,16 +3327,6 @@
 					[
 						"Change the Default Camera Zoom",
 						"0.8",
-						""
-					]
-				]
-			],
-			[
-				146823.529411764,
-				[
-					[
-						"Flash effect",
-						"0",
 						""
 					]
 				]
