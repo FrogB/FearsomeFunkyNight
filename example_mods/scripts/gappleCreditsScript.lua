@@ -87,14 +87,14 @@ function onCreatePost() -- IN SONG ORDER
 
     if songName == "Evocation" then
         composer = "Ayo"
-        visuals = "Wasted2"
-        charter = "molniexx"
+        visuals = "Wasted2, ayo,\n& Pianoo"
+        charter = "FrogB"
         allowinspiration = false
     end
 
     if songName == "Hypercube" then
         composer = "Ayo"
-        visuals = "Wasted2"
+        visuals = "Wasted2, ayo,\n& Pianoo"
         charter = "BarGames"
         allowinspiration = false
     end

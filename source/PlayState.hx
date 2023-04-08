@@ -85,16 +85,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
-		['Bad', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
-		['Good', 0.8], //From 70% to 79%
-		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['F', 0.2], //From 0% to 19%
+		['E', 0.4], //From 20% to 39%
+		['D', 0.5], //From 40% to 49%
+		['C', 0.6], //From 50% to 59%
+		['B', 0.69], //From 60% to 68%
+		['A', 0.7], //69%
+		['AA', 0.8], //From 70% to 79%
+		['AAA', 0.9], //From 80% to 89%
+		['AAAA', 1], //From 90% to 99%
+		['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -158,11 +158,11 @@ class PlayState extends MusicBeatState
 
 	private var altSong:SwagSong;
 
-	var funnyFloatyBoys:Array<String> = ['dave-3d', 'mordon', 'heldai-phase-1']; // i know 404 is open useable but if we want to add him to our mod then we can put his json name here. -frogb
+	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'heldai-phase-1'];
 	var funnySideFloatyBoys:Array<String> = ['bombu', 'bombu-expunged'];
 	var canSlide:Bool = true;
 	
-	var dontDarkenChar:Array<String> = ['bambi-god', 'bambi-god2d'];
+	var dontDarkenChar:Array<String> = ['bambi-god', 'bambi-god2d', 'hell-expunged-ffn-phase-1'];
 
 	public var notes:FlxTypedGroup<Note>;
 	public var unspawnNotes:Array<Note> = [];
@@ -174,6 +174,8 @@ class PlayState extends MusicBeatState
 	private var strumLine:FlxSprite;
 
 	public var curbg:FlxSprite;
+	//public var screenshader:Shaders.PulseEffect = new PulseEffect(1, 2, 1); dont turn this on you'll get a shader null object reference.
+	//trust me i tried hardcoding eyesores here and it doesnt work for some reason.
 
 	//Handles the new epic mega sexy cam code that i've done
 	public var camFollow:FlxPoint;
@@ -215,7 +217,7 @@ class PlayState extends MusicBeatState
 	public var bads:Int = 0;
 	public var shits:Int = 0;
 
-	public var hasBfDarkLevels:Array<String> = ['farmNight', 'houseNight', '3dUnfair']; // 0xFF878787
+	public var hasBfDarkLevels:Array<String> = ['farmNight', 'houseNight', '3dUnfair', 'bambersHell']; // 0xFF878787
 	public var hasBfSunsetLevels:Array<String> = ['farmSunset', 'houseSunset']; // 0xFFF9974C
 	public var hasBfDarkerLevels:Array<String> = ['spooky']; // not needed 
 
@@ -506,6 +508,8 @@ class PlayState extends MusicBeatState
 					curStage = 'houseNight';
 				case 'vex': 
 					curStage = 'farmVex';
+				case 'evocation' | 'hypercube' | 'empyrean':
+					curStage = 'bambersHell';
 				default:
 					curStage = 'stage';
 			}
@@ -934,6 +938,28 @@ class PlayState extends MusicBeatState
 				curbg = bg;
 
 				add(bg);
+			}
+
+			case 'bambersHell': // the basic shit
+			{
+				defaultCamZoom = 0.7;
+				curStage = 'bambersHell';
+				var bg:BGSprite = new BGSprite('purgatory/graysky', -600, -200, 0.2, 0.2);
+				bg.antialiasing = false;
+				bg.scrollFactor.set(0, 0);
+				bg.active = true;
+				add(bg);
+	
+				var bgshit:BGSprite = new BGSprite('purgatory/Grid_BG', -600, -300, 0.7, 0.7);
+				bgshit.antialiasing = false;
+				bgshit.scrollFactor.set(0, 0);
+				bgshit.active = true;
+				bgshit.alpha = 0.5;
+				add(bgshit);
+	
+				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect(0.95, 5, 0.1);
+				bgshit.shader = testshader.shader;
+				curbg = bgshit;
 			}
 
 		
@@ -1417,7 +1443,7 @@ class PlayState extends MusicBeatState
 		}
 		switch(dad.curCharacter)
 		{
-			case 'bambi-god' | 'bambi-god2d' | 'heldai-phase-1' :
+			case 'bambi-god' | 'bambi-god2d' | 'heldai-phase-1' | 'hell-expunged-FFN-phase-1' | 'hell-expunged-ffn-phase-1' :
 				evilTrail = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
 				switch (curStage)
@@ -3667,13 +3693,13 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'houseNight' | 'farmNight' | '3dUnfair': // Dark character thing
+			case 'houseNight' | 'farmNight' | '3dUnfair' | 'bambersHell': // Dark character thing
                 {
                     dad.color = 0xFF878787;
                     gf.color = 0xFF878787;
                     boyfriend.color = 0xFF878787;
 
-					if (SONG.player2 == 'bambi-god2d')
+					if (SONG.player2 == 'hell-expunged-FFN-phase-1')
 					{
 						dad.color = 0xFFFFFFFF;
 					}
@@ -4759,11 +4785,16 @@ for (key => value in luaShaders)
 	{
 		if(isDad)
 		{
+			switch (dad.curCharacter)
+			{
+				case 'hell-expunged-FFN-phase-1':
+					camFollow.y = dad.getMidpoint().y;
+			}
 			camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
 			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
 			tweenCamIn();
-		}
+		}	
 		else
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);

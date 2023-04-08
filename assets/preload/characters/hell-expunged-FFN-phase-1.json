@@ -7,7 +7,7 @@
 				-170
 			],
 			"anim": "singDOWN",
-			"fps": 14,
+			"fps": 4,
 			"name": "hell-expunged-FFN down",
 			"indices": []
 		},
@@ -18,7 +18,7 @@
 				-20
 			],
 			"anim": "singUP",
-			"fps": 14,
+			"fps": 4,
 			"name": "hell-expunged-FFN up",
 			"indices": []
 		},
@@ -29,7 +29,7 @@
 				-6
 			],
 			"anim": "singRIGHT",
-			"fps": 14,
+			"fps": 4,
 			"name": "hell-expunged-FFN right",
 			"indices": []
 		},
@@ -40,7 +40,7 @@
 				53
 			],
 			"anim": "singLEFT",
-			"fps": 14,
+			"fps": 4,
 			"name": "hell-expunged-FFN left",
 			"indices": []
 		},
@@ -49,10 +49,10 @@
 				0,
 				0
 			],
-			"indices": [],
-			"fps": 11,
-			"anim": "idle",
 			"loop": true,
+			"fps": 3,
+			"anim": "idle",
+			"indices": [],
 			"name": "hell-expunged-FFN idle"
 		}
 	],
@@ -70,9 +70,9 @@
 		255
 	],
 	"camera_position": [
-		-140,
-		380
+		190,
+		500
 	],
 	"sing_duration": 6.1,
-	"scale": 0.899999999999999
+	"scale": 0.799999999999999
 }
