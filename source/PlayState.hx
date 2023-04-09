@@ -160,7 +160,7 @@ class PlayState extends MusicBeatState
 
 	private var altSong:SwagSong;
 
-	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'heldai-phase-1'];
+	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'cheating-expunged'];
 	var funnySideFloatyBoys:Array<String> = ['bombu', 'bombu-expunged'];
 	var canSlide:Bool = true;
 	
@@ -179,10 +179,11 @@ class PlayState extends MusicBeatState
 	
 	//public static var blockedShader:BlockedGlitchEffect;
 	//public static var blockedFilter:ShaderFilter;
-	//the two vars above are used for the blocked glitch shader, unfortunately they just dont work :/
+	//the two vars above are used for the blocked glitch shader, unfortunately they give a null object reference so they had to be disabled for now :/
 	
 	//public var screenshader:Shaders.PulseEffect = new PulseEffect(1, 2, 1); dont turn this on you'll get a shader null object reference.
 	//trust me i tried hardcoding eyesores here and it doesnt work for some reason.
+	//i did not put a lua version of eyesores in the custom events folder for no reason.
 
 	//Handles the new epic mega sexy cam code that i've done
 	public var camFollow:FlxPoint;
