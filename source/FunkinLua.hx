@@ -2537,10 +2537,6 @@ Lua_helper.add_callback(lua, "clearShadersFromCamera", function(cameraName)
 			PlayState.instance.addShaderToCamera(camera, new PulseEffect(waveSpeed,waveFrq,waveAmp));
 
 		});
-		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String,res:Float = 0.1, time:Float = 0.1, colorMultiplier:Float = 0.1, colorTransform:Bool=false) {
-
-			PlayState.instance.addShaderToCamera(camera, new BlockedGlitchEffect(res,time,colorMultiplier,colorTransform));
-		});
 		Lua_helper.add_callback(lua, "addDistortionEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
 
 			PlayState.instance.addShaderToCamera(camera, new DistortBGEffect(waveSpeed,waveFrq,waveAmp));

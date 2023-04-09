@@ -176,6 +176,11 @@ class PlayState extends MusicBeatState
 	private var strumLine:FlxSprite;
 
 	public var curbg:FlxSprite;
+	
+	//public static var blockedShader:BlockedGlitchEffect;
+	//public static var blockedFilter:ShaderFilter;
+	//the two vars above are used for the blocked glitch shader, unfortunately they just dont work :/
+	
 	//public var screenshader:Shaders.PulseEffect = new PulseEffect(1, 2, 1); dont turn this on you'll get a shader null object reference.
 	//trust me i tried hardcoding eyesores here and it doesnt work for some reason.
 
@@ -1833,6 +1838,11 @@ class PlayState extends MusicBeatState
 
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
+
+		if (SONG.song.toLowerCase() == 'empyrean')
+		{
+			blockedShader = new BlockedGlitchEffect(1280, 1, 1, true);
+		}
 
 		// SONG SPECIFIC SCRIPTS
 		#if LUA_ALLOWED
@@ -3587,6 +3597,11 @@ class PlayState extends MusicBeatState
 			iconP1.swapOldIcon();
 		}*/
 		callOnLuas('onUpdate', [elapsed]);
+	
+	//if (blockedShader != null)
+	//	{
+	//		blockedShader.update(elapsed);
+	//	}
 
 
 	switch (SONG.song.toLowerCase())

@@ -27,9 +27,9 @@ class BuildingEffect {
   }
 }
 
-class BlockedGlitchEffect extends Effect //i actually fucking hope this works if it doesnt im going to shit all over the floor -frogb
+class BlockedGlitchEffect extends Effect
 {
-	public var shader:BlockedGlitchShader = new BlockedGlitchShader();
+	public var shader(default, null):BlockedGlitchShader = new BlockedGlitchShader();
 
 	public var time(default, set):Float = 0;
 	public var resolution(default, set):Float = 0;
@@ -38,12 +38,10 @@ class BlockedGlitchEffect extends Effect //i actually fucking hope this works if
 
 	public function new(res:Float, time:Float, colorMultiplier:Float, colorTransform:Bool):Void
 	{
-    shader.data.uTime.value = [0];
-		this.time = time;
-		this.resolution = res;
-		this.colorMultiplier = colorMultiplier;
-    this.hasColorTransform = colorTransform;
-		PlayState.instance.shaderUpdates.push(update);
+		set_time(time);
+		set_resolution(res);
+		set_colorMultiplier(colorMultiplier);
+		set_hasColorTransform(colorTransform);
 	}
 
 	public function update(elapsed:Float):Void
@@ -55,7 +53,7 @@ class BlockedGlitchEffect extends Effect //i actually fucking hope this works if
 	{
 		resolution = v;
 		shader.screenSize.value = [resolution];
-		return v;
+		return this.resolution;
 	}
 
 	function set_hasColorTransform(value:Bool):Bool
@@ -79,6 +77,7 @@ class BlockedGlitchEffect extends Effect //i actually fucking hope this works if
 		return this.time;
 	}
 }
+
 
 class BuildingShader extends FlxShader
 {
