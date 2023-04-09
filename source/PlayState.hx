@@ -1839,10 +1839,10 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		if (SONG.song.toLowerCase() == 'empyrean')
-		{
-			blockedShader = new BlockedGlitchEffect(1280, 1, 1, true);
-		}
+		//if (SONG.song.toLowerCase() == 'empyrean')
+		//{
+			//blockedShader = new BlockedGlitchEffect(1280, 1, 1, true);
+		//}
 
 		// SONG SPECIFIC SCRIPTS
 		#if LUA_ALLOWED
