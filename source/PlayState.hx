@@ -7,6 +7,8 @@ import Discord.DiscordClient;
 import Section.SwagSection;
 import Song.SwagSong;
 import Shaders.PulseEffect;
+import Shaders.BlockedGlitchShader;
+import Shaders.BlockedGlitchEffect;
 import WiggleEffect.WiggleEffectType;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
@@ -944,9 +946,9 @@ class PlayState extends MusicBeatState
 			{
 				defaultCamZoom = 0.7;
 				curStage = 'bambersHell';
-				var bg:BGSprite = new BGSprite('purgatory/graysky', -600, -200, 0.2, 0.2);
+				var bg:BGSprite = new BGSprite('purgatory/shine', -600, -200, 0.2, 0.2);
 				bg.antialiasing = false;
-				bg.scrollFactor.set(0, 0);
+				bg.scrollFactor.set(0.05, 0.05);
 				bg.active = true;
 				add(bg);
 	
