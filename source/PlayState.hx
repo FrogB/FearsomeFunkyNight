@@ -217,6 +217,7 @@ class PlayState extends MusicBeatState
 	var songPercent:Float = 0;
 
 	private var timeBarBG:AttachedSprite;
+	private var timeBarOverlay:AttachedSprite; //idk its funny lol
 	public var timeBar:FlxBar;
 
 	public var ratingsData:Array<Rating> = [];
@@ -1537,6 +1538,17 @@ class PlayState extends MusicBeatState
 		timeBarBG.yAdd = -4;
 		timeBarBG.screenCenter(X);
 
+		timeBarOverlay = new AttachedSprite('healthBarOverlay'); // its funny
+		timeBarOverlay.x = timeTxt.x;
+		timeBarOverlay.y = timeTxt.y + (timeTxt.height / 4);
+		timeBarOverlay.scrollFactor.set();
+		timeBarOverlay.alpha = 0;
+		timeBarOverlay.visible = showTime;
+		timeBarOverlay.color = FlxColor.BLACK;
+		timeBarOverlay.xAdd = -4;
+		timeBarOverlay.yAdd = -4;
+		timeBarOverlay.screenCenter(X);
+
 		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
 			'songPercent', 0, 1);
 		timeBar.scrollFactor.set();
@@ -1553,6 +1565,7 @@ class PlayState extends MusicBeatState
 		//SHITTTT SO THATS WHAT I FORGOT TO DO :skull:
 		add(timeBarBG);
 		add(timeBar);
+		add(timeBarOverlay);
 		add(timeTxt);
 
 		if(ClientPrefs.timeBarType == 'Song Name')
@@ -1849,6 +1862,7 @@ class PlayState extends MusicBeatState
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		timeBarOverlay.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		blackScreendeez.cameras = [camHUD];
 
@@ -3058,6 +3072,8 @@ class PlayState extends MusicBeatState
 		songLength = FlxG.sound.music.length;
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 	    FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(timeBarBG, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+		FlxTween.tween(timeBarOverlay, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
 		switch(curStage)
 		{
@@ -4910,6 +4926,7 @@ for (key => value in luaShaders)
 		}
 
 		timeBarBG.visible = false;
+		timeBarOverlay.visible = false;
 		timeBar.visible = false;
 		timeTxt.visible = false;
 		canPause = false;
@@ -5880,6 +5897,7 @@ for (key => value in luaShaders)
 		scoreTxt.visible = false;
 	    timeBar.visible = false;
 	    timeBarBG.visible = false;
+		timeBarOverlay.visible = false;
 		timeTxt.visible = false;
 	}
 	
@@ -5897,6 +5915,7 @@ for (key => value in luaShaders)
 		notes.visible = true;
 	    timeBar.visible = true;
 	    timeBarBG.visible = true;
+		timeBarOverlay.visible = false;
 		timeTxt.visible = true; 
 	}
 	
