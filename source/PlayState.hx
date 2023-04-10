@@ -515,7 +515,11 @@ class PlayState extends MusicBeatState
 				case 'night':
 					curStage = 'houseNight';
 				case 'vex': 
-					curStage = 'farmVex';
+					curStage = 'farmVex'; //this stage is coded in lua you cant find it here getRektLmao
+				case 'cypher':
+					curStage = '3dGreen';
+				case 'deceit':
+					curStage = '3dUnfair';
 				case 'evocation' | 'hypercube' | 'empyrean':
 					curStage = 'bambersHell';
 				default:
@@ -940,6 +944,21 @@ class PlayState extends MusicBeatState
 
 				var bg:FlxSprite = new FlxSprite(200, 0).loadGraphic(Paths.image('expunged/scaryBG'));
 				bg.setGraphicSize(Std.int(bg.width * 3.5));
+
+				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect(2, 5, 0.1);
+				bg.shader = testshader.shader;
+				curbg = bg;
+
+				add(bg);
+			}
+
+			case '3dGreen': // it's probably only temporary until we make the ACTUAL stage for cypher.
+			{
+				defaultCamZoom = 0.7;
+				curStage = '3dGreen';
+
+				var bg:FlxSprite = new FlxSprite(-700, -350).loadGraphic(Paths.image('expunged/cheater'));
+				bg.setGraphicSize(Std.int(bg.width * 2));
 
 				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect(2, 5, 0.1);
 				bg.shader = testshader.shader;
