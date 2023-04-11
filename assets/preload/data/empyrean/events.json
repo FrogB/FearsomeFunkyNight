@@ -146,7 +146,7 @@
 				[
 					[
 						"Hide or Show HUD elements",
-						"1",
+						"0",
 						""
 					]
 				]
@@ -166,7 +166,7 @@
 				[
 					[
 						"Hide or Show HUD elements",
-						"1",
+						"0",
 						""
 					]
 				]
@@ -186,7 +186,7 @@
 				[
 					[
 						"Hide or Show HUD elements",
-						"1",
+						"0",
 						""
 					]
 				]
@@ -206,7 +206,7 @@
 				[
 					[
 						"Hide or Show HUD elements",
-						"1",
+						"0",
 						""
 					]
 				]
@@ -225,6 +225,11 @@
 				89999.9999999999,
 				[
 					[
+						"turn that fuckin spin on",
+						"1",
+						""
+					],
+					[
 						"LUA-Based Eyesores",
 						"1",
 						""
@@ -235,8 +240,8 @@
 				90019.7368421052,
 				[
 					[
-						"Hide or Show HUD elements",
-						"0",
+						"turn that fuckin spin on",
+						"2",
 						""
 					]
 				]
@@ -245,7 +250,7 @@
 				90039.4736842104,
 				[
 					[
-						"Hide or Show HUD elements",
+						"turn that fuckin spin on",
 						"1",
 						""
 					]
@@ -255,8 +260,8 @@
 				90059.2105263157,
 				[
 					[
-						"Hide or Show HUD elements",
-						"0",
+						"turn that fuckin spin on",
+						"2",
 						""
 					]
 				]
@@ -265,7 +270,7 @@
 				90078.947368421,
 				[
 					[
-						"Hide or Show HUD elements",
+						"turn that fuckin spin on",
 						"1",
 						""
 					]
@@ -275,8 +280,8 @@
 				90098.6842105262,
 				[
 					[
-						"Hide or Show HUD elements",
-						"0",
+						"turn that fuckin spin on",
+						"2",
 						""
 					]
 				]
@@ -285,7 +290,7 @@
 				90118.4210526315,
 				[
 					[
-						"Hide or Show HUD elements",
+						"turn that fuckin spin on",
 						"1",
 						""
 					]
@@ -295,8 +300,8 @@
 				90138.1578947368,
 				[
 					[
-						"Hide or Show HUD elements",
-						"0",
+						"turn that fuckin spin on",
+						"2",
 						""
 					]
 				]
@@ -305,8 +310,13 @@
 				90157.894736842,
 				[
 					[
-						"Hide or Show HUD elements",
-						"1",
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					],
+					[
+						"turn that fuckin spin on",
+						"0",
 						""
 					]
 				]
@@ -315,13 +325,8 @@
 				90177.6315789473,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
-						""
-					],
-					[
-						"Hide or Show HUD elements",
-						"2",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -330,9 +335,9 @@
 				90197.3684210525,
 				[
 					[
-						"turn that fuckin spin on",
-						"2",
-						""
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
 					]
 				]
 			],
@@ -340,8 +345,8 @@
 				90217.1052631578,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -350,13 +355,8 @@
 				90236.8421052631,
 				[
 					[
-						"BF Fade",
-						"0",
-						"0"
-					],
-					[
-						"turn that fuckin spin on",
-						"0",
+						"Thunderstorm type black screen",
+						"1",
 						""
 					]
 				]
@@ -365,9 +365,9 @@
 				90256.5789473683,
 				[
 					[
-						"BF Fade",
+						"Thunderstorm type black screen",
 						"0",
-						"1"
+						""
 					]
 				]
 			],
@@ -375,9 +375,9 @@
 				90276.3157894736,
 				[
 					[
-						"BF Fade",
-						"0",
-						"0"
+						"Thunderstorm type black screen",
+						"1",
+						""
 					]
 				]
 			],
@@ -385,9 +385,9 @@
 				90296.0526315789,
 				[
 					[
-						"BF Fade",
+						"Thunderstorm type black screen",
 						"0",
-						"1"
+						""
 					]
 				]
 			],
@@ -405,9 +405,9 @@
 				90631.5789473683,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
-						""
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
 					]
 				]
 			],
@@ -415,8 +415,8 @@
 				90651.3157894736,
 				[
 					[
-						"turn that fuckin spin on",
-						"2",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -425,9 +425,9 @@
 				90671.0526315789,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
-						""
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
 					]
 				]
 			],
@@ -435,8 +435,8 @@
 				90690.7894736841,
 				[
 					[
-						"turn that fuckin spin on",
-						"2",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -445,9 +445,9 @@
 				90710.5263157894,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
-						""
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
 					]
 				]
 			],
@@ -455,8 +455,8 @@
 				90730.2631578946,
 				[
 					[
-						"turn that fuckin spin on",
-						"2",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -465,9 +465,9 @@
 				90749.9999999999,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
-						""
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
 					]
 				]
 			],
@@ -475,8 +475,8 @@
 				90769.7368421052,
 				[
 					[
-						"turn that fuckin spin on",
-						"2",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -485,7 +485,17 @@
 				90789.4736842104,
 				[
 					[
-						"turn that fuckin spin on",
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				90947.3684210525,
+				[
+					[
+						"Flash effect",
 						"0",
 						""
 					]
@@ -563,6 +573,46 @@
 			],
 			[
 				156868.421052632,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				160105.263157895,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				160184.210526316,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				160263.157894737,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				160342.105263158,
 				[
 					[
 						"Add Camera Zoom",
@@ -697,6 +747,166 @@
 					[
 						"Add Camera Zoom",
 						"",
+						""
+					]
+				]
+			],
+			[
+				163263.157894737,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				163302.631578948,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				163342.105263158,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				163381.578947369,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				163421.052631579,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				163460.52631579,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				163500,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				163539.473684211,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				163578.947368421,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.4",
+						""
+					]
+				]
+			],
+			[
+				163894.736842105,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
+						""
+					]
+				]
+			],
+			[
+				164526.315789474,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				164605.263157895,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				164684.210526316,
+				[
+					[
+						"Add Camera Zoom",
+						"-0.015",
+						"-0.03"
+					]
+				]
+			],
+			[
+				164763.157894737,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				165473.684210526,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.2",
+						""
+					]
+				]
+			],
+			[
+				166105.263157895,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
 						""
 					]
 				]
@@ -957,6 +1167,26 @@
 					[
 						"Change the Default Camera Zoom",
 						"0.7",
+						""
+					]
+				]
+			],
+			[
+				169578.947368421,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.6",
+						""
+					]
+				]
+			],
+			[
+				169736.842105263,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.6",
 						""
 					]
 				]
