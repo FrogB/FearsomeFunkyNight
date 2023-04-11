@@ -6,11 +6,6 @@
 <SubTexture name="God Ex idle0004" x="761" y="1450" width="533" height="553" frameX="-307" frameY="-98" frameWidth="1113" frameHeight="769" />
 <SubTexture name="God Ex idle0005" x="761" y="1450" width="533" height="553" frameX="-307" frameY="-98" frameWidth="1113" frameHeight="769" />
 <SubTexture name="God Ex idle0006" x="0" y="1450" width="761" height="564" frameX="-191" frameY="-93" frameWidth="1113" frameHeight="769" />
-<SubTexture name="God Ex idle0007" x="2305" y="1450" width="695" height="520" frameX="-244" frameY="-134" frameWidth="1113" frameHeight="769" />
-<SubTexture name="God Ex idle0008" x="761" y="2531" width="601" height="500" frameX="-277" frameY="-155" frameWidth="1113" frameHeight="769" />
-<SubTexture name="God Ex idle0009" x="1572" y="769" width="536" height="557" frameX="-305" frameY="-100" frameWidth="1113" frameHeight="769" />
-<SubTexture name="God Ex idle0010" x="761" y="1450" width="533" height="553" frameX="-307" frameY="-98" frameWidth="1113" frameHeight="769" />
-<SubTexture name="God Ex idle0011" x="761" y="1450" width="533" height="553" frameX="-307" frameY="-98" frameWidth="1113" frameHeight="769" />
 <SubTexture name="God Ex right0000" x="0" y="769" width="1113" height="681" frameX="0" frameY="-15" frameWidth="1113" frameHeight="769" />
 <SubTexture name="God Ex right0001" x="1010" y="0" width="1111" height="682" frameX="-2" frameY="-13" frameWidth="1113" frameHeight="769" />
 <SubTexture name="God Ex right0002" x="2121" y="0" width="1113" height="681" frameX="0" frameY="-15" frameWidth="1113" frameHeight="769" />

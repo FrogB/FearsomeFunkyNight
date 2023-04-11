@@ -160,7 +160,7 @@ class PlayState extends MusicBeatState
 
 	private var altSong:SwagSong;
 
-	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'cheating-expunged'];
+	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'cheating-expunged', 'god-expunged'];
 	var funnySideFloatyBoys:Array<String> = ['bombu', 'bombu-expunged'];
 	var canSlide:Bool = true;
 	
@@ -226,7 +226,7 @@ class PlayState extends MusicBeatState
 	public var bads:Int = 0;
 	public var shits:Int = 0;
 
-	public var hasBfDarkLevels:Array<String> = ['farmNight', 'houseNight', '3dUnfair', 'bambersHell']; // 0xFF878787
+	public var hasBfDarkLevels:Array<String> = ['farmNight', 'houseNight', '3dUnfair', 'bambersHell', 'bambersHell2']; // 0xFF878787
 	public var hasBfSunsetLevels:Array<String> = ['farmSunset', 'houseSunset']; // 0xFFF9974C
 	public var hasBfDarkerLevels:Array<String> = ['spooky']; // not needed 
 
@@ -521,8 +521,10 @@ class PlayState extends MusicBeatState
 					curStage = '3dGreen';
 				case 'deceit':
 					curStage = '3dUnfair';
-				case 'evocation' | 'hypercube' | 'empyrean':
+				case 'evocation' | 'hypercube':
 					curStage = 'bambersHell';
+				case 'empyrean':
+					curStage = 'bambersHell2';
 				default:
 					curStage = 'stage';
 			}
@@ -990,7 +992,27 @@ class PlayState extends MusicBeatState
 				curbg = bgshit;
 			}
 
-		
+			case 'bambersHell2': // duplicate of bambershell in hopes of tackling the flxtrail issue for expunged
+			{
+				defaultCamZoom = 0.7;
+				curStage = 'bambersHell2';
+				var bg:BGSprite = new BGSprite('purgatory/shine', -600, -200, 0.2, 0.2);
+				bg.antialiasing = false;
+				bg.scrollFactor.set(0.05, 0.05);
+				bg.active = true;
+				add(bg);
+	
+				var bgshit:BGSprite = new BGSprite('purgatory/Grid_BG', -600, -300, 0.7, 0.7);
+				bgshit.antialiasing = false;
+				bgshit.scrollFactor.set(0, 0);
+				bgshit.active = true;
+				bgshit.alpha = 0.5;
+				add(bgshit);
+	
+				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect(0.95, 5, 0.1);
+				bgshit.shader = testshader.shader;
+				curbg = bgshit;
+			}		
 
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
@@ -1461,17 +1483,9 @@ class PlayState extends MusicBeatState
 				resetFastCar();
 				insert(members.indexOf(gfGroup) - 1, fastCar);	
 			case 'schoolEvil' | 'spooky':
-				evilTrail = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
+				evilTrail = new FlxTrail(dad, null, 4, 12, 0.3, 0.069);
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
-			case 'houseroof':
-				evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
-				insert(members.indexOf(dadGroup) - 1, evilTrail);
-				evilTrail = new FlxTrail(boyfriend, null, 4, 24, 0.3, 0.069); //nice
-				insert(members.indexOf(boyfriendGroup) - 1, evilTrail);
-		}
-		switch(dad.curCharacter)
-		{
-			case 'bambi-god' | 'bambi-god2d' | 'heldai-phase-1' | 'hell-expunged-FFN-phase-1' | 'hell-expunged-ffn-phase-1' :
+			case 'bambersHell':
 				evilTrail = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
 				switch (curStage)
@@ -3746,7 +3760,7 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'houseNight' | 'farmNight' | '3dUnfair' | 'bambersHell': // Dark character thing
+			case 'houseNight' | 'farmNight' | '3dUnfair' | 'bambersHell' | 'bambersHell2': // Dark character thing
                 {
                     dad.color = 0xFF878787;
                     gf.color = 0xFF878787;
@@ -5915,7 +5929,7 @@ for (key => value in luaShaders)
 		notes.visible = true;
 	    timeBar.visible = true;
 	    timeBarBG.visible = true;
-		timeBarOverlay.visible = false;
+		timeBarOverlay.visible = true;
 		timeTxt.visible = true; 
 	}
 	

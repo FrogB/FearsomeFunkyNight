@@ -3,10 +3,10 @@
 -- and dont even think about not crediting/stealing it, i put code in here that'll find your house if you do end up doing it, thanks to cmarkv.
 -- frogb
 
-local composer = "Unknown"
-local visuals = "Unknown"
-local charter = "Unknown"
-local inspiration = "Unknown"
+local composer = "N/A"
+local visuals = "N/A"
+local charter = "N/A"
+local inspiration = "N/A"
 local allowinspiration = false
 
 function createtheShit()
@@ -78,6 +78,13 @@ function onCreatePost() -- IN SONG ORDER
         allowinspiration = false
     end
 
+    if songName == "Cypher" then
+        composer = "Sr.Wiliam"
+        visuals = "Ayo &\nThe OG DNB Team"
+        charter = "L_gunn_"
+        allowinspiration = false
+    end
+
     if songName == "Deceit" then
         composer = "Sr.Wiliam"
         visuals = "The OG DNB \nTeam"
@@ -102,7 +109,7 @@ function onCreatePost() -- IN SONG ORDER
     if songName == "Empyrean" then
         composer = "Pianoo"
         visuals = "Wasted2 &\nAyo"
-        charter = "Gecko"
+        charter = "Gecko & FrogB"
         allowinspiration = false
     end
     createtheShit()

@@ -49,6 +49,7 @@ function onUpdate()
 	doTweenAlpha('AlphaTween6', 'timeBar', 0, 0.25)
 	doTweenAlpha('AlphaTween7', 'timeBarBG', 0, 0.25)
 	doTweenAlpha('AlphaTween8', 'timeTxt', 0, 0.25)
+	doTweenAlpha('AlphaTween9', 'timeBarOverlay', 0, 0.25)
 	end
 
 	if downscroll and start == 1 then
@@ -72,6 +73,7 @@ function onUpdate()
 	doTweenAlpha('AlphaTween6', 'timeBar', 0, 0.25)
 	doTweenAlpha('AlphaTween7', 'timeBarBG', 0, 0.25)
 	doTweenAlpha('AlphaTween8', 'timeTxt', 0, 0.25)
+	doTweenAlpha('AlphaTween9', 'timeBarOverlay', 0, 0.25)
 	end
 
 	if finish == 2 then
@@ -95,6 +97,7 @@ function onUpdate()
 	doTweenAlpha('AlphaTween6', 'timeBar', 1, 0.25)
 	doTweenAlpha('AlphaTween7', 'timeBarBG', 1, 0.25)
 	doTweenAlpha('AlphaTween8', 'timeTxt', 1, 0.25)
+	doTweenAlpha('AlphaTween9', 'timeBarOverlay', 1, 0.25)
 	
 	end
 
@@ -119,6 +122,7 @@ function onUpdate()
 	doTweenAlpha('AlphaTween6', 'timeBar', 1, 0.25)
 	doTweenAlpha('AlphaTween7', 'timeBarBG', 1, 0.25)
 	doTweenAlpha('AlphaTween8', 'timeTxt', 1, 0.25)
+	doTweenAlpha('AlphaTween9', 'timeBarOverlay', 1, 0.25)
 	end
 	
 end
