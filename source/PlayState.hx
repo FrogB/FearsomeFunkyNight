@@ -5950,6 +5950,7 @@ for (key => value in luaShaders)
 		notes.visible = true;
 	    timeBar.visible = true;
 	    timeBarBG.visible = true;
+		timeBarOverlay.visible = true;
 	    timeTxt.visible = true;
 	}
 
