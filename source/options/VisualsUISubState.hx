@@ -34,7 +34,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
 
-		var option:Option = new Option('Judgement Counter',
+		var option:Option = new Option('Judgement Counter:',
 			"Shows a judgement counter at the left-side of your screen.\nYou can also select how informative you want the counter to be.",
 			'judgementCounter',
 			'string',
