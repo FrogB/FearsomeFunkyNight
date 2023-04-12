@@ -1810,11 +1810,25 @@ class PlayState extends MusicBeatState
 		judgementCounter.screenCenter(Y);
 		if(ClientPrefs.judgementCounter == 'Simple')
 		{
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
+			if(ClientPrefs.scoreUIType == 'Psych Engine' || ClientPrefs.scoreUIType == 'Dave Engine')
+			{
+				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}\n';
+			}
+			else //purgatory and ffn styles by default
+			{
+				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';	
+			}		
 		}
 		else if(ClientPrefs.judgementCounter == 'Complex')
 		{
-			judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+			if(ClientPrefs.scoreUIType == 'Psych Engine' || ClientPrefs.scoreUIType == 'Dave Engine')
+			{
+				judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nMisses: ${songMisses}\n';
+			}
+			else
+			{
+				judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+			}
 		}
 		if(ClientPrefs.judgementCounter == 'Disabled')
 		{
@@ -6686,11 +6700,24 @@ for (key => value in luaShaders)
 		setOnLuas('ratingFC', ratingFC);
 		if(ClientPrefs.judgementCounter == 'Simple')
 		{
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
+			if(ClientPrefs.scoreUIType == 'Psych Engine' || ClientPrefs.scoreUIType == 'Dave Engine')
+			{
+				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}\n';
+			}
+			{
+				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';	
+			}		
 		}
 		else if(ClientPrefs.judgementCounter == 'Complex')
 		{
-			judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+			if(ClientPrefs.scoreUIType == 'Psych Engine' || ClientPrefs.scoreUIType == 'Dave Engine')
+			{
+				judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nMisses: ${songMisses}\n';
+			}
+			else
+			{
+				judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+			}
 		}
 	}
 
