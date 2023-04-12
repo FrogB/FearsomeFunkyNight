@@ -262,6 +262,7 @@ class PlayState extends MusicBeatState
 	public static var the3DWorldEffectWavy:WiggleEffect;
 	public static var the3DWorldEffectHeatWaveVer:WiggleEffect;
 	public static var the3DWorldEffectDreamy:WiggleEffect;
+	public static var the3DWorldEffectFlag2:WiggleEffect;
 
 	public var kadeEngineWatermark:FlxText;
 	public var modWatermark:FlxText;
@@ -311,6 +312,8 @@ class PlayState extends MusicBeatState
 	var grpLimoParticles:FlxTypedGroup<BGSprite>;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:BGSprite;
+
+	var wavyBGs:Array<String> = []; //idk but i was told it does something to wiggleeffect lmao
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -445,6 +448,10 @@ class PlayState extends MusicBeatState
 			keysPressed.push(false);
 		}
 
+		wavyBGs = CoolUtil.coolTextFile(Paths.txt('wavyBackgrounds'));
+
+		FlxG.save.data.playingNow = false;
+
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
@@ -487,6 +494,13 @@ class PlayState extends MusicBeatState
 		the3DWorldEffectWavy.waveAmplitude = 0.2;
 		the3DWorldEffectWavy.waveFrequency = 3;
 		the3DWorldEffectWavy.waveSpeed = 1.25;
+		
+		//EXTRAS
+		the3DWorldEffectFlag2 = new WiggleEffect();
+		the3DWorldEffectFlag2.effectType = WiggleEffectType.FLAG;
+		the3DWorldEffectFlag2.waveAmplitude = 0.1;
+		the3DWorldEffectFlag2.waveFrequency = 5;
+		the3DWorldEffectFlag2.waveSpeed = 1.25;
 
 		// var gameCam:FlxCamera = FlxG.camera;\
 		camGame = new FlxCamera();
@@ -3729,6 +3743,7 @@ class PlayState extends MusicBeatState
 		the3DWorldEffectHeatWaveVer.update(elapsed);
 		the3DWorldEffectDreamy.update(elapsed);
 		the3DWorldEffectWavy.update(elapsed);
+		the3DWorldEffectFlag2.update(elapsed);
 
 		elapsedtime += elapsed;
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) // simplified it since we aint using badai or bandu or some shit lol -frogb
@@ -3890,7 +3905,7 @@ class PlayState extends MusicBeatState
                     gf.color = 0xFF878787;
                     boyfriend.color = 0xFF878787;
 
-					if (SONG.player2 == 'hell-expunged-FFN-phase-1')
+					if (SONG.player2 == 'hell-expunged-FFN-phase-1' || SONG.player2 == 'god-expunged') //glowing bitches
 					{
 						dad.color = 0xFFFFFFFF;
 					}
@@ -6659,8 +6674,10 @@ for (key => value in luaShaders)
 			// Rating FC
 			ratingFC = "";
 			if (sicks > 0) ratingFC = "SFC";
-			if (goods > 0) ratingFC = "GFC";
-			if (bads > 0 || shits > 0) ratingFC = "FC";
+			if (goods > 0) ratingFC = "SDG";
+			if (goods > 9) ratingFC = "GFC";
+			if (bads > 0) ratingFC = "SDB";
+			if (bads > 9 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 			else if (songMisses >= 10) ratingFC = "Clear";
 		}
