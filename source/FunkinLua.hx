@@ -1642,6 +1642,27 @@ class FunkinLua {
 				}
 			}
 		});
+		//STRIDENT CRISIS SHADERS LUA COMMAND (not working atm)
+		//Lua_helper.add_callback(lua, "addWiggleEffect", function(tag:String, wavyType:String) {
+		//	if(PlayState.modchartSprites.exists(tag)) {
+		//		var shit:ModchartSprite = PlayState.modchartSprites.get(tag);
+		//		switch(wavyType)
+		//		{
+		//			case "FLAG":
+		//				shit.shader = PlayState.the3DWorldEffectFlag.shader;
+		//			case "DREAMY":
+		//				shit.shader = PlayState.the3DWorldEffectDreamy.shader;
+		//			case "HEAT_WAVE_HORIZONTAL":
+		//				shit.shader = PlayState.the3DWorldEffectHeatWaveHor.shader;
+		//			case "HEAT_WAVE_VERTICAL":
+		//				shit.shader = PlayState.the3DWorldEffectHeatWaveVer.shader;
+		//			case "WAVY":
+		//				shit.shader = PlayState.the3DWorldEffectWavy.shader;
+		//			default:
+		//				shit.shader = PlayState.the3DWorldEffectWavy.shader;
+		//		}
+		//	}
+		//});
 		Lua_helper.add_callback(lua, "setGraphicSize", function(obj:String, x:Int, y:Int = 0, updateHitbox:Bool = true) {
 			if(PlayState.instance.getLuaObject(obj)!=null) {
 				var shit:FlxSprite = PlayState.instance.getLuaObject(obj);

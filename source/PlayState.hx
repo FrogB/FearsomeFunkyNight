@@ -100,7 +100,7 @@ class PlayState extends MusicBeatState
 	];
 	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
-	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
+	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>(); 
 	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
 	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
 	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
@@ -255,6 +255,13 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
+
+	//STRIDENT CRISIS :vomit:
+	public static var the3DWorldEffectFlag:WiggleEffect;
+	public static var the3DWorldEffectHeatWaveHor:WiggleEffect;
+	public static var the3DWorldEffectWavy:WiggleEffect;
+	public static var the3DWorldEffectHeatWaveVer:WiggleEffect;
+	public static var the3DWorldEffectDreamy:WiggleEffect;
 
 	public var kadeEngineWatermark:FlxText;
 	public var modWatermark:FlxText;
@@ -449,6 +456,37 @@ class PlayState extends MusicBeatState
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 		
 		shader_chromatic_abberation = new ChromaticAberrationEffect();
+
+		//MORE STRIDENT CRISIS :i_shit_myself:
+		the3DWorldEffectFlag = new WiggleEffect();
+		the3DWorldEffectFlag.effectType = WiggleEffectType.FLAG;
+		the3DWorldEffectFlag.waveAmplitude = 0.1;
+		the3DWorldEffectFlag.waveFrequency = 5;
+		the3DWorldEffectFlag.waveSpeed = 2.25;
+
+		the3DWorldEffectHeatWaveHor = new WiggleEffect();
+		the3DWorldEffectHeatWaveHor.effectType = WiggleEffectType.HEAT_WAVE_HORIZONTAL;
+		the3DWorldEffectHeatWaveHor.waveAmplitude = 0.1;
+		the3DWorldEffectHeatWaveHor.waveFrequency = 5;
+		the3DWorldEffectHeatWaveHor.waveSpeed = 2.25;
+		
+		the3DWorldEffectHeatWaveVer = new WiggleEffect();
+		the3DWorldEffectHeatWaveVer.effectType = WiggleEffectType.HEAT_WAVE_VERTICAL;
+		the3DWorldEffectHeatWaveVer.waveAmplitude = 0.1;
+		the3DWorldEffectHeatWaveVer.waveFrequency = 5;
+		the3DWorldEffectHeatWaveVer.waveSpeed = 2.25;
+		
+		the3DWorldEffectDreamy = new WiggleEffect();
+		the3DWorldEffectDreamy.effectType = WiggleEffectType.DREAMY;
+		the3DWorldEffectDreamy.waveAmplitude = 0.1;
+		the3DWorldEffectDreamy.waveFrequency = 5;
+		the3DWorldEffectDreamy.waveSpeed = 2.25;
+
+		the3DWorldEffectWavy = new WiggleEffect();
+		the3DWorldEffectWavy.effectType = WiggleEffectType.WAVY;
+		the3DWorldEffectWavy.waveAmplitude = 0.2;
+		the3DWorldEffectWavy.waveFrequency = 3;
+		the3DWorldEffectWavy.waveSpeed = 1.25;
 
 		// var gameCam:FlxCamera = FlxG.camera;\
 		camGame = new FlxCamera();
@@ -3686,6 +3724,12 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		the3DWorldEffectFlag.update(elapsed);
+		the3DWorldEffectHeatWaveHor.update(elapsed);
+		the3DWorldEffectHeatWaveVer.update(elapsed);
+		the3DWorldEffectDreamy.update(elapsed);
+		the3DWorldEffectWavy.update(elapsed);
+
 		elapsedtime += elapsed;
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) // simplified it since we aint using badai or bandu or some shit lol -frogb
 		{
@@ -3989,6 +4033,12 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
+
+			//FROM HERE ONWARDS, PUT YOUR STAGE CASES THAT CONTAINS A WIGGLEEFFECT VARIANT HERE AND MAKE SURE THAT STAGE'S SHADER IS ELAPSED
+
+			//TEMPLATE BELOW:
+			//case 'stagename':
+			// the3DWorldEffectFlag.update(elapsed); <--- SAME GOES FOR ALL THE OTHER VERSIONS OF THE WIGGLEEFFECT
 		}
 
 		if(!inCutscene) {

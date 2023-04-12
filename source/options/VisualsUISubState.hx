@@ -43,7 +43,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Score UI Style:',
-			"Which Score UI style do you want the game to show?\nNOTE: Purgatory's style is unfinished due to the NPS counter being broken",
+			"Which Score UI style do you want the game to show?\nNOTE: Purgatory's style is unfinished due to the NPS counter being broken.",
 			'scoreUIType',
 			'string',
 			'FFN',
