@@ -34,6 +34,38 @@ class VisualsUISubState extends BaseOptionsMenu
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
 
+		var option:Option = new Option('Judgement Counter',
+			"Shows a judgement counter at the left-side of your screen.\nYou can also select how informative you want the counter to be.",
+			'judgementCounter',
+			'string',
+			'Complex',
+			['Disabled', 'Simple', 'Complex']);
+		addOption(option);
+
+		var option:Option = new Option('Score UI Style:',
+			"Which Score UI style do you want the game to show?\nNOTE: Purgatory's style is unfinished due to the NPS counter being broken",
+			'scoreUIType',
+			'string',
+			'FFN',
+			['FFN', 'Psych Engine', 'Dave Engine', 'Purgatory']);
+		addOption(option);
+
+		var option:Option = new Option('Icon Bounce Style:',
+			"Choose which icon bounce it plays in-game.",
+			'iconBounceType',
+			'string',
+			'FFN',
+			['FFN', 'Vanilla', 'Golden Apple', 'David Engine 1', 'David Engine 2', 'Purgatory', 'No Bounce']);
+		addOption(option);
+
+		var option:Option = new Option('Time Bar:',
+			"What should the Time Bar display?",
+			'timeBarType',
+			'string',
+			'Song and Time Left',
+			['Song and Time Left', 'Song and Time Elapsed', 'Song Name']);
+		addOption(option);
+
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
 			'noteSplashes',
@@ -63,8 +95,8 @@ class VisualsUISubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Flashing Lights',
-			"Uncheck this if you're sensitive to flashing lights!",
+		var option:Option = new Option('Eyesores & Flashing Lights',
+			"Uncheck this if you're sensitive to flashing lights or fast-flashing colors!\nTurning these off will take away some effects used in some songs.",
 			'flashing',
 			'bool',
 			true);

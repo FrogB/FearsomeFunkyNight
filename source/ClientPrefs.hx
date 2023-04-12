@@ -14,6 +14,10 @@ class ClientPrefs {
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
 	public static var globalAntialiasing:Bool = true;
+	//LATESTRELIC825'S PSYCH ENGINE VARIABLES (temporary ones only since i'll probably remove these options soon except for the judgement counter.)
+	public static var judgementCounter:String = 'Complex';
+	public static var scoreUIType:String = 'FFN';
+	public static var iconBounceType:String = 'Vanilla';
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
 	public static var framerate:Int = 60;
@@ -102,6 +106,9 @@ class ClientPrefs {
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
+		FlxG.save.data.judgementCounter = judgementCounter;
+		FlxG.save.data.scoreUIType = scoreUIType;
+		FlxG.save.data.iconBounceType = iconBounceType;
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
@@ -166,6 +173,15 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.globalAntialiasing != null) {
 			globalAntialiasing = FlxG.save.data.globalAntialiasing;
+		}
+		if(FlxG.save.data.judgementCounter != null) {
+			judgementCounter = FlxG.save.data.judgementCounter;
+		}
+		if(FlxG.save.data.iconBounceType != null) {
+			iconBounceType = FlxG.save.data.iconBounceType;
+		}
+		if(FlxG.save.data.scoreUIType != null) {
+			scoreUIType = FlxG.save.data.scoreUIType;
 		}
 		if(FlxG.save.data.noteSplashes != null) {
 			noteSplashes = FlxG.save.data.noteSplashes;

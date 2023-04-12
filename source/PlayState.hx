@@ -1520,7 +1520,7 @@ class PlayState extends MusicBeatState
 
 		var showTime:Bool =  (!ClientPrefs.hideTime);
 
-		if(ClientPrefs.timeBarType == 'Song Name')
+		if(ClientPrefs.timeBarType == 'Song Name') //whatsdown its the same thing what were you doing back in the original purgatory build lmao -frogb
 		{
 			timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 20, 400, "", 32);
 	    	timeTxt.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1727,10 +1727,25 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("comic.ttf"), 17, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		if(ClientPrefs.scoreUIType == 'FFN' || ClientPrefs.scoreUIType == 'Purgatory')
+		{
+			scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("comic.ttf"), 17, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.borderSize = 1.25;
+		}
+		else if(ClientPrefs.scoreUIType == 'Psych Engine')
+		{
+			scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.borderSize = 1.5;
+		}
+		else if(ClientPrefs.scoreUIType == 'Dave Engine') //basically same as psych but change of fonts lmao
+		{
+			scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("comic-sans.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.borderSize = 1.5;
+		}
 		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
@@ -1741,6 +1756,18 @@ class PlayState extends MusicBeatState
 		judgementCounter.scrollFactor.set();
 		judgementCounter.cameras = [camHUD];
 		judgementCounter.screenCenter(Y);
+		if(ClientPrefs.judgementCounter == 'Simple')
+		{
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
+		}
+		else if(ClientPrefs.judgementCounter == 'Complex')
+		{
+			judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+		}
+		if(ClientPrefs.judgementCounter == 'Disabled')
+		{
+			judgementCounter.visible = false;
+		}
 		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
 		add(judgementCounter);
 		judgementCounter.cameras = [camHUD];
@@ -1748,10 +1775,12 @@ class PlayState extends MusicBeatState
 		var credits:String;
 		switch (SONG.song.toLowerCase())
 		{
-			case 'cheating' | 'cypher':
+			case 'cypher':
 				credits = "Screw you!";
 			case 'unfairness':
 				credits = "Ghost tapping is forced OFF! FUCK YOU!";
+			case 'nether':
+				credits = "No holding back now USER!";
 			default:
 				credits = '';
 		}	
@@ -2997,18 +3026,69 @@ class PlayState extends MusicBeatState
 	public function updateScore(miss:Bool = false)
 	{
 		if(ratingName == '?') {
-			scoreTxt.text =	'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: 0% // Rank: N/A';
+			if(ClientPrefs.scoreUIType == 'FFN')
+			{
+				scoreTxt.text =	'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: 0% // Rank: N/A';
+			}
+			if(ClientPrefs.scoreUIType == 'Psych Engine')
+			{
+				scoreTxt.text =	'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ?';
+			}
+			if(ClientPrefs.scoreUIType == 'Dave Engine')
+			{
+				scoreTxt.text =	'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: 0%';
+			}
+			if(ClientPrefs.scoreUIType == 'Purgatory')
+			{
+				scoreTxt.text =	'NPS: ' + nps + ' (Max 0) | Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: 0% | N/A';
+			}
 		}
 		else
 		{
-			scoreTxt.text = 'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' // Rank: (' + ratingFC + ') ' + ratingName;
+			if(ClientPrefs.scoreUIType == 'FFN')
+			{
+				scoreTxt.text = 'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' // Rank: (' + ratingFC + ') ' + ratingName;
+			}
+			if(ClientPrefs.scoreUIType == 'Psych Engine')
+			{
+				scoreTxt.text = 'Score: ' + songScore
+				+ ' | Misses: ' + songMisses
+				+ ' | Rating: ' + ratingName
+				+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
+			}
+			if(ClientPrefs.scoreUIType == 'Dave Engine')
+			{
+				scoreTxt.text =	'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+			}
+			if(ClientPrefs.scoreUIType == 'Purgatory')
+			{
+				scoreTxt.text =  'NPS: ' + nps + ' (Max ' + maxnps + ') | Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' | (' + ratingFC + ') ' + ratingName;
+			}
 		}
 		if(practiceMode)
-			{
+		{
+			if(ClientPrefs.scoreUIType == 'FFN')
+			{	
 				scoreTxt.text = 'Combo Breaks: ' + songMisses + ' // Practice Mode ';
 			}
+			if(ClientPrefs.scoreUIType == 'Purgatory')
+			{	
+				scoreTxt.text = 'NPS: ' + nps + ' | Combo Breaks: ' + songMisses + ' | Practice Mode ';
+			}
+			if(ClientPrefs.scoreUIType == 'Psych Engine' || ClientPrefs.scoreUIType == 'Dave Engine')
+			{	
+				scoreTxt.text = 'Misses: ' + songMisses + ' | Practice Mode ';
+			}
+		}
 		if(cpuControlled) {
-			scoreTxt.text = 'BOT';
+			if(ClientPrefs.scoreUIType == 'Purgatory')
+			{	
+				scoreTxt.text = 'NPS: ' + nps + ' | (Cheater!) Botplay';
+			}
+			else
+			{
+				scoreTxt.text = 'BOT';
+			}
 		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
@@ -3950,19 +4030,48 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 
-		var thingy = 0.88; //(144 / Main.fps.currentFPS) * 0.88;
-		//still gotta make this fps consistent crap
+		//CHECKING WHICH TYPE OF BOUNCE THE PLAYER WANTS
+		if(ClientPrefs.iconBounceType == 'Golden Apple')
+		{
+			iconP1.centerOffsets();
+			iconP2.centerOffsets();
 
-		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, thingy)),Std.int(FlxMath.lerp(150, iconP1.height, thingy)));
-		iconP1.updateHitbox();
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
 
-		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, thingy)),Std.int(FlxMath.lerp(150, iconP2.height, thingy)));
-		iconP2.updateHitbox();
+		if(ClientPrefs.iconBounceType == 'David Engine 1' || ClientPrefs.iconBounceType == 'David Engine 2' || ClientPrefs.iconBounceType == 'FFN' || ClientPrefs.iconBounceType == 'Purgatory 2') //fuck.
+		{
+			iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.8)),Std.int(FlxMath.lerp(150, iconP1.height, 0.8)));
+			iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.8)),Std.int(FlxMath.lerp(150, iconP2.height, 0.8)));
 
-		var iconOffset:Int = 26;
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
 
-		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
+		if(ClientPrefs.iconBounceType == 'Vanilla' || ClientPrefs.iconBounceType == 'No Bounce') //fuck.
+		{
+			iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
+			iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
+
+		//SETTING THE OFFSETS
+		if(ClientPrefs.iconBounceType == 'Vanilla' || ClientPrefs.iconBounceType == 'David Engine 1' || ClientPrefs.iconBounceType == 'David Engine 2' || ClientPrefs.iconBounceType == 'FFN' || ClientPrefs.iconBounceType == 'Purgatory 2' || ClientPrefs.iconBounceType == 'Golden Apple')
+		{
+			var iconOffset:Int = 26;
+			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
+			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
+		}
+
+		if(ClientPrefs.iconBounceType == 'No Bounce')
+		{
+			var iconOffset:Int = 26;
+			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		}
 
 		
 		if (health > 2)
@@ -5130,7 +5239,7 @@ for (key => value in luaShaders)
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff);
 		var ratingNum:Int = 0;
-		tnh = sicks + goods + bads + shits;
+		tnh = sicks + goods + bads + shits + 1;//to make calculations right
 
 		if (noteDiff > Conductor.safeZoneOffset * 0.75)
 		{
@@ -6191,14 +6300,98 @@ for (key => value in luaShaders)
 			}
 	    }
 
-		var funny:Float = Math.max(Math.min(healthBar.value,1.9),0.1);//Math.clamp(healthBar.value,0.02,1.98);//Math.min(Math.min(healthBar.value,1.98),0.02);
+		if(ClientPrefs.iconBounceType == 'Vanilla')
+		{
+			iconP1.setGraphicSize(Std.int(iconP1.width + 30));
+			iconP2.setGraphicSize(Std.int(iconP2.width + 30));
 
-		//health icon bounce but epic
-		iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (funny + 0.1))),Std.int(iconP1.height - (25 * funny)));
-		iconP2.setGraphicSize(Std.int(iconP2.width + (50 * ((2 - funny) + 0.1))),Std.int(iconP2.height - (25 * ((2 - funny) + 0.1))));
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
 
-		iconP1.updateHitbox();
-		iconP2.updateHitbox();
+		if(ClientPrefs.iconBounceType == 'David Engine 1')
+		{
+			var funny2:Float = (healthBar.percent * 0.01) + 0.01;
+			iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (2 - funny2))),Std.int(iconP1.height - (25 * (2 - funny2))));
+			iconP2.setGraphicSize(Std.int(iconP2.width + (50 * (2 - funny2))),Std.int(iconP2.height - (25 * (2 - funny2))));
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
+
+		if(ClientPrefs.iconBounceType == 'David Engine 2')
+		{
+			var funny2:Float = (healthBar.percent * 0.01) + 0.01;
+			if (curBeat % 4 == 0) // icon bop coollll shittt t t t t 
+			{
+				FlxTween.angle(iconP1, -30, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+				FlxTween.angle(iconP2, 30, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+			}
+
+			iconP1.setGraphicSize(Std.int(iconP1.width + (50 * funny2)),Std.int(iconP2.height - (25 * funny2)));
+			iconP2.setGraphicSize(Std.int(iconP1.width + (50 * funny2)),Std.int(iconP2.height - (25 * funny2)));
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
+
+		if(ClientPrefs.iconBounceType == 'FFN')
+		{
+			var funny2:Float = (healthBar.percent * 0.01) + 0.01;
+			if (curBeat % 2 == 0) // Bambi's Purgatory: The Revival (Cancelled Build Gameplay)
+			{
+				FlxTween.angle(iconP1, -20, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+				FlxTween.angle(iconP2, 20, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+			}
+
+			iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (2 - funny2))),Std.int(iconP1.height - (25 * (2 - funny2))));
+			iconP2.setGraphicSize(Std.int(iconP2.width + (50 * (2 - funny2))),Std.int(iconP2.height - (25 * (2 - funny2))));
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
+
+		if(ClientPrefs.iconBounceType == 'Purgatory 2')
+		{
+			var funny2:Float = (healthBar.percent * 0.01) + 0.01;
+			if (curBeat % 1 == 0) // Bambi's Purgatory: Presentation Video (WhatsDown)
+			{
+				FlxTween.angle(iconP1, -20, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+				FlxTween.angle(iconP2, 20, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+			}
+
+			iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (2 - funny2))),Std.int(iconP1.height - (25 * (2 - funny2))));
+			iconP2.setGraphicSize(Std.int(iconP2.width + (50 * (2 - funny2))),Std.int(iconP2.height - (25 * (2 - funny2))));
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
+
+		if(ClientPrefs.iconBounceType == 'Golden Apple')
+		{
+			if (curBeat % 2 == 0)
+				{
+					iconP1.scale.set(1.1, 0.8);
+					iconP2.scale.set(1.1, 1.3);
+					
+					FlxTween.angle(iconP1, -15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+					FlxTween.angle(iconP2, 15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+				}
+			if (curBeat % 2 == 1)
+				{
+					iconP1.scale.set(1.1, 1.3);
+					iconP2.scale.set(1.1, 0.8);
+
+					FlxTween.angle(iconP2, -15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+					FlxTween.angle(iconP1, 15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+				}
+
+			FlxTween.tween(iconP1, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
+			FlxTween.tween(iconP2, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
 
 		if (gf != null && curBeat % Math.round(gfSpeed * gf.danceEveryNumBeats) == 0 && gf.animation.curAnim != null && !gf.animation.curAnim.name.startsWith("sing") && !gf.stunned)
 		{
@@ -6424,7 +6617,14 @@ for (key => value in luaShaders)
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
+		if(ClientPrefs.judgementCounter == 'Simple')
+		{
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
+		}
+		else if(ClientPrefs.judgementCounter == 'Complex')
+		{
+			judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+		}
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
