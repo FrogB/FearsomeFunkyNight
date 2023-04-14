@@ -18,6 +18,7 @@ class ClientPrefs {
 	public static var judgementCounter:String = 'Complex';
 	public static var scoreUIType:String = 'FFN';
 	public static var iconBounceType:String = 'Vanilla';
+	public static var healthBarType:String = 'Dave Engine';
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
 	public static var framerate:Int = 60;
@@ -109,6 +110,8 @@ class ClientPrefs {
 		FlxG.save.data.judgementCounter = judgementCounter;
 		FlxG.save.data.scoreUIType = scoreUIType;
 		FlxG.save.data.iconBounceType = iconBounceType;
+		FlxG.save.data.healthBarType = healthBarType;
+		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
@@ -120,7 +123,6 @@ class ClientPrefs {
 		FlxG.save.data.arrowHSV = arrowHSV;
 		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
-		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.scoreZoom = scoreZoom;
 		FlxG.save.data.noReset = noReset;
 		FlxG.save.data.healthBarAlpha = healthBarAlpha;
@@ -182,6 +184,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.scoreUIType != null) {
 			scoreUIType = FlxG.save.data.scoreUIType;
+		}
+		if(FlxG.save.data.healthBarType != null) {
+			healthBarType = FlxG.save.data.healthBarType;
 		}
 		if(FlxG.save.data.noteSplashes != null) {
 			noteSplashes = FlxG.save.data.noteSplashes;

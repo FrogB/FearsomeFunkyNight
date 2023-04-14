@@ -98,6 +98,19 @@ class PlayState extends MusicBeatState
 		['AAAA', 1], //From 90% to 99%
 		['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
+	public static var ratingStuff2:Array<Dynamic> = [ //used for the psych engine ui styled layout.
+		['You Suck!', 0.2], //From 0% to 19%
+		['Shit', 0.4], //From 20% to 39%
+		['Bad', 0.5], //From 40% to 49%
+		['Bruh', 0.6], //From 50% to 59%
+		['Meh', 0.69], //From 60% to 68%
+		['Nice', 0.7], //69%
+		['Good', 0.8], //From 70% to 79%
+		['Great', 0.9], //From 80% to 89%
+		['Sick!', 1], //From 90% to 99%
+		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+	];
+
 	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>(); 
@@ -1734,11 +1747,18 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection();
 
-		healthBarBG = new AttachedSprite('healthBar');
+		if(ClientPrefs.healthBarType == 'Dave Engine')
+		{
+			healthBarBG = new AttachedSprite('healthBar');
+		}
+		else if(ClientPrefs.healthBarType == 'Vanilla')
+		{
+			healthBarBG = new AttachedSprite('healthBarNormal');
+		}
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
-		healthBarBG.visible = false;
+		healthBarBG.visible = true; //the fuck this was false for?
 		healthBarBG.xAdd = -4;
 		healthBarBG.yAdd = -4;
 		add(healthBarBG);
@@ -1758,6 +1778,10 @@ class PlayState extends MusicBeatState
 		healthBarOverlay.screenCenter(X);
 		healthBarOverlay.scrollFactor.set();
 		healthBarOverlay.visible = !ClientPrefs.hideHud;
+		if(ClientPrefs.healthBarType == 'Vanilla')
+		{
+			healthBarOverlay.visible = false; //forces it off if you're using the vanilla styled health bar
+		}
         healthBarOverlay.color = FlxColor.BLACK;
 		healthBarOverlay.blend = MULTIPLY;
 		healthBarOverlay.x = healthBarBG.x;
@@ -3091,7 +3115,7 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		if(ratingName == '?') {
+		if(ratingName == '?' || ratingName2 == '?') {
 			if(ClientPrefs.scoreUIType == 'FFN')
 			{
 				scoreTxt.text =	'Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: 0% // Rank: N/A';
@@ -3102,7 +3126,7 @@ class PlayState extends MusicBeatState
 			}
 			if(ClientPrefs.scoreUIType == 'Dave Engine')
 			{
-				scoreTxt.text =	'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: 0%';
+				scoreTxt.text =	'Score:' + songScore + ' | Misses:' + songMisses + ' | Accuracy:0%';
 			}
 			if(ClientPrefs.scoreUIType == 'Purgatory')
 			{
@@ -3119,12 +3143,12 @@ class PlayState extends MusicBeatState
 			{
 				scoreTxt.text = 'Score: ' + songScore
 				+ ' | Misses: ' + songMisses
-				+ ' | Rating: ' + ratingName
-				+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
+				+ ' | Rating: ' + ratingName2
+				+ (ratingName2 != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 			}
 			if(ClientPrefs.scoreUIType == 'Dave Engine')
 			{
-				scoreTxt.text =	'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+				scoreTxt.text =	'Score:' + songScore + ' | Misses:' + songMisses + ' | Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 			}
 			if(ClientPrefs.scoreUIType == 'Purgatory')
 			{
@@ -6644,6 +6668,7 @@ for (key => value in luaShaders)
 	}
 
 	public var ratingName:String = '?';
+	public var ratingName2:String = '?';
 	public var ratingPercent:Float;
 	public var ratingFC:String;
 	public function RecalculateRating(badHit:Bool = false) {
@@ -6683,6 +6708,21 @@ for (key => value in luaShaders)
 						}
 					}
 				}
+				if(ratingPercent >= 1)
+				{
+					ratingName2 = ratingStuff2[ratingStuff2.length-1][0]; //Uses last string
+				}
+				else
+				{
+					for (i in 0...ratingStuff2.length-1)
+					{
+						if(ratingPercent < ratingStuff2[i][1])
+						{
+							ratingName2 = ratingStuff2[i][0];
+							break;
+						}
+					}
+				}
 			}
 
 			// Rating FC
@@ -6697,6 +6737,7 @@ for (key => value in luaShaders)
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
+		setOnLuas('ratingName2', ratingName2);
 		setOnLuas('ratingFC', ratingFC);
 		if(ClientPrefs.judgementCounter == 'Simple')
 		{

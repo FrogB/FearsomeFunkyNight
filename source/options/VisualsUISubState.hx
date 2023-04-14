@@ -42,6 +42,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Disabled', 'Simple', 'Complex']);
 		addOption(option);
 
+		var option:Option = new Option('Health Bar UI Style:',
+			"Which Health Bar UI style do you want the game to show?",
+			'healthBarType',
+			'string',
+			'Dave Engine',
+			['Dave Engine', 'Vanilla']);
+		addOption(option);
+
 		var option:Option = new Option('Score UI Style:',
 			"Which Score UI style do you want the game to show?\nNOTE: Purgatory's style is unfinished due to the NPS counter being broken.",
 			'scoreUIType',
