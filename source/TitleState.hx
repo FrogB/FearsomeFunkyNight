@@ -9,6 +9,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.display.FlxGridOverlay;
+import flixel.addons.display.FlxBackdrop;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
@@ -150,6 +151,7 @@ class TitleState extends MusicBeatState
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
+	var titlestatebg:FlxSprite;
 	var arrowshit:FlxSprite;
 	var swagShader:ColorSwap = null;
 
@@ -209,6 +211,7 @@ class TitleState extends MusicBeatState
 			gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 
 		//gfDance.antialiasing = ClientPrefs.globalAntialiasing;
+
 		//add(gfDance);
 		//gfDance.shader = swagShader.shader;
 		//logoBl.shader = swagShader.shader;
@@ -489,6 +492,13 @@ class TitleState extends MusicBeatState
 			bg.screenCenter();
 			bg.antialiasing = ClientPrefs.globalAntialiasing;
 			add(bg);
+
+			titlestatebg = new FlxBackdrop(Paths.image('checkeredBG'), 0.2, 0, true, true);
+			titlestatebg.velocity.set(50, 50);
+			titlestatebg.updateHitbox();
+			titlestatebg.alpha = 0.6;
+			titlestatebg.screenCenter(X);
+			add(titlestatebg);
 			
 			logoBl = new FlxSprite(245, -600);
 			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');

@@ -57,6 +57,7 @@ import flixel.input.keyboard.FlxKey;
 import Note.EventNote;
 import openfl.events.KeyboardEvent;
 import flixel.effects.particles.FlxEmitter;
+import lime.tools.ApplicationData;
 import flixel.effects.particles.FlxParticle;
 import flixel.util.FlxSave;
 import animateatlas.AtlasFrameMaker;
@@ -68,8 +69,16 @@ import Conductor.Rating;
 import Shaders;
 import DynamicShaderHandler;
 #if sys
+import sys.io.File;
+import sys.io.Process;
 import sys.FileSystem;
 #end
+
+#if windows
+import lime.app.Application;
+#end
+
+import lime.app.Application; //copy in case some other debuggers wanna do some other shit with it
 
 #if VIDEOS_ALLOWED
 import vlc.MP4Handler;
@@ -216,7 +225,7 @@ class PlayState extends MusicBeatState
 	var tnh:Int = 0;
 
 	public var camZooming:Bool = false;
-	public var camZoomingMult:Float = 1;
+	public var camZoomingMult:Float = 0.5;
 	public var camZoomingDecay:Float = 1;
 	private var curSong:String = "";
 
@@ -1870,7 +1879,7 @@ class PlayState extends MusicBeatState
 			case 'unfairness':
 				credits = "Ghost tapping is forced OFF! FUCK YOU!";
 			case 'nether':
-				credits = "No holding back now USER!";
+				credits = "No holding back now"+ " " + (FlxG.save.data.selfAwareness ? CoolSystemStuff.getUsername() : 'Boyfriend') + "!";
 			default:
 				credits = '';
 		}	
@@ -1937,7 +1946,7 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.borderSize = 1.25;
 		add(kadeEngineWatermark);
 
-		modWatermark = new FlxText(4, textYPosAlt, 0, "FEARSOME FUNKY NIGHT' // DEMO", 14);
+		modWatermark = new FlxText(4, textYPosAlt, 0, "FFN' REMASTERED // DEMO", 14);
 		modWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		modWatermark.scrollFactor.set();
 		modWatermark.borderSize = 1.25;
@@ -1946,18 +1955,8 @@ class PlayState extends MusicBeatState
 		var composersWatermark:String;
 		switch (SONG.song.toLowerCase()) // screw this shit we're doing this in lua -frogb
 		{
-			case 'tranquility' | 'hypercube' :
-				composersWatermark = 'PurpleSigh192';
-			case 'deceit' :
-				composersWatermark = 'Sr.Wiliam';
-			case 'ecstatic' :
-				composersWatermark = 'BoxHaze';
-			case 'cypher' | 'nether' :
+			case 'evocation':
 				composersWatermark = 'ayo';
-			case 'empyrean' :
-				composersWatermark = 'Pianoo';
-			case 'splitathon' : //SPLITIN THE THONNNNNN
-				composersWatermark = 'FyriDev & BoxHaze';
 			default:
 				composersWatermark = ' ';
 		}
@@ -3267,6 +3266,21 @@ class PlayState extends MusicBeatState
 				{
 					spr.dance();
 				});
+		}
+
+		switch (SONG.song.toLowerCase())
+		{
+			case 'nether': //it seems that you're back, for i am on the attack IT'S TIME. TO. DIE.
+
+			//screw this first part of the code we already have a black screen thanks to purgatory code.
+				/*blackScreen = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+				blackScreen.cameras = [camHUD];
+				blackScreen.screenCenter();
+				blackScreen.scrollFactor.set();
+				blackScreen.alpha = 0;
+				add(blackScreen);*/
+					
+				Application.current.window.title = "[DATA EXPUNGED]";//EXPLOITATION REFERENCE THE FUCKKDNRIHNCR0NCHW0WFHN0FCH0 083RF8HN30	
 		}
 
 		#if desktop
@@ -5342,29 +5356,17 @@ for (key => value in luaShaders)
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff);
 		var ratingNum:Int = 0;
-		tnh = sicks + goods + bads + shits + 1;//to make calculations right
-
-		if (noteDiff > Conductor.safeZoneOffset * 0.75)
-		{
-			shits += 1;
-		}
-		else if (noteDiff > Conductor.safeZoneOffset * 0.5)
-		{
-			bads += 1;
-		}
-		else if (noteDiff > Conductor.safeZoneOffset * 0.25)
-		{
-			goods += 1;
-		}
-		else
-		{
-			spawnNoteSplashOnNote(note);
-		}
+		tnh = sicks + goods + bads + shits + 1;
 
 		totalNotesHit += daRating.ratingMod;
 		note.ratingMod = daRating.ratingMod;
 		if(!note.ratingDisabled) daRating.increase();
 		note.rating = daRating.name;
+
+		if(daRating.noteSplash && !note.noteSplashDisabled)
+		{
+			spawnNoteSplashOnNote(note);
+		}
 
 		if(!practiceMode && !cpuControlled) {
 			songScore += score;
@@ -6328,6 +6330,12 @@ for (key => value in luaShaders)
 	}
 
 	override function destroy() {
+		switch (SONG.song.toLowerCase())
+		{
+			case 'nether':
+				Application.current.window.title = "Fearsome Funky Night'"; //set the shit back
+		}
+
 		for (lua in luaArray) {
 			lua.call('onDestroy', []);
 			lua.stop();

@@ -12,12 +12,15 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.addons.display.FlxBackdrop;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
 
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
+
+	var bg:FlxSprite;
 
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Change Difficulty', 'Exit to menu'];
@@ -72,8 +75,15 @@ class PauseSubState extends MusicBeatSubstate
 
 		FlxG.sound.list.add(pauseMusic);
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		var backBg:FlxSprite = new FlxSprite();
+		backBg.makeGraphic(FlxG.width + 1, FlxG.height + 1, FlxColor.BLACK);
+		backBg.alpha = 0;
+		backBg.scrollFactor.set();
+		add(backBg);
+
+		bg = new FlxBackdrop(Paths.image('checkeredBG', 'preload'), 1, 1, true, true, 1, 1);
 		bg.alpha = 0;
+		bg.antialiasing = true;
 		bg.scrollFactor.set();
 		add(bg);
 
@@ -123,6 +133,7 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
 		blueballedTxt.x = FlxG.width - (blueballedTxt.width + 20);
 
+		FlxTween.tween(backBg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
@@ -139,6 +150,11 @@ class PauseSubState extends MusicBeatSubstate
 	var cantUnpause:Float = 0.1;
 	override function update(elapsed:Float)
 	{
+		//VS DAVE CHECKERED BG PAUSE MENU SHIT HAHAHAHAHAHA THE FUCKK CFHCRF08NFRCH08FR0
+		var scrollSpeed:Float = 50;
+		bg.x -= scrollSpeed * elapsed;
+		bg.y -= scrollSpeed * elapsed;
+
 		cantUnpause -= elapsed;
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
