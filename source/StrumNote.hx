@@ -8,6 +8,8 @@ using StringTools;
 
 class StrumNote extends FlxSprite
 {
+	public var baseX:Float;
+	public var baseY:Float;
 	private var colorSwap:ColorSwap;
 	public var resetAnim:Float = 0;
 	private var noteData:Int = 0;
@@ -32,6 +34,7 @@ class StrumNote extends FlxSprite
 		noteData = leData;
 		this.player = player;
 		this.noteData = leData;
+		baseY = y;
 		super(x, y);
 
 		var skin:String = 'NOTE_assets';
@@ -170,5 +173,15 @@ class StrumNote extends FlxSprite
 				centerOrigin();
 			}
 		}
+	}
+
+	public function resetX()
+	{
+		x = baseX;
+	}
+
+	public function resetY()
+	{
+		y = baseY;
 	}
 }

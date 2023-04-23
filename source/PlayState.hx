@@ -289,6 +289,19 @@ class PlayState extends MusicBeatState
 	public var kadeEngineWatermark:FlxText;
 	public var modWatermark:FlxText;
 
+	//EXPLOITATION SHIT
+	var switchSide:Bool;
+	public var dadStrumAmount = 4;
+	public var playerStrumAmount = 4;
+	public static var scrollType:String;
+	var glitchText:Bool = true;
+
+	static var DOWNSCROLL_Y:Float;
+	static var UPSCROLL_Y:Float;
+
+	//subtitle var
+	public var subtitleManager:SubtitleManager;
+
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
@@ -559,6 +572,10 @@ class PlayState extends MusicBeatState
 		blackScreendeez.scrollFactor.set();
 		blackScreendeez.alpha = 0;
 		add(blackScreendeez);
+
+		subtitleManager = new SubtitleManager();
+		subtitleManager.cameras = [camHUD];
+		add(subtitleManager); 
 
 		#if desktop
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
@@ -1645,6 +1662,9 @@ class PlayState extends MusicBeatState
 		timeBar.visible = showTime;
 		reloadTimeBarColors();
 		timeBarBG.sprTracker = timeBar;
+
+		UPSCROLL_Y = 50;
+		DOWNSCROLL_Y = FlxG.height - 165;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -3158,7 +3178,7 @@ class PlayState extends MusicBeatState
 		{
 			if(ClientPrefs.scoreUIType == 'FFN')
 			{	
-				scoreTxt.text = 'Combo Breaks: ' + songMisses + ' // Practice Mode ';
+				scoreTxt.text = 'NPS: ' + nps + ' // Combo Breaks: ' + songMisses + ' // Practice Mode ';
 			}
 			if(ClientPrefs.scoreUIType == 'Purgatory')
 			{	
@@ -5867,12 +5887,12 @@ for (key => value in luaShaders)
 		}
 
 		switch (curSong.toLowerCase()){
-			case 'cheating':
-				health -= 0.01;					
-			 case 'unfairness' | 'deceit':
-				health -= (0.02 / 6);
-				camHUD.shake(0.0045, 0.1);
-				FlxG.camera.shake(0.0075, 0.1);
+			case 'cypher':
+				health -= 0.02;					
+			 case 'unfairness' | 'deceit': //made it fit the 3.0 update accurately
+				health -= (0.02 / 3);
+				camHUD.shake(0.00225, 0.1);
+				FlxG.camera.shake(0.00375, 0.1);
 		}
 
 		if (SONG.needsVoices)
@@ -6364,6 +6384,47 @@ for (key => value in luaShaders)
 	override function stepHit()
 	{
 		super.stepHit();
+		switch (SONG.song.toLowerCase())
+		{
+			case 'deceit': //haha funny subtitles go brrr
+				switch(curStep)
+				{
+					case 234:
+						subtitleManager.addSubtitle('Fine...', 0.02, 1);
+					case 769:
+						subtitleManager.addSubtitle('Anything you want...', 0.02, 1);
+					case 790:
+						subtitleManager.addSubtitle('You play me?', 0.02, 1);
+					case 815:
+						subtitleManager.addSubtitle('Sure.', 0.02, 1, {subtitleSize: 40});
+					case 842:
+						subtitleManager.addSubtitle('What you wanna play?', 0.02, 1);
+					case 866:
+						subtitleManager.addSubtitle("You gon' bully me?", 0.02, 1);
+					case 892:
+						subtitleManager.addSubtitle("Never come back again.", 0.02, 1, {subtitleSize: 60});
+					case 1452:
+						subtitleManager.addSubtitle("Okay...", 0.02, 0.5);
+					case 1568:
+						subtitleManager.addSubtitle("No.......", 0.02, 1);
+					case 1613:
+						subtitleManager.addSubtitle("*discord ping*", 0.02, 1);
+					case 1632:
+						subtitleManager.addSubtitle("'Dick' hehehehehe....", 0.02, 2);
+					case 1673:
+						subtitleManager.addSubtitle("Oh my god...", 0.02, 0.5);
+					case 1692:
+						subtitleManager.addSubtitle("It's not funny this is stupid.", 0.02, 1.5);
+					case 1744:
+						subtitleManager.addSubtitle("Hoho!", 0.02, 0.7);
+					case 1756:
+						subtitleManager.addSubtitle("*discord ping*", 0.02, 1);
+					case 1777:
+						subtitleManager.addSubtitle("*discord ping*", 0.02, 0.6);
+					case 1786:
+						subtitleManager.addSubtitle("*inaudible*", 0.02, 1.6);
+				}
+		}
 		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20
 			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))
 		{
@@ -6462,7 +6523,7 @@ for (key => value in luaShaders)
 			iconP2.updateHitbox();
 		}
 
-		if(ClientPrefs.iconBounceType == 'Purgatory 2')
+		if(ClientPrefs.iconBounceType == 'Purgatory')
 		{
 			var funny2:Float = (healthBar.percent * 0.01) + 0.01;
 			if (curBeat % 1 == 0) // Bambi's Purgatory: Presentation Video (WhatsDown)
@@ -6599,6 +6660,87 @@ for (key => value in luaShaders)
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);
 	}
+
+	function switchNoteScroll(cancelTweens:Bool = true)
+		{
+			switch (scrollType)
+			{
+				case 'upscroll':
+					strumLine.y = DOWNSCROLL_Y;
+					scrollType = 'downscroll';
+				case 'downscroll':
+					strumLine.y = UPSCROLL_Y;
+					scrollType = 'upscroll';
+			}
+			for (strumNote in strumLineNotes)
+			{
+				if (cancelTweens)
+				{
+					FlxTween.completeTweensOf(strumNote);
+				}
+				strumNote.angle = 0;
+				
+				FlxTween.angle(strumNote, strumNote.angle, strumNote.angle + 360, 0.4, {ease: FlxEase.expoOut});
+				FlxTween.tween(strumNote, {y: strumLine.y}, 0.6, {ease: FlxEase.backOut});
+			}
+		}
+
+		function switchNoteSide()
+		{
+			for (i in 0...4)
+			{
+				var curOpponentNote = opponentStrums.members[i];
+				var curPlayerNote = playerStrums.members[i];
+
+				FlxTween.tween(curOpponentNote, {x: curPlayerNote.x}, 0.6, {ease: FlxEase.expoOut, startDelay: 0.01 * i});
+				FlxTween.tween(curPlayerNote, {x: curOpponentNote.x}, 0.6, {ease: FlxEase.expoOut, startDelay: 0.01 * i});
+			}
+			switchSide = !switchSide;
+		}
+
+		function switchNotePositions(order:Array<Int>)
+		{
+			var positions:Array<Float> = [];
+			for (i in 0...4)
+			{
+				var curNote = playerStrums.members[i];
+				positions.push(curNote.baseX);
+			}
+			for (i in 0...4)
+			{
+				var curNote = opponentStrums.members[i];
+				positions.push(curNote.baseX);
+			}
+			for (i in 0...4)
+			{
+				var curOpponentNote = opponentStrums.members[i];
+				var curPlayerNote = playerStrums.members[i];
+
+				FlxTween.tween(curOpponentNote, {x: positions[order[i + playerStrumAmount]]}, 0.6, {ease: FlxEase.expoOut, startDelay: 0.01 * i});
+				FlxTween.tween(curPlayerNote, {x: positions[order[i]]}, 0.6, {ease: FlxEase.expoOut, startDelay: 0.01 * i});
+			}
+			switchSide = !switchSide;
+		}
+
+		function makeInvisibleNotes(invisible:Bool)
+		{
+			if (invisible)
+			{
+				for (strumNote in strumLineNotes)
+				{
+					FlxTween.cancelTweensOf(strumNote);
+					FlxTween.tween(strumNote, {alpha: 0}, 1);
+				}
+			}
+			else
+			{
+				for (strumNote in strumLineNotes)
+				{
+					FlxTween.cancelTweensOf(strumNote);
+					FlxTween.tween(strumNote, {alpha: 1}, 1);
+				}
+			}
+		}
 
 	override function sectionHit()
 	{
