@@ -41,7 +41,7 @@
 					],
 					[
 						"Change the Default Camera Zoom",
-						"0.8",
+						"0.7",
 						""
 					]
 				]
@@ -466,8 +466,8 @@
 					],
 					[
 						"Change the Default Camera Zoom",
-						"0.8",
-						""
+						"0.7",
+						" "
 					]
 				]
 			],
@@ -668,6 +668,11 @@
 						"Add Camera Zoom",
 						"0.03",
 						"0.06"
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
+						""
 					]
 				]
 			],
@@ -2548,6 +2553,11 @@
 						"Add Camera Zoom",
 						"-0.015",
 						"-0.03"
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.8",
+						""
 					]
 				]
 			],
@@ -2558,6 +2568,11 @@
 						"Add Camera Zoom",
 						"-0.015",
 						"-0.03"
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
+						""
 					]
 				]
 			],
@@ -3158,6 +3173,11 @@
 						"Add Camera Zoom",
 						"-0.015",
 						"-0.03"
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.8",
+						""
 					]
 				]
 			],
@@ -3168,6 +3188,16 @@
 						"Add Camera Zoom",
 						"-0.015",
 						"-0.03"
+					]
+				]
+			],
+			[
+				159428.571428571,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
+						""
 					]
 				]
 			],
@@ -3401,7 +3431,7 @@
 					],
 					[
 						"Change the Default Camera Zoom",
-						"0.8",
+						"0.7",
 						""
 					]
 				]
