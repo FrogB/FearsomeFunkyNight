@@ -225,7 +225,7 @@ class PlayState extends MusicBeatState
 	var tnh:Int = 0;
 
 	public var camZooming:Bool = false;
-	public var camZoomingMult:Float = 0.5;
+	public var camZoomingMult:Float = 1;
 	public var camZoomingDecay:Float = 1;
 	private var curSong:String = "";
 
@@ -4167,7 +4167,7 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 
-		//CHECKING WHICH TYPE OF BOUNCE THE PLAYER WANTS
+		//CHECKING WHICH TYPE OF BOUNCE THE PLAYER WANTS & SETTING THE GRAPHIC ICON SIZE/CENTERING THEM
 		if(ClientPrefs.iconBounceType == 'Golden Apple')
 		{
 			iconP1.centerOffsets();
@@ -4177,7 +4177,7 @@ class PlayState extends MusicBeatState
 			iconP2.updateHitbox();
 		}
 
-		if(ClientPrefs.iconBounceType == 'David Engine 1' || ClientPrefs.iconBounceType == 'David Engine 2' || ClientPrefs.iconBounceType == 'FFN' || ClientPrefs.iconBounceType == 'Purgatory 2') //fuck.
+		if(ClientPrefs.iconBounceType == 'David Engine 1' || ClientPrefs.iconBounceType == 'David Engine 2' || ClientPrefs.iconBounceType == 'FFN' || ClientPrefs.iconBounceType == 'Purgatory') //fuck.
 		{
 			iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.8)),Std.int(FlxMath.lerp(150, iconP1.height, 0.8)));
 			iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.8)),Std.int(FlxMath.lerp(150, iconP2.height, 0.8)));
@@ -4196,7 +4196,7 @@ class PlayState extends MusicBeatState
 		}
 
 		//SETTING THE OFFSETS
-		if(ClientPrefs.iconBounceType == 'Vanilla' || ClientPrefs.iconBounceType == 'David Engine 1' || ClientPrefs.iconBounceType == 'David Engine 2' || ClientPrefs.iconBounceType == 'FFN' || ClientPrefs.iconBounceType == 'Purgatory 2' || ClientPrefs.iconBounceType == 'Golden Apple')
+		if(ClientPrefs.iconBounceType == 'Vanilla' || ClientPrefs.iconBounceType == 'David Engine 1' || ClientPrefs.iconBounceType == 'David Engine 2' || ClientPrefs.iconBounceType == 'FFN' || ClientPrefs.iconBounceType == 'Purgatory' || ClientPrefs.iconBounceType == 'Golden Apple')
 		{
 			var iconOffset:Int = 26;
 			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
@@ -4309,7 +4309,7 @@ class PlayState extends MusicBeatState
 
 		if (unspawnNotes[0] != null)
 		{
-			var thing:Int = (SONG.song.toLowerCase() == 'unfairness' || SONG.song.toLowerCase() == 'deceit' || PlayState.SONG.song.toLowerCase() == 'exploitation' ? 15000 : 1500);
+			var thing:Int = (SONG.song.toLowerCase() == 'deceit' || PlayState.SONG.song.toLowerCase() == 'nether' ? 15000 : 1500);
 			var time:Float = spawnTime;
 			if(songSpeed < 1) time /= songSpeed;
 			if(unspawnNotes[0].multSpeed < 1) time /= unspawnNotes[0].multSpeed;
@@ -4328,7 +4328,7 @@ class PlayState extends MusicBeatState
 
 		if (altUnspawnNotes[0] != null)
 		{
-			var thing:Int = (SONG.song.toLowerCase() == 'unfairness' || PlayState.SONG.song.toLowerCase() == 'exploitation' ? 15000 : 1500);
+			var thing:Int = (SONG.song.toLowerCase() == 'deceit' || PlayState.SONG.song.toLowerCase() == 'exploitation' ? 15000 : 1500);
 
 			if (altUnspawnNotes[0].strumTime - Conductor.songPosition < thing)
 			{
@@ -5098,11 +5098,6 @@ for (key => value in luaShaders)
 	{
 		if(isDad)
 		{
-			switch (dad.curCharacter)
-			{
-				case 'hell-expunged-FFN-phase-1':
-					camFollow.y = dad.getMidpoint().y;
-			}
 			camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
 			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
@@ -5111,8 +5106,8 @@ for (key => value in luaShaders)
 		else
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
-			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
+			camFollow.x -= boyfriend.cameraPosition[0];
+			camFollow.y += boyfriend.cameraPosition[1];
 
 			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
 			{
@@ -5564,7 +5559,7 @@ for (key => value in luaShaders)
 						}
 						canMiss = false; // <--- turn this shit from true to false to turn off that STUPID UGLy anti mash
 					}
-					if(SONG.song.toLowerCase() == "unfairness" || SONG.song.toLowerCase() == "deceit")
+					if(SONG.song.toLowerCase() == "deceit")
 					{
 						canMiss = true; // cry about it
 					}
@@ -5844,20 +5839,12 @@ for (key => value in luaShaders)
 			{
 				case 0:
 					animToPlay = 'singLEFT';
-					dadCamFollowY = 0;
-					dadCamFollowX = -25;
 				case 1:
 					animToPlay = 'singDOWN';
-					dadCamFollowY = 25;
-					dadCamFollowX = 0;
 				case 2:
 					animToPlay = 'singUP';
-					dadCamFollowY = -25;
-					dadCamFollowX = 0;
 				case 3:
 					animToPlay = 'singRIGHT';
-					dadCamFollowY = 0;
-					dadCamFollowX = 25;
 			}
 
 			if(note.gfNote) {
@@ -5888,8 +5875,8 @@ for (key => value in luaShaders)
 
 		switch (curSong.toLowerCase()){
 			case 'cypher':
-				health -= 0.02;					
-			 case 'unfairness' | 'deceit': //made it fit the 3.0 update accurately
+				health -= 0.015;					
+			 case 'deceit': //made it fit the 3.0 update accurately
 				health -= (0.02 / 3);
 				camHUD.shake(0.00225, 0.1);
 				FlxG.camera.shake(0.00375, 0.1);
@@ -6384,6 +6371,9 @@ for (key => value in luaShaders)
 	override function stepHit()
 	{
 		super.stepHit();
+
+		moveCameraSection(); //hopefully this does the camera mount on dad
+
 		switch (SONG.song.toLowerCase())
 		{
 			case 'deceit': //haha funny subtitles go brrr
@@ -6416,14 +6406,35 @@ for (key => value in luaShaders)
 					case 1692:
 						subtitleManager.addSubtitle("It's not funny this is stupid.", 0.02, 1.5);
 					case 1744:
-						subtitleManager.addSubtitle("Hoho!", 0.02, 0.7);
+						subtitleManager.addSubtitle("Hohoho!", 0.02, 0.7);
 					case 1756:
-						subtitleManager.addSubtitle("*discord ping*", 0.02, 1);
+						subtitleManager.addSubtitle("*discord ping*", 0.02, 0.5);
 					case 1777:
 						subtitleManager.addSubtitle("*discord ping*", 0.02, 0.6);
 					case 1786:
-						subtitleManager.addSubtitle("*inaudible*", 0.02, 1.6);
+						subtitleManager.addSubtitle("*inaudible*", 0.02, 1.5);
 				}
+			case 'evocation':
+				switch(curStep)
+				{
+					case 76:
+						subtitleManager.addSubtitle("FUCK OFF ALISON!", 0.05, 3);
+					case 899:
+						subtitleManager.addSubtitle("Imma blocking you. I'm blocking you..", 0.02, 0.7);
+					case 918:
+						subtitleManager.addSubtitle("That's it, I'm blocking you.", 0.02, 1);
+					case 941:
+						subtitleManager.addSubtitle("Haha you loser Alison.", 0.02, 1.6);
+					case 974:
+						subtitleManager.addSubtitle("STOP.", 0.02, 0.5, {subtitleSize: 45});
+					case 986:
+						subtitleManager.addSubtitle("FUCKING.", 0.02, 0.5, {subtitleSize: 45});
+					case 998:
+						subtitleManager.addSubtitle("CALLING ME!", 0.02, 0.5, {subtitleSize: 45});
+					case 1008:
+						subtitleManager.addSubtitle("AAAALLLLIIIISSSSOOOONNNN!!!!", 0.01, 0.5, {subtitleSize: 60}); //what would happen if-
+				}
+
 		}
 		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20
 			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))

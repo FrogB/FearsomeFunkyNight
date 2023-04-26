@@ -26,7 +26,7 @@ class FlashingState extends MusicBeatState
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Hey there, thanks for downloading the DEMO of Fearsome Funky Night!\n
 			Just a small warning that this mod contains some flashing & epilepsy effects in some songs.\n
-			If you wish to disable them, please do so in the Options Menu\n
+			If you wish to disable them, please do so in the Graphics Section of the Options Menu\n
 			Press ENTER or ESC to continue",
 			32);
 		warnText.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, CENTER);
@@ -43,17 +43,17 @@ class FlashingState extends MusicBeatState
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 				if(!back) {
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxG.sound.play(Paths.sound('cancelMenu'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 					onComplete: function (twn:FlxTween) {
 					MusicBeatState.switchState(new TitleState());
 					}
 				});
 				} else {
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxG.sound.play(Paths.sound('cancelMenu'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new TitleState());
+						MusicBeatState.switchState(new TitleState());
 						}
 					});
 				}
