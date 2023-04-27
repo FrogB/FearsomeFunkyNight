@@ -170,6 +170,12 @@ class PlayState extends MusicBeatState
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 
+	//3.0-type countdown shit
+	public static var isDaveSong:Bool = false;
+	public static var isBambiSong:Bool = false;
+	public static var isTristanSong:Bool = false;
+	public static var isExpunged:Bool = false;
+
 	public var spawnTime:Float = 2000;
 
 	public var vocals:FlxSound;
@@ -284,7 +290,6 @@ class PlayState extends MusicBeatState
 	public static var the3DWorldEffectWavy:WiggleEffect;
 	public static var the3DWorldEffectHeatWaveVer:WiggleEffect;
 	public static var the3DWorldEffectDreamy:WiggleEffect;
-	public static var the3DWorldEffectFlag2:WiggleEffect;
 
 	public var kadeEngineWatermark:FlxText;
 	public var modWatermark:FlxText;
@@ -529,13 +534,6 @@ class PlayState extends MusicBeatState
 		the3DWorldEffectWavy.waveAmplitude = 0.2;
 		the3DWorldEffectWavy.waveFrequency = 3;
 		the3DWorldEffectWavy.waveSpeed = 1.25;
-		
-		//EXTRAS
-		the3DWorldEffectFlag2 = new WiggleEffect();
-		the3DWorldEffectFlag2.effectType = WiggleEffectType.FLAG;
-		the3DWorldEffectFlag2.waveAmplitude = 0.1;
-		the3DWorldEffectFlag2.waveFrequency = 5;
-		the3DWorldEffectFlag2.waveSpeed = 1.25;
 
 		// var gameCam:FlxCamera = FlxG.camera;\
 		camGame = new FlxCamera();
@@ -602,8 +600,10 @@ class PlayState extends MusicBeatState
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
 			{
-				case 'tranquility' | 'ecstatic':
+				case 'tranquility':
 					curStage = 'houseDay';
+				case 'ecstatic':
+					curStage = 'houseEcstatic';
 				case 'night':
 					curStage = 'houseNight';
 				case 'vex': 
@@ -628,6 +628,11 @@ class PlayState extends MusicBeatState
 				directory: "",
 				defaultZoom: 0.9,
 				isPixelStage: false,
+				isDaveSong: false,
+				isBambiSong: false,
+				isTristanSong: false,
+				isExpunged: false,
+				
 
 				boyfriend: [770, 100],
 				girlfriend: [400, 130],
@@ -643,6 +648,10 @@ class PlayState extends MusicBeatState
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;
+		isDaveSong = stageData.isDaveSong;
+		isBambiSong = stageData.isBambiSong;
+		isTristanSong = stageData.isTristanSong;
+		isExpunged = stageData.isExpunged;
 		BF_X = stageData.boyfriend[0];
 		BF_Y = stageData.boyfriend[1];
 		GF_X = stageData.girlfriend[0];
@@ -701,6 +710,42 @@ class PlayState extends MusicBeatState
 			{
 				defaultCamZoom = 0.8;
 				curStage = 'houseDay';
+
+				var bg:FlxSprite = new FlxSprite(-680, -130).loadGraphic(Paths.image('bambi/sky'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.1, 0.1);
+				bg.active = true;
+
+				var hills:FlxSprite = new FlxSprite(-652, -20).loadGraphic(Paths.image('dave/hills'));
+				hills.antialiasing = true;
+				hills.scrollFactor.set(0.7, 0.7);
+				hills.active = true;
+
+				var grassBG:FlxSprite = new FlxSprite(-725, 400).loadGraphic(Paths.image('dave/grass bg'));
+				grassBG.antialiasing = true;
+				grassBG.scrollFactor.set(0.3, 0.3);
+				grassBG.active = true;
+
+				var gate:FlxSprite = new FlxSprite(-542, 440).loadGraphic(Paths.image('dave/gate'));
+				gate.antialiasing = true;
+				gate.scrollFactor.set(0.9, 0.9);
+				gate.active = true;
+
+				var grass:FlxSprite = new FlxSprite(-725, 580).loadGraphic(Paths.image('dave/grass'));
+				grass.antialiasing = true;
+				grass.scrollFactor.set(1, 1);
+
+				add(bg);
+				add(hills);
+				add(grassBG);
+				add(gate);
+				add(grass);
+			}
+
+			case 'houseEcstatic':
+			{
+				defaultCamZoom = 0.8;
+				curStage = 'houseEcstatic';
 
 				var bg:FlxSprite = new FlxSprite(-680, -130).loadGraphic(Paths.image('bambi/sky'));
 				bg.antialiasing = true;
@@ -1417,7 +1462,15 @@ class PlayState extends MusicBeatState
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
-
+		if(isDaveSong) {
+			introSoundsSuffix = '_dave';
+		}
+		if(isBambiSong) {
+			introSoundsSuffix = '_bambi';
+		}
+		if(isTristanSong) {
+			introSoundsSuffix = '';
+		}
 		add(gfGroup); //Needed for blammed lights
 
 		// Shitty layering but whatev it works LOL
@@ -2956,11 +3009,16 @@ class PlayState extends MusicBeatState
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 				introAssets.set('default', ['ready', 'set', 'go']);
 				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+				introAssets.set('expunged', ['ready', 'set', 'go_glitch']);
 
 				var introAlts:Array<String> = introAssets.get('default');
 				var antialias:Bool = ClientPrefs.globalAntialiasing;
 				if(isPixelStage) {
 					introAlts = introAssets.get('pixel');
+					antialias = false;
+				}
+				if(isExpunged) {
+					introAlts = introAssets.get('expunged'); // dont you marvel on my new looks i told you that this was only the beginning *SPAMMING THE FUCK O-*
 					antialias = false;
 				}
 
@@ -3815,7 +3873,6 @@ class PlayState extends MusicBeatState
 		the3DWorldEffectHeatWaveVer.update(elapsed);
 		the3DWorldEffectDreamy.update(elapsed);
 		the3DWorldEffectWavy.update(elapsed);
-		the3DWorldEffectFlag2.update(elapsed);
 
 		elapsedtime += elapsed;
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) // simplified it since we aint using badai or bandu or some shit lol -frogb
@@ -6372,7 +6429,10 @@ for (key => value in luaShaders)
 	{
 		super.stepHit();
 
-		moveCameraSection(); //hopefully this does the camera mount on dad
+		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) //restricting it to move every stephit would break the cam and the cam movement on arrow system, setting it to restrict only to floating people
+		{
+			moveCameraSection();
+		}
 
 		switch (SONG.song.toLowerCase())
 		{

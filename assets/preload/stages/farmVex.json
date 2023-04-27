@@ -2,6 +2,10 @@
 	"directory": "",
 	"defaultZoom": 0.8,
 	"isPixelStage": false,
+	"isDaveSong": false,
+	"isBambiSong": true,
+	"isTristanSong": false,
+	"isExpunged": false,
 
 	"boyfriend": [928, 90],
 	"girlfriend": [530, 130],

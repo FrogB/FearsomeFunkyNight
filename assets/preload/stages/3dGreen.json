@@ -8,6 +8,10 @@
 		-100
 	],
 	"isPixelStage": false,
+	"isDaveSong": false,
+	"isTristanSong": false,
+	"isBambiSong": true,
+	"isExpunged": false,
 	"opponent": [
 		250,
 		100
