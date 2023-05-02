@@ -1691,7 +1691,7 @@
 					],
 					[
 						"Change the Default Camera Zoom",
-						"0.8",
+						"0.7",
 						""
 					]
 				]
@@ -2021,7 +2021,7 @@
 					],
 					[
 						"Change the Default Camera Zoom",
-						"0.8",
+						"0.7",
 						""
 					]
 				]
@@ -3327,6 +3327,16 @@
 					[
 						"Change the Default Camera Zoom",
 						"0.8",
+						""
+					]
+				]
+			],
+			[
+				146647.058823529,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
 						""
 					]
 				]

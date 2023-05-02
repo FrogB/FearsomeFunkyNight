@@ -4,7 +4,7 @@ function onStartCountdown()
 end
 
 function onCreatePost()
-    setProperty('gf.alpha',0)
+    setProperty('gf.alpha', 0)
 end
 
 function onUpdatePost(elapsed)

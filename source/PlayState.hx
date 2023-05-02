@@ -708,7 +708,7 @@ class PlayState extends MusicBeatState
 
 		case 'houseDay':
 			{
-				defaultCamZoom = 0.8;
+				defaultCamZoom = 0.7;
 				curStage = 'houseDay';
 
 				var bg:FlxSprite = new FlxSprite(-680, -130).loadGraphic(Paths.image('bambi/sky'));
@@ -744,7 +744,7 @@ class PlayState extends MusicBeatState
 
 			case 'houseEcstatic':
 			{
-				defaultCamZoom = 0.8;
+				defaultCamZoom = 0.7;
 				curStage = 'houseEcstatic';
 
 				var bg:FlxSprite = new FlxSprite(-680, -130).loadGraphic(Paths.image('bambi/sky'));
@@ -793,7 +793,7 @@ class PlayState extends MusicBeatState
 
 			case 'houseSunset':
 			{
-				defaultCamZoom = 0.8;
+				defaultCamZoom = 0.7;
 				curStage = 'houseSunset';
 
 				var bg:FlxSprite = new FlxSprite(-680, -130).loadGraphic(Paths.image('bambi/sky_sunset'));
@@ -835,7 +835,7 @@ class PlayState extends MusicBeatState
 
 			case 'houseNight':
 			{
-				defaultCamZoom = 0.8;
+				defaultCamZoom = 0.7;
 				curStage = 'houseNight';
 
 				var bg:FlxSprite = new FlxSprite(-680, -130).loadGraphic(Paths.image('bambi/sky_night'));
@@ -1081,9 +1081,8 @@ class PlayState extends MusicBeatState
 				defaultCamZoom = 0.7;
 				curStage = '3dUnfair';
 
-				var bg:FlxSprite = new FlxSprite(200, 0).loadGraphic(Paths.image('expunged/scaryBG'));
-				bg.setGraphicSize(Std.int(bg.width * 3.5));
-
+				var bg:FlxSprite = new FlxSprite(-250, -400).loadGraphic(Paths.image('expunged/deceitbg'));
+				bg.scrollFactor.set(0.3, 0.3);
 				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect(2, 5, 0.1);
 				bg.shader = testshader.shader;
 				curbg = bg;
@@ -1091,13 +1090,13 @@ class PlayState extends MusicBeatState
 				add(bg);
 			}
 
-			case '3dGreen': // it's probably only temporary until we make the ACTUAL stage for cypher.
+			case '3dGreen': 
 			{
 				defaultCamZoom = 0.7;
 				curStage = '3dGreen';
 
-				var bg:FlxSprite = new FlxSprite(-700, -350).loadGraphic(Paths.image('expunged/cheater'));
-				bg.setGraphicSize(Std.int(bg.width * 2));
+				var bg:FlxSprite = new FlxSprite(-400, -300).loadGraphic(Paths.image('expunged/cypherbg'));
+				bg.scrollFactor.set(0.5, 0.5);
 
 				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect(2, 5, 0.1);
 				bg.shader = testshader.shader;

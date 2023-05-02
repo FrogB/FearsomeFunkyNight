@@ -60,7 +60,7 @@ function onCreatePost() -- IN SONG ORDER
     if songName == "Tranquility" then
         composer = "PurpleSigh192"
         visuals = "The OG DNB \nTeam"
-        charter = "Gecko"
+        charter = "Gecko & FrogB"
         allowinspiration = false
     end
 
@@ -86,9 +86,9 @@ function onCreatePost() -- IN SONG ORDER
     end
 
     if songName == "Deceit" then
-        composer = "Sr.Wiliam"
-        visuals = "The OG DNB \nTeam"
-        charter = "RedlyGenix &\n FrogB"
+        composer = "Ayo"
+        visuals = "Ayo, NooboDev &\natp engineer"
+        charter = "FrogB"
         allowinspiration = false
     end
 
