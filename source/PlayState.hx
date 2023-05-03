@@ -3901,10 +3901,10 @@ class PlayState extends MusicBeatState
 
 		for(i in 0...notesHitArray.length)
 		{
-		var cock:Date = notesHitArray[i];
-		if (cock != null)
-			if (cock.getTime() + 2000 < Date.now().getTime())
-			notesHitArray.remove(cock);
+			var cock:Date = notesHitArray[i];
+			if (cock != null)
+				if (cock.getTime() + 2000 < Date.now().getTime())
+				notesHitArray.remove(cock);
 		}
 		nps = Math.floor(notesHitArray.length / 2);
 		if (nps > maxnps) maxnps = nps;
@@ -4354,6 +4354,16 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("secShit", curSection);
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
+
+		switch (curSong.toLowerCase())
+		{
+			case 'hypercube':
+				for (i in 0...opponentStrums.length) {
+				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
+				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
+				opponentStrums.members[i].alpha = 0.2;
+				}
+		}
 
 		// RESET = Quick Game Over Screen
 		if (!ClientPrefs.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
@@ -5965,6 +5975,7 @@ for (key => value in luaShaders)
 	{
 		if (!note.isSustainNote)
 			notesHitArray.push(Date.now());
+		
 		if (!note.wasGoodHit)
 		{
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
