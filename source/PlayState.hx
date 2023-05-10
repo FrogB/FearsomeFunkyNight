@@ -1847,9 +1847,8 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+			'displayedHealth', 0, 2);
 		healthBar.scrollFactor.set();
-		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
 		add(healthBar);
@@ -3883,7 +3882,7 @@ class PlayState extends MusicBeatState
 		the3DWorldEffectDreamy.update(elapsed);
 		the3DWorldEffectWavy.update(elapsed);
 
-		health = FlxMath.lerp(health, health, .2/(ClientPrefs.framerate / 45)); //trying to do gapple 1.5 stuff idfk
+		displayedHealth = FlxMath.lerp(displayedHealth, health, .2/(ClientPrefs.framerate / ClientPrefs.framerate)); //trying to do gapple 1.5 stuff idfk
 
 		elapsedtime += elapsed;
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) // simplified it since we aint using badai or bandu or some shit lol -frogb
