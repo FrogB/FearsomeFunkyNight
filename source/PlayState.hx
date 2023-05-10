@@ -237,6 +237,7 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
+	private var displayedHealth:Float = 1;
 	public var combo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
@@ -3703,9 +3704,11 @@ class PlayState extends MusicBeatState
 			babyArrow.downScroll = ClientPrefs.downScroll;
 			if (!isStoryMode && !skipArrowStartTween)
 			{
-				//babyArrow.y -= 10;
+				babyArrow.y -= 10;
 				babyArrow.alpha = 0;
-				FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				babyArrow.angle = -90;
+				FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: targetAlpha}, 0.5, {ease: FlxEase.circOut, startDelay: 0.25 + (0.1 * i)});
+				FlxTween.tween(babyArrow, {angle: 0}, 0.5, {ease: FlxEase.quadOut, startDelay: 0.25 + (0.1 * i)});
 			}
 			else
 			{
@@ -3873,11 +3876,14 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		//wiggleeffect shaders 
 		the3DWorldEffectFlag.update(elapsed);
 		the3DWorldEffectHeatWaveHor.update(elapsed);
 		the3DWorldEffectHeatWaveVer.update(elapsed);
 		the3DWorldEffectDreamy.update(elapsed);
 		the3DWorldEffectWavy.update(elapsed);
+
+		health = FlxMath.lerp(health, health, .2/(ClientPrefs.framerate / 45)); //trying to do gapple 1.5 stuff idfk
 
 		elapsedtime += elapsed;
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) // simplified it since we aint using badai or bandu or some shit lol -frogb
