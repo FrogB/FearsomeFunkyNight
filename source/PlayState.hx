@@ -231,7 +231,7 @@ class PlayState extends MusicBeatState
 	var tnh:Int = 0;
 
 	public var camZooming:Bool = false;
-	public var camZoomingMult:Float = 1;
+	public var camZoomingMult:Float = 2; //for the funnies
 	public var camZoomingDecay:Float = 1;
 	private var curSong:String = "";
 
@@ -317,7 +317,6 @@ class PlayState extends MusicBeatState
 
 	var notesHitArray:Array<Date> = [];
 
-	var tristanBG:FlxSprite = new FlxSprite(-680, -130).loadGraphic(Paths.image('dave/void/3dTristan'));
 	var blackBG:FlxSprite = new FlxSprite(-120, -120).makeGraphic(Std.int(FlxG.width * 100), Std.int(FlxG.height * 150), FlxColor.BLACK);
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
@@ -773,23 +772,11 @@ class PlayState extends MusicBeatState
 				grass.scrollFactor.set(1, 1);
 				grass.active = true;
 
-				tristanBG.loadGraphic(Paths.image('dave/void/3dTristan'));
-				tristanBG.antialiasing = true;
-				tristanBG.scrollFactor.set(0.1, 0.1);
-				tristanBG.scale.set(3, 3);
-				tristanBG.active = true;
-				tristanBG.visible = false;
-
-				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect(2, 5, 0.1);
-				tristanBG.shader = testshader.shader;
-				curbg = tristanBG;
-
 				add(bg);
 				add(hills);
 				add(grassBG);
 				add(gate);
 				add(grass);
-				add(tristanBG);
 			}
 
 			case 'houseSunset':
@@ -3955,12 +3942,10 @@ class PlayState extends MusicBeatState
 					case 1024:
 						fartt = true;
 						bALLS = true;
-						tristanBG.visible = true;
 					case 1536:
 						fartt = false;
 						fartt2 = false;
 						FlxTween.tween(camHUD, {angle: 0}, 0.8, {ease: FlxEase.quadOut}); // fixing that stupid camhud bug
-						tristanBG.visible = false;
 				}
 	}
 
@@ -4358,8 +4343,8 @@ class PlayState extends MusicBeatState
 
 		if (camZooming)
 		{
-			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay), 0, 1));
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay), 0, 1));
+			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 10 * camZoomingDecay), 0, 1));
+			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 10 * camZoomingDecay), 0, 1));
 		}
 
 		FlxG.watch.addQuick("secShit", curSection);
@@ -4941,8 +4926,8 @@ for (key => value in luaShaders)
 				if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35) {
 					var camZoom:Float = Std.parseFloat(value1);
 					var hudZoom:Float = Std.parseFloat(value2);
-					if(Math.isNaN(camZoom)) camZoom = 0.015;
-					if(Math.isNaN(hudZoom)) hudZoom = 0.03;
+					if(Math.isNaN(camZoom)) camZoom = 0.03;
+					if(Math.isNaN(hudZoom)) hudZoom = 0.06;
 
 					FlxG.camera.zoom += camZoom;
 					camHUD.zoom += hudZoom;
