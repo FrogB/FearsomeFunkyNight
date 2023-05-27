@@ -52,7 +52,7 @@ class MainMenuState extends MusicBeatState
 		'Play any song of your choosing/liking and achieve new high scores!',
 		'Check out all the amazing people who worked on this mod!',
 		'View the entire playlist for the mod on YouTube!',
-		"Tweak game settings, adjust keybinds, or maybe customize the game's UI to your liking!",
+		"Tweak game settings, adjust keybinds, or customize the game's UI to your liking!",
 		'Join the official Fearsome Funky Night Discord Server!'
 	];
 
@@ -69,7 +69,7 @@ class MainMenuState extends MusicBeatState
 	public static var engineVers:Array<String> = ['Dave', 'Bambi', 'Tristan', 'Golden Tristan', 'Expunged', 'Fearsome']; // <-- so many names
 
 	//public static var kadeEngineVer:String = "DAVE"; NO. JUST NO. PLEASE NO. FOR THE LOvE OF GOD PLEASE. NO.
-	public static var gameVer:String = "0.2.8";
+	//public static var gameVer:String = "0.2.8"; gamever is alr given on project.xml lmao
 
 	public static var canInteract:Bool = false;
 
@@ -276,7 +276,7 @@ class MainMenuState extends MusicBeatState
 					switch (optionShit[curSelected])
 					{
 						case 'discord':
-							CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+							CoolUtil.browserLoad('https://discord.gg/jGNTgcjq');
 						case 'ost':
 							CoolUtil.browserLoad('https://www.youtube.com/playlist?list=PLjOIzvG4OFJftGgKFzQ4GB87BoSxJMaB3');
 					}
@@ -324,7 +324,7 @@ class MainMenuState extends MusicBeatState
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'discord':
-										CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+										CoolUtil.browserLoad('https://discord.gg/jGNTgcjq');
 								}
 							});
 						}

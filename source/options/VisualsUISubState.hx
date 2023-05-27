@@ -55,7 +55,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'scoreUIType',
 			'string',
 			'FFN',
-			['FFN', 'Psych Engine', 'Dave Engine', 'Purgatory']);
+			['FFN', 'Psych Engine', 'Kade Engine', 'Dave Engine', 'Purgatory']);
 		addOption(option);
 
 		var option:Option = new Option('Icon Bounce Style:',

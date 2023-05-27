@@ -60,6 +60,7 @@ import flixel.effects.particles.FlxEmitter;
 import lime.tools.ApplicationData;
 import flixel.effects.particles.FlxParticle;
 import flixel.util.FlxSave;
+import flixel.animation.FlxAnimationController; //for playback thing
 import animateatlas.AtlasFrameMaker;
 import Achievements;
 import StageData;
@@ -128,6 +129,9 @@ class PlayState extends MusicBeatState
 	public var modchartTexts:Map<String, ModchartText> = new Map<String, ModchartText>();
 	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
 	public var shader_chromatic_abberation:ChromaticAberrationEffect;
+	public var scanline_shader:ScanlineEffect;
+	public var grain_shader:GrainEffect;
+	public var vcr_shader:VCRDistortionEffect;
 	public var camGameShaders:Array<ShaderEffect> = [];
 	public var camHUDShaders:Array<ShaderEffect> = [];
 	public var camOtherShaders:Array<ShaderEffect> = [];
@@ -158,6 +162,8 @@ class PlayState extends MusicBeatState
 	public var songSpeedType:String = "multiplicative";
 	public var noteKillOffset:Float = 350;
 
+	public var playbackRate(default, set):Float = 1; //planning some shit
+
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
@@ -179,6 +185,12 @@ class PlayState extends MusicBeatState
 	public var spawnTime:Float = 2000;
 
 	public var vocals:FlxSound;
+
+	//opponent note hit creates rgb effect shit
+	var doneloll:Bool = false;
+	var doneloll2:Bool = false;
+	var stupidInt:Int = 0;
+	var stupidBool:Bool = false;
 
 	public var elapsedtime:Float = 0;
 
@@ -231,7 +243,7 @@ class PlayState extends MusicBeatState
 	var tnh:Int = 0;
 
 	public var camZooming:Bool = false;
-	public var camZoomingMult:Float = 2; //for the funnies
+	public var camZoomingMult:Float = 1;
 	public var camZoomingDecay:Float = 1;
 	private var curSong:String = "";
 
@@ -501,8 +513,6 @@ class PlayState extends MusicBeatState
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill', false);
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
-		
-		shader_chromatic_abberation = new ChromaticAberrationEffect();
 
 		//MORE STRIDENT CRISIS :i_shit_myself:
 		the3DWorldEffectFlag = new WiggleEffect();
@@ -550,6 +560,12 @@ class PlayState extends MusicBeatState
 		FlxCamera.defaultCameras = [camGame];
 		CustomFadeTransition.nextCamera = camOther;
 		//FlxG.cameras.setDefaultDrawTarget(camGame, true);
+
+		#if windows
+		shader_chromatic_abberation = new ChromaticAberrationEffect(0.0075); // i think this one was from psych itself?\
+		vcr_shader = new VCRDistortionEffect(0.2, true, false, false);
+		scanline_shader = new ScanlineEffect(false);
+		#end
 
 		persistentUpdate = true;
 		persistentDraw = true;
@@ -1877,6 +1893,12 @@ class PlayState extends MusicBeatState
 			scoreTxt.setFormat(Paths.font("comic.ttf"), 17, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			scoreTxt.borderSize = 1.25;
 		}
+		if(ClientPrefs.scoreUIType == 'Kade Engine') //it's basically purgatory but a dfferent font and a smaller text size lmao whatsdown did you inspire the de hud from this shit?
+		{
+			scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.borderSize = 1.25;
+		}
 		else if(ClientPrefs.scoreUIType == 'Psych Engine')
 		{
 			scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
@@ -1906,7 +1928,7 @@ class PlayState extends MusicBeatState
 			{
 				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}\n';
 			}
-			else //purgatory and ffn styles by default
+			else //purgatory, kade and ffn styles by default
 			{
 				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';	
 			}		
@@ -2241,6 +2263,21 @@ class PlayState extends MusicBeatState
 		}
 		songSpeed = value;
 		noteKillOffset = 350 / songSpeed;
+		return value;
+	}
+
+	function set_playbackRate(value:Float):Float
+	{
+		if(generatedMusic)
+		{
+			if(vocals != null) vocals.pitch = value;
+			FlxG.sound.music.pitch = value;
+		}
+		playbackRate = value;
+		FlxAnimationController.globalSpeed = value;
+		trace('Anim speed: ' + FlxAnimationController.globalSpeed);
+		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000 * value;
+		setOnLuas('playbackRate', playbackRate);
 		return value;
 	}
 
@@ -3197,7 +3234,7 @@ class PlayState extends MusicBeatState
 			{
 				scoreTxt.text =	'Score:' + songScore + ' | Misses:' + songMisses + ' | Accuracy:0%';
 			}
-			if(ClientPrefs.scoreUIType == 'Purgatory')
+			if(ClientPrefs.scoreUIType == 'Purgatory' || ClientPrefs.scoreUIType == 'Kade Engine')
 			{
 				scoreTxt.text =	'NPS: ' + nps + ' (Max 0) | Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: 0% | N/A';
 			}
@@ -3219,7 +3256,7 @@ class PlayState extends MusicBeatState
 			{
 				scoreTxt.text =	'Score:' + songScore + ' | Misses:' + songMisses + ' | Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 			}
-			if(ClientPrefs.scoreUIType == 'Purgatory')
+			if(ClientPrefs.scoreUIType == 'Purgatory' || ClientPrefs.scoreUIType == 'Kade Engine')
 			{
 				scoreTxt.text =  'NPS: ' + nps + ' (Max ' + maxnps + ') | Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' | (' + ratingFC + ') ' + ratingName;
 			}
@@ -3230,7 +3267,7 @@ class PlayState extends MusicBeatState
 			{	
 				scoreTxt.text = 'NPS: ' + nps + ' // Combo Breaks: ' + songMisses + ' // Practice Mode ';
 			}
-			if(ClientPrefs.scoreUIType == 'Purgatory')
+			if(ClientPrefs.scoreUIType == 'Purgatory' || ClientPrefs.scoreUIType == 'Kade Engine')
 			{	
 				scoreTxt.text = 'NPS: ' + nps + ' | Combo Breaks: ' + songMisses + ' | Practice Mode ';
 			}
@@ -3240,7 +3277,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		if(cpuControlled) {
-			if(ClientPrefs.scoreUIType == 'Purgatory')
+			if(ClientPrefs.scoreUIType == 'Purgatory' || ClientPrefs.scoreUIType == 'Kade Engine')
 			{	
 				scoreTxt.text = 'NPS: ' + nps + ' | (Cheater!) Botplay';
 			}
@@ -3869,7 +3906,7 @@ class PlayState extends MusicBeatState
 		the3DWorldEffectDreamy.update(elapsed);
 		the3DWorldEffectWavy.update(elapsed);
 
-		displayedHealth = FlxMath.lerp(displayedHealth, health, .2/(ClientPrefs.framerate / ClientPrefs.framerate)); //trying to do gapple 1.5 stuff idfk
+		displayedHealth = FlxMath.lerp(displayedHealth, health, .1/(ClientPrefs.framerate / ClientPrefs.framerate)); //trying to do gapple 1.5 stuff idfk
 
 		elapsedtime += elapsed;
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) // simplified it since we aint using badai or bandu or some shit lol -frogb
@@ -3896,16 +3933,6 @@ class PlayState extends MusicBeatState
 		{
 			camHUD.angle -= elapsed * 30;
 		} 
-
-		for(i in 0...notesHitArray.length)
-		{
-			var cock:Date = notesHitArray[i];
-			if (cock != null)
-				if (cock.getTime() + 2000 < Date.now().getTime())
-				notesHitArray.remove(cock);
-		}
-		nps = Math.floor(notesHitArray.length / 2);
-		if (nps > maxnps) maxnps = nps;
 
 		/*if (FlxG.keys.justPressed.NINE)
 		{
@@ -3961,6 +3988,30 @@ class PlayState extends MusicBeatState
 				spr.x -= Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
 				spr.x += Math.sin(elapsedtime) * 1.5;
 			});
+		}
+
+		if (SONG.song.toLowerCase() == 'hypercube')
+		{
+			
+			#if windows
+			if(stupidInt > 0 && !stupidBool)
+				{
+					shader_chromatic_abberation.setChrome(FlxG.random.float(0.01, 0.015));
+					stupidInt -= 1;
+				}
+			else if(!stupidBool)
+				{
+					doneloll2 = false;
+				}
+			else
+				{
+					shader_chromatic_abberation.setChrome(FlxG.random.float(0.01, 0.015));
+				}
+			if(!doneloll2)
+				{
+					shader_chromatic_abberation.setChrome(FlxG.random.float(0.003, 0.005));
+				}
+			#end
 		}
 
 		if(SONG.song.toLowerCase() == 'evocation') // WHEN I GO REBOUNDING EVERYWHERE HAHAHABFUIBEWF9UNHEWF9 DO YOU WANT DO YOU WANT PHONE PHONE PHONE PHONE AUHEF973FNCWH9FWCHNFWHN80EWF80CWNY3WCF890NHE890NE0N
@@ -4191,6 +4242,22 @@ class PlayState extends MusicBeatState
 			} else {
 				boyfriendIdleTime = 0;
 			}
+		}
+
+		{
+			var balls = notesHitArray.length-1;
+			while (balls >= 0)
+			{
+				var cock:Date = notesHitArray[balls];
+				if (cock != null && cock.getTime() + 1000 / playbackRate < Date.now().getTime())
+					notesHitArray.remove(cock);
+				else
+					balls = 0;
+				balls--;
+			}
+			nps = notesHitArray.length;
+			if (nps > maxnps)
+				maxnps = nps;
 		}
 
 		super.update(elapsed);
@@ -4926,8 +4993,8 @@ for (key => value in luaShaders)
 				if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35) {
 					var camZoom:Float = Std.parseFloat(value1);
 					var hudZoom:Float = Std.parseFloat(value2);
-					if(Math.isNaN(camZoom)) camZoom = 0.03;
-					if(Math.isNaN(hudZoom)) hudZoom = 0.06;
+					if(Math.isNaN(camZoom)) camZoom = 0.015;
+					if(Math.isNaN(hudZoom)) hudZoom = 0.03;
 
 					FlxG.camera.zoom += camZoom;
 					camHUD.zoom += hudZoom;
@@ -5937,7 +6004,10 @@ for (key => value in luaShaders)
 
 		switch (curSong.toLowerCase()){
 			case 'cypher':
-				health -= 0.015;					
+				health -= 0.015;
+			case 'hypercube':
+				doneloll2 = true;
+				stupidInt = 10;						
 			 case 'deceit': //made it fit the 3.0 update accurately
 				health -= (0.02 / 3);
 				camHUD.shake(0.00225, 0.1);
@@ -5968,10 +6038,7 @@ for (key => value in luaShaders)
 	private var maxnps:Float = 0;
 
 	function goodNoteHit(note:Note):Void
-	{
-		if (!note.isSustainNote)
-			notesHitArray.push(Date.now());
-		
+	{	
 		if (!note.wasGoodHit)
 		{
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
@@ -6012,6 +6079,7 @@ for (key => value in luaShaders)
 			{
 				combo += 1;
 				if(combo > 9999) combo = 9999;
+				notesHitArray.unshift(Date.now());
 				popUpScore(note);
 			}
 			health += note.hitHealth * healthGain;
@@ -6442,6 +6510,13 @@ for (key => value in luaShaders)
 
 		switch (SONG.song.toLowerCase())
 		{
+			case 'hypercube':
+				switch (curStep)
+				{
+					case 256:
+						camHUD.flash(FlxColor.WHITE, 1);
+						camHUD.setFilters([new ShaderFilter(shader_chromatic_abberation.shader)]);
+				}
 			case 'deceit': //haha funny subtitles go brrr
 				switch(curStep)
 				{
@@ -6960,7 +7035,11 @@ for (key => value in luaShaders)
 			if (bads > 0) ratingFC = "SDB";
 			if (bads > 9 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
-			else if (songMisses >= 10) ratingFC = "Clear";
+			if (songMisses >= 10) ratingFC = "Clear";
+			if (songMisses >= 100) ratingFC = "TDSB";
+			if (songMisses >= 1000) ratingFC = "QDSB";
+			if (songMisses >= 100000) ratingFC = "STDCB";
+			else if (songMisses >= 10000000) ratingFC = "SPDCB"; //how, just how?
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);

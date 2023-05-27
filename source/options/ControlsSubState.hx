@@ -114,6 +114,10 @@ class ControlsSubState extends MusicBeatSubstate {
 
 	var leaving:Bool = false;
 	var bindingTime:Float = 0;
+	var bindingBlack:FlxSprite;
+	var bindingText:Alphabet;
+	var bindingText2:Alphabet;
+
 	override function update(elapsed:Float) {
 		if(!rebindingKey) {
 			if (controls.UI_UP_P) {
