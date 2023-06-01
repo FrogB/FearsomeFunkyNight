@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-50,
+				-170
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "hell-expunged-FFN down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-41,
+				-20
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "hell-expunged-FFN up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-112,
+				-6
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "hell-expunged-FFN right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				245,
+				53
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "hell-expunged-FFN left",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "hell-expunged-FFN idle"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/hell-expunged-FFN",
+	"position": [
+		-1110,
+		-830
+	],
+	"healthicon": "icon-hell-expunged",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		190,
+		500
+	],
+	"sing_duration": 6.1,
+	"scale": 0.799999999999999
+}

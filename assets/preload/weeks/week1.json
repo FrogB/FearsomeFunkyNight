@@ -2,7 +2,7 @@
 	"songs": [
 		["Tranquility", "dave", [73, 101, 255]],
 		["Ecstatic", "tristan", [255, 0, 0]],
-		["Vex", "bambi", [0, 181, 21]],
+		["Cornstep", "bambi", [0, 181, 21]],
 		["Night", "dave", [0, 19, 127]]
 	],
 
@@ -15,7 +15,7 @@
 
 	"storyName": "THE TRIO",
 	"weekBefore": "tutorial",
-	"weekName": "Week 1",
+	"weekName": "Week 1 - The Trio",
 	"weekDifficulties": "Normal",
 	"startUnlocked": true,
 

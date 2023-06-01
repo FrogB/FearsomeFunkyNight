@@ -33,7 +33,7 @@ class ClientPrefs {
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var hideTime:Bool = false;
-	public static var timeBarType:String = 'Song and Time Left';
+	public static var timeBarType:String = 'Song + Time Elapsed/Total Time';
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;

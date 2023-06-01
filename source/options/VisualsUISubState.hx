@@ -66,14 +66,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			['FFN', 'Vanilla', 'Golden Apple', 'David Engine 1', 'David Engine 2', 'Purgatory', 'No Bounce']);
 		addOption(option);
 
-		var option:Option = new Option('Time Bar:',
-			"What should the Time Bar display?",
-			'timeBarType',
-			'string',
-			'Song and Time Left',
-			['Song and Time Left', 'Song and Time Elapsed', 'Song Name']);
-		addOption(option);
-
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
 			'noteSplashes',
@@ -92,8 +84,8 @@ class VisualsUISubState extends BaseOptionsMenu
 			"What should the Time Bar display?",
 			'timeBarType',
 			'string',
-			'Song and Time Left',
-			['Song and Time Left', 'Song and Time Elapsed', 'Song Name']);
+			'Song + Time Elapsed/Total Time',
+			['Song + Time Elapsed/Total Time', 'Song and Time Elapsed', 'Song Name']);
 		addOption(option);
 
 		var option:Option = new Option('Hide Time Bar',

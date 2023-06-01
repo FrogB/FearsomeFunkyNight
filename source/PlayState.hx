@@ -220,10 +220,6 @@ class PlayState extends MusicBeatState
 	//public static var blockedShader:BlockedGlitchEffect;
 	//public static var blockedFilter:ShaderFilter;
 	//the two vars above are used for the blocked glitch shader, unfortunately they give a null object reference so they had to be disabled for now :/
-	
-	//public var screenshader:Shaders.PulseEffect = new PulseEffect(1, 2, 1); dont turn this on you'll get a shader null object reference.
-	//trust me i tried hardcoding eyesores here and it doesnt work for some reason.
-	//i did not put a lua version of eyesores in the custom events folder for no reason.
 
 	//Handles the new epic mega sexy cam code that i've done
 	public var camFollow:FlxPoint;
@@ -233,6 +229,7 @@ class PlayState extends MusicBeatState
 
 	private var STUPDVARIABLETHATSHOULDNTBENEEDED:FlxSprite;
 
+	public static var TURNTHATSHITON = false;
 	public static var eyesoreson = true;
 
 	public var strumLineNotes:FlxTypedGroup<StrumNote>;
@@ -622,8 +619,8 @@ class PlayState extends MusicBeatState
 					curStage = 'houseEcstatic';
 				case 'night':
 					curStage = 'houseNight';
-				case 'vex': 
-					curStage = 'farmVex'; //this stage is coded in lua you cant find it here getRektLmao
+				case 'cornstep': 
+					curStage = 'farmCornstep'; //this stage is coded in lua you cant find it here getRektLmao
 				case 'cypher':
 					curStage = '3dGreen';
 				case 'deceit':
@@ -1633,7 +1630,7 @@ class PlayState extends MusicBeatState
 				evilTrail = new FlxTrail(dad, null, 4, 12, 0.3, 0.069);
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
 			case 'bambersHell':
-				evilTrail = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
+				evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
 				switch (curStage)
 		    	{
@@ -3924,6 +3921,7 @@ class PlayState extends MusicBeatState
 	{
 		boyfriend.y += (Math.sin(elapsedtime) * 0.6);
 	}
+
 		if (daspinlmao)
 		{
 			camHUD.angle += elapsed * 30;
@@ -4249,7 +4247,7 @@ class PlayState extends MusicBeatState
 			while (balls >= 0)
 			{
 				var cock:Date = notesHitArray[balls];
-				if (cock != null && cock.getTime() + 1000 / playbackRate < Date.now().getTime())
+				if (cock != null && cock.getTime() + 1000 < Date.now().getTime())
 					notesHitArray.remove(cock);
 				else
 					balls = 0;
@@ -4402,6 +4400,9 @@ class PlayState extends MusicBeatState
 
 					if(ClientPrefs.timeBarType != 'Song Name')
 						timeTxt.text = SONG.song + ' (' + FlxStringUtil.formatTime(secondsTotal, false) + ')';
+
+					if(ClientPrefs.timeBarType == 'Song + Time Elapsed/Total Time')
+						timeTxt.text = SONG.song + ' (${FlxStringUtil.formatTime(secondsTotal, false)} / ${FlxStringUtil.formatTime(Math.floor(songLength / 1000), false)})';
 				}
 			}
 
@@ -4702,6 +4703,29 @@ for (key => value in luaShaders)
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
+				if (SONG.song.toLowerCase() == 'nether')
+				{
+					var expungedLines:Array<String> = 
+					[
+						'[I FOUND YOU]', 
+						"[I CAN SEE YOU]", 
+						'[HAHAHHAHAHA]', 
+						"[PUNISHMENT DAY IS HERE, THIS ONE IS REMOVING YOU]",
+						"[GOT YOU]",
+						"[TRY AGAIN, IF YOU DARE]",
+						"[NICE TRY]",
+						"[I COULD DO THIS ALL DAY]",
+						"[DO THAT AGAIN, I LIKE WATCHING YOU FAIL]",
+						"[REALLY? YOU BEAT ME THE FIRST TIME. I EXPECTED MORE FROM YOU]",
+						"[OH COME ON, YOU WERE SO CONFIDENT THE FIRST TIME]",
+						"[YOU REALLY CAN'T HANDLE THIS CAN YOU?]",
+						"[DOOMED TO REPEAT]",
+						"[JUST ONE MORE TRY]",
+						"[I WARNED YOU]",
+						"[LOOKS LIKE YOU'VE REACHED THE END OF THE RABBIT HOLE]"
+					];
+					CoolSystemStuff.generateTextFile(expungedLines[FlxG.random.int(0, expungedLines.length)], 'HELLO');
+				}
 				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 				#end
 				isDead = true;
@@ -6012,6 +6036,11 @@ for (key => value in luaShaders)
 				health -= (0.02 / 3);
 				camHUD.shake(0.00225, 0.1);
 				FlxG.camera.shake(0.00375, 0.1);
+			case 'nether':
+				if (((health + (FlxEase.backInOut(health / 16.5)) - 0.002) >= 0))
+				{
+					health += ((FlxEase.backInOut(health / 16.5)) * (curBeat <= 160 ? 0.25 : 1)) - 0.002; 
+				}
 		}
 
 		if (SONG.needsVoices)
@@ -6586,6 +6615,26 @@ for (key => value in luaShaders)
 		if(curStep == lastStepHit) {
 			return;
 		}
+
+		if (SONG.song.toLowerCase() == 'nether' && curStep % 8 == 0) //vs dave devs could've just done curBeat % 2 == 0 but whatever -frogb
+		{
+			var fonts = ['ariblk', 'arial', 'chalktastic', 'openSans', 'pkmndp', 'barcode', 'vcr', 'consola', 'fixedsys', 'pixel', 'webdings', 'wingdings', 'default', 'comic_normal', 'cascode'];
+			//i made duplicates of the rng just to make it more randomized and "exploited"
+			var chosenFont = fonts[FlxG.random.int(0, fonts.length)];
+			var chosenFont2 = fonts[FlxG.random.int(0, fonts.length)];
+			var chosenFont3 = fonts[FlxG.random.int(0, fonts.length)];
+			var chosenFont4 = fonts[FlxG.random.int(0, fonts.length)];
+			var chosenFont5 = fonts[FlxG.random.int(0, fonts.length)];
+			var chosenFont6 = fonts[FlxG.random.int(0, fonts.length)];
+			var chosenFont7 = fonts[FlxG.random.int(0, fonts.length)];
+			kadeEngineWatermark.font = Paths.font('${chosenFont}.ttf');
+			modWatermark.font = Paths.font('${chosenFont2}.ttf');
+			creditsWatermark.font = Paths.font('${chosenFont3}.ttf');
+			scoreTxt.font = Paths.font('${chosenFont4}.ttf');
+			judgementCounter.font = Paths.font('${chosenFont5}.ttf');
+			timeTxt.font = Paths.font('${chosenFont6}.ttf');
+		}
+			
 
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);

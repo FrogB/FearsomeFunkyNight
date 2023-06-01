@@ -71,7 +71,7 @@ class MainMenuState extends MusicBeatState
 	//public static var kadeEngineVer:String = "DAVE"; NO. JUST NO. PLEASE NO. FOR THE LOvE OF GOD PLEASE. NO.
 	//public static var gameVer:String = "0.2.8"; gamever is alr given on project.xml lmao
 
-	public static var canInteract:Bool = false;
+	public static var canInteract:Bool = true;
 
 	var bg:FlxSprite;
 	var magenta:FlxSprite;
@@ -266,7 +266,7 @@ class MainMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				FlxG.switchState(new TitleState());
+				MusicBeatState.switchState(new TitleState());
 			}
 
 			if (controls.ACCEPT)
@@ -343,7 +343,7 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(huh:Int = 0)
 	{	
-		if (finishedFunnyMove)
+		if (canInteract)
 			{
 				curSelected += huh;
 
@@ -357,7 +357,7 @@ class MainMenuState extends MusicBeatState
 			{
 				spr.animation.play('idle');
 
-				if (spr.ID == curSelected && finishedFunnyMove)
+				if (spr.ID == curSelected && canInteract)
 				{
 					spr.animation.play('selected');
 					// camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);

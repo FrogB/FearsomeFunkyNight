@@ -1,4 +1,4 @@
---was planning to use the purgatory-styled credit shit but ayo said to use this so uhhhh here we go ig?
+-- was planning to use the purgatory-styled credit shit but ayo said to use this so uhhhh here we go ig?
 -- the whole script was made by fyrid (FyriDev) and i put few tweaks on it, if you do end up using this CREDIT HER AND ME, other than that just dont use it like an idiot
 -- and dont even think about not crediting/stealing it, i put code in here that'll find your house if you do end up doing it, thanks to cmarkv.
 -- frogb
@@ -44,30 +44,32 @@ function createtheShit()
     addLuaText('creditText4')
 end
 
-function onSongStart() -- make it look like gapple 1.5 fr
-    doTweenX('cardSlideIn', 'creditBG', 0, 1, 'backOut');
-    doTweenX('textSlideIn', 'creditText', -290, 1, 'backOut');
-    doTweenX('textSlideIn2', 'creditText2', -290, 1, 'backOut');
-    doTweenX('textSlideIn3', 'creditText3', -290, 1, 'backOut');
-    if allowsinspiration then
-        doTweenX('textSlideIn4', 'creditText4', -290, 1, 'backOut');
+function onCountdownTick(counter)
+    if counter == 3 then
+        cardSlideIn()
     end
-    runTimer('tim', 3, 1);
 end
 
 function onCreatePost() -- IN SONG ORDER
     --and this is where all the magic happens
     if songName == "Tranquility" then
         composer = "PurpleSigh192"
-        visuals = "The OG DNB \nTeam"
+        visuals = "The OG D&B \nTeam"
         charter = "Gecko & FrogB"
         allowinspiration = false
     end
 
     if songName == "Ecstatic" then
         composer = "BoxHaze"
-        visuals = "The DNB AND \nGolden Apple Team"
+        visuals = "The OG D&B \nTeam"
         charter = "Gecko & FrogB"
+        allowinspiration = false
+    end
+
+    if songName == "Cornstep" then
+        composer = "Ayo"
+        visuals = "The OG D&B \nTeam"
+        charter = "FrogB"
         allowinspiration = false
     end
 
@@ -80,7 +82,7 @@ function onCreatePost() -- IN SONG ORDER
 
     if songName == "Cypher" then
         composer = "Sr.Wiliam"
-        visuals = "Ayo &\nThe OG DNB Team"
+        visuals = "Ayo"
         charter = "L_gunn_"
         allowinspiration = false
     end
@@ -88,6 +90,13 @@ function onCreatePost() -- IN SONG ORDER
     if songName == "Deceit" then
         composer = "Ayo"
         visuals = "Ayo, NooboDev &\natp engineer"
+        charter = "FrogB"
+        allowinspiration = false
+    end
+
+    if songName == "Nether" then
+        composer = "CXYon3"
+        visuals = "Ayo, & \nTechCourseTheTwinception"
         charter = "FrogB"
         allowinspiration = false
     end
@@ -108,7 +117,7 @@ function onCreatePost() -- IN SONG ORDER
 
     if songName == "Empyrean" then
         composer = "Pianoo"
-        visuals = "Wasted2 &\nAyo"
+        visuals = "Wasted2, ayo,\n& Pianoo"
         charter = "Gecko & FrogB"
         allowinspiration = false
     end
@@ -126,6 +135,17 @@ function cardgoaway()
     doTweenX('textSlideOut', 'creditText', -1000, 2, 'backInOut');
     doTweenX('textSlideOut2', 'creditText2', -1000, 2, 'backInOut');
     doTweenX('textSlideOut3', 'creditText3', -1000, 2, 'backInOut');
+end
+
+function cardSlideIn()
+    doTweenX('cardSlideIn', 'creditBG', 0, 1, 'backOut');
+    doTweenX('textSlideIn', 'creditText', -290, 1, 'backOut');
+    doTweenX('textSlideIn2', 'creditText2', -290, 1, 'backOut');
+    doTweenX('textSlideIn3', 'creditText3', -290, 1, 'backOut');
+    if allowsinspiration then
+        doTweenX('textSlideIn4', 'creditText4', -290, 1, 'backOut');
+    end
+    runTimer('tim', 3, 1);
 end
 
 function Tracking(elapsed) -- told you bitch
