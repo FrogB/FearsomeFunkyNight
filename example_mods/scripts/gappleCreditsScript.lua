@@ -131,17 +131,17 @@ function onTimerCompleted(tag, loops, loopsLeft)
 end
 
 function cardgoaway()
-    doTweenX('cardSlideOut', 'creditBG', -1000, 2, 'backInOut');
-    doTweenX('textSlideOut', 'creditText', -1000, 2, 'backInOut');
-    doTweenX('textSlideOut2', 'creditText2', -1000, 2, 'backInOut');
-    doTweenX('textSlideOut3', 'creditText3', -1000, 2, 'backInOut');
+    doTweenX('cardSlideOut', 'creditBG', -1000, 1, 'backIn');
+    doTweenX('textSlideOut', 'creditText', -1000, 1, 'backIn');
+    doTweenX('textSlideOut2', 'creditText2', -1000, 1, 'backIn');
+    doTweenX('textSlideOut3', 'creditText3', -1000, 1, 'backIn');
 end
 
 function cardSlideIn()
-    doTweenX('cardSlideIn', 'creditBG', 0, 1, 'backOut');
-    doTweenX('textSlideIn', 'creditText', -290, 1, 'backOut');
-    doTweenX('textSlideIn2', 'creditText2', -290, 1, 'backOut');
-    doTweenX('textSlideIn3', 'creditText3', -290, 1, 'backOut');
+    doTweenX('cardSlideIn', 'creditBG', 0, 0.5, 'backOut');
+    doTweenX('textSlideIn', 'creditText', -290, 0.5, 'backOut');
+    doTweenX('textSlideIn2', 'creditText2', -290, 0.5, 'backOut');
+    doTweenX('textSlideIn3', 'creditText3', -290, 0.5, 'backOut');
     if allowsinspiration then
         doTweenX('textSlideIn4', 'creditText4', -290, 1, 'backOut');
     end
