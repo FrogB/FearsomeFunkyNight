@@ -200,7 +200,7 @@ class PlayState extends MusicBeatState
 
 	private var altSong:SwagSong;
 
-	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'cheating-expunged', 'god-expunged'];
+	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'cheating-expunged', 'god-expunged', 'unfairbambi'];
 	var funnySideFloatyBoys:Array<String> = ['bombu', 'bombu-expunged'];
 	var canSlide:Bool = true;
 	
@@ -4393,13 +4393,17 @@ class PlayState extends MusicBeatState
 					songPercent = (curTime / songLength);
 
 					var songCalc:Float = (songLength - curTime);
-					if(ClientPrefs.timeBarType == 'Song and Time Elapsed') songCalc = curTime;
+					if(ClientPrefs.timeBarType == 'Song and Time Elapsed' || ClientPrefs.timeBarType == 'Song + Time Elapsed/Total Time') songCalc = curTime;
 
 					var secondsTotal:Int = Math.floor(songCalc / 1000);
 					if(secondsTotal < 0) secondsTotal = 0;
 
 					if(ClientPrefs.timeBarType != 'Song Name')
 						timeTxt.text = SONG.song + ' (' + FlxStringUtil.formatTime(secondsTotal, false) + ')';
+
+					//these two cases use the same string of code yet gives a different outcome in game what is this fucking black magic... -frogb
+					if(ClientPrefs.timeBarType == 'Song + Time Left/Total Time')
+						timeTxt.text = SONG.song + ' (${FlxStringUtil.formatTime(secondsTotal, false)} / ${FlxStringUtil.formatTime(Math.floor(songLength / 1000), false)})';
 
 					if(ClientPrefs.timeBarType == 'Song + Time Elapsed/Total Time')
 						timeTxt.text = SONG.song + ' (${FlxStringUtil.formatTime(secondsTotal, false)} / ${FlxStringUtil.formatTime(Math.floor(songLength / 1000), false)})';
@@ -4634,6 +4638,7 @@ for (key => value in luaShaders)
 		for (i in shaderUpdates){
 			i(elapsed);
 		}
+		RecalculateRating();
 	}
 
 	function openPauseMenu()

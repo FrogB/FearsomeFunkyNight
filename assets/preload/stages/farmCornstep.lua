@@ -42,7 +42,7 @@ function onCreate()
 	addLuaSprite('corn2',false)
 	setLuaSpriteScrollFactor('corn2', 1, 1)
 
-	makeLuaSprite('sign','bambi/Sign', 125, 340)
+	makeLuaSprite('sign','bambi/sign', 125, 340)
 	addLuaSprite('sign',false)
 	setLuaSpriteScrollFactor('sign', 1, 1)
 

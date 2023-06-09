@@ -2548,6 +2548,12 @@ Lua_helper.add_callback(lua, "clearShadersFromCamera", function(cameraName)
 	cameraFromString(cameraName).setFilters([]);
 });	
 
+		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String,resolution:Float = 1280,time:Float = 1) { //i just took the vars from vsdave source and modified them a bit lmao
+
+			PlayState.instance.addShaderToCamera(camera, new BlockedGlitchEffect(resolution,time));
+			trace('MAKE SURE YOU PUT IN ALL VALUES OR IT WILL CRASH');
+
+		});
 		Lua_helper.add_callback(lua, "addGlitchEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
 
 			PlayState.instance.addShaderToCamera(camera, new GlitchEffect(waveSpeed,waveFrq,waveAmp));

@@ -29,52 +29,53 @@ class BuildingEffect {
 
 class BlockedGlitchEffect extends Effect
 {
-	public var shader(default, null):BlockedGlitchShader = new BlockedGlitchShader();
+	public var shader:BlockedGlitchShader = new BlockedGlitchShader();
 
 	public var time(default, set):Float = 0;
 	public var resolution(default, set):Float = 0;
 	public var colorMultiplier(default, set):Float = 0;
-	public var hasColorTransform(default, set):Bool = false;
+	public var colorTransform(default, set):Bool = false;
 
-	public function new(res:Float, time:Float, colorMultiplier:Float, colorTransform:Bool):Void
+	public function new(resolution:Float, time:Float, colorMultiplier:Float, colorTransform:Bool):Void
 	{
-		set_time(time);
-		set_resolution(res);
-		set_colorMultiplier(colorMultiplier);
-		set_hasColorTransform(colorTransform);
+		this.time = time;
+		this.resolution = resolution;
+		this.colorMultiplier = colorMultiplier;
+		this.colorTransform = colorTransform;
+    PlayState.instance.shaderUpdates.push(update);
 	}
 
 	public function update(elapsed:Float):Void
 	{
-		shader.time.value[0] += elapsed;
+		shader.data.time.value[0] += elapsed;
 	}
 
 	public function set_resolution(v:Float):Float
 	{
 		resolution = v;
-		shader.screenSize.value = [resolution];
-		return this.resolution;
+		shader.data.screenSize.value = [resolution];
+		return v;
 	}
 
-	function set_hasColorTransform(value:Bool):Bool
+	function set_colorTransform(v:Bool):Bool
 	{
-		this.hasColorTransform = value;
-		shader.hasColorTransform.value = [hasColorTransform];
-		return hasColorTransform;
+		this.colorTransform = v;
+		shader.data.screenSize.value = [colorTransform];
+		return v;
 	}
 
-	function set_colorMultiplier(value:Float):Float
+	function set_colorMultiplier(v:Float):Float
 	{
-		this.colorMultiplier = value;
-		shader.colorMultiplier.value = [value];
-		return this.colorMultiplier;
+		this.colorMultiplier = v;
+		shader.data.colorMultiplier.value = [colorMultiplier];
+		return v;
 	}
 
-	function set_time(value:Float):Float
+	function set_time(v:Float):Float
 	{
-		this.time = value;
-		shader.time.value = [value];
-		return this.time;
+		this.time = v;
+		shader.data.time.value = [time];
+		return v;
 	}
 }
 

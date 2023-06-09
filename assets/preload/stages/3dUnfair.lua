@@ -9,9 +9,9 @@ function onCreate()
 	setScrollFactor('cube2', 0.5, 0.5);
 
 	makeLuaSprite('towershit', 'expunged/tower', 800, 0);
-	setScrollFactor('towershit', 0.95, 0.95);
-	setProperty('towershit.scale.x',2)
-	setProperty('towershit.scale.y',2)
+	setScrollFactor('towershit', 0.1, 0.1);
+	setProperty('towershit.scale.x',1.5)
+	setProperty('towershit.scale.y',1.5)
 
 	makeLuaSprite('platform', 'expunged/deceitplatform', 600, 100);
 	setScrollFactor('platform', 1, 1);
@@ -19,9 +19,13 @@ function onCreate()
 	makeLuaSprite('spikes', 'expunged/spikes', 400, 100);
 	setScrollFactor('spikes', 0.95, 0.95);
 
+	addLuaSprite('towershit', false) --whatsdown said to make the tower more distant so i moved it behind everything -frogb
 	addLuaSprite('cubes', false)
 	addLuaSprite('cubes2', false)
-	addLuaSprite('towershit', false)
 	addLuaSprite('spikes', false)
 	addLuaSprite('platform', false)
+end
+
+function onCreatePost()
+	setProperty('gf.alpha', 0)
 end
