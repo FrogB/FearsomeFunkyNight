@@ -63,7 +63,7 @@ class MainMenuState extends MusicBeatState
 	public static var sexo3:Bool = false; //sex
 
 	public static var daRealEngineVer:String = 'Psych';
-	public static var psychEngineVersion:String = '0.6.2';
+	public static var psychEngineVersion:String = '0.6.3';
 	public static var curModVer:String = '1.0'; //taken from old purgatory sc forgive me lmao
 
 	public static var engineVers:Array<String> = ['Dave', 'Bambi', 'Tristan', 'Golden Tristan', 'Expunged', 'Fearsome']; // <-- so many names

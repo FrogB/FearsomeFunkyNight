@@ -24,12 +24,9 @@ class FlashingState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Hey there, thanks for downloading the DEMO of Fearsome Funky Night!\n
-			Just a small warning that this mod contains some flashing & epilepsy effects in some songs.\n
-			If you wish to disable them, please do so in the Graphics Section of the Options Menu\n
-			Press ENTER or ESC to continue",
+			"Hey, Thanks for downloading this mod!\nThis is NOT an official mod of Vs Dave and Bambi,\nnor is it meant to replace it. \nPress Enter to continue!",
 			32);
-		warnText.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, CENTER);
+		warnText.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
 	}
@@ -43,17 +40,17 @@ class FlashingState extends MusicBeatState
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 				if(!back) {
-					FlxG.sound.play(Paths.sound('cancelMenu'));
-					FlxTween.tween(warnText, {alpha: 0}, 1, {
-					onComplete: function (twn:FlxTween) {
-					MusicBeatState.switchState(new TitleState());
-					}
-				});
-				} else {
-					FlxG.sound.play(Paths.sound('cancelMenu'));
+					FlxG.sound.play(Paths.sound('confirmMenu'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-						MusicBeatState.switchState(new TitleState());
+							MusicBeatState.switchState(new TitleState());
+						}
+					});
+				} else {
+					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxTween.tween(warnText, {alpha: 0}, 1, {
+						onComplete: function (twn:FlxTween) {
+							MusicBeatState.switchState(new TitleState());
 						}
 					});
 				}

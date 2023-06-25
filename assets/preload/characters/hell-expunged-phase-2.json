@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				10,
+				-13
+			],
+			"anim": "singDOWN",
+			"fps": 4,
+			"name": "Hell expunged phase 2 Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-31,
+				50
+			],
+			"anim": "singUP",
+			"fps": 4,
+			"name": "Hell expunged phase 2 Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-72,
+				-6
+			],
+			"anim": "singRIGHT",
+			"fps": 4,
+			"name": "Hell expunged phase 2 Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				135,
+				3
+			],
+			"anim": "singLEFT",
+			"fps": 4,
+			"name": "Hell expunged phase 2 Left",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 3,
+			"anim": "idle",
+			"indices": [],
+			"name": "Hell expunged phase 2 Idle"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Hell-expunged-phase-2",
+	"position": [
+		-700,
+		-450
+	],
+	"healthicon": "icon-hell-expunged-phase-2",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		190,
+		180
+	],
+	"sing_duration": 6.1,
+	"scale": 0.899999999999999
+}

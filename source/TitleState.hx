@@ -453,7 +453,7 @@ class TitleState extends MusicBeatState
 			case 7:
 				createCoolText(['Fearsome Funky Night by']);
 			case 8:
-				addMoreText('ayo, FrogB, FyriDev, BarGames\nGecko, Pianoo, Bide, BoxHaze,\nCXYon3, Gabito, Noobo, RA\n...and many more of our contributors!');
+				addMoreText('ayo, FrogB, FyriDev, BarGames\nGecko, Pianoo, Bide, BoxHaze,\nCXYon3, Gabito, Noobo, MelonMan\n...and many more of our contributors!');
 			case 9:
 				deleteCoolText();
 			case 10:
@@ -500,7 +500,7 @@ class TitleState extends MusicBeatState
 			titlestatebg.screenCenter(X);
 			add(titlestatebg);
 			
-			logoBl = new FlxSprite(245, -600);
+			logoBl = new FlxSprite(285, -600);
 			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 			logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
@@ -518,12 +518,15 @@ class TitleState extends MusicBeatState
 			add(titleText);
 
 			FlxTween.tween(logoBl,{y: -10}, 1.4, {ease: FlxEase.expoInOut});
+			logoBl.angle = -5;
 
-			logoBl.angle = -7;
-			if(logoBl.angle == -7) 
-			FlxTween.angle(logoBl, logoBl.angle, 7, 7, {ease: FlxEase.quartInOut});
-			if (logoBl.angle == 7) 
-			FlxTween.angle(logoBl, logoBl.angle, -7, 7, {ease: FlxEase.quartInOut});
+			new FlxTimer().start(0.01, function(tmr:FlxTimer)
+			{
+				if (logoBl.angle == -5)
+					FlxTween.angle(logoBl, logoBl.angle, 5, 5, {ease: FlxEase.quartInOut});
+				if (logoBl.angle == 5)
+					FlxTween.angle(logoBl, logoBl.angle, -5, 5, {ease: FlxEase.quartInOut});
+			}, 0);
 
 			if(ClientPrefs.flashing) {FlxG.camera.flash(FlxColor.WHITE, 4); }
 			remove(credGroup);

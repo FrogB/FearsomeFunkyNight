@@ -50,22 +50,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Dave Engine', 'Vanilla']);
 		addOption(option);
 
-		var option:Option = new Option('Score UI Style:',
-			"Which Score UI style do you want the game to show?\nNOTE: Purgatory's style is unfinished due to the NPS counter being broken.",
-			'scoreUIType',
-			'string',
-			'FFN',
-			['FFN', 'Psych Engine', 'Kade Engine', 'Dave Engine', 'Purgatory']);
-		addOption(option);
-
-		var option:Option = new Option('Icon Bounce Style:',
-			"Choose which icon bounce it plays in-game.",
-			'iconBounceType',
-			'string',
-			'FFN',
-			['FFN', 'Vanilla', 'Golden Apple', 'David Engine 1', 'David Engine 2', 'Purgatory', 'No Bounce']);
-		addOption(option);
-
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
 			'noteSplashes',
@@ -86,13 +70,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			'string',
 			'Song + Time Left/Total Time',
 			['Song + Time Left/Total Time', 'Song + Time Elapsed/Total Time', 'Song and Time Elapsed', 'Song Name']);
-		addOption(option);
-
-		var option:Option = new Option('Hide Time Bar',
-			"If Checked, Hides the Time Bar",
-			'hideTime',
-			'bool',
-			false);
 		addOption(option);
 
 		var option:Option = new Option('Eyesores & Flashing Lights',
@@ -155,6 +132,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 		#end
+
+		var option:Option = new Option('Combo Stacking',
+			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
+			'comboStacking',
+			'bool',
+			true);
+		addOption(option);
 
 		super();
 	}

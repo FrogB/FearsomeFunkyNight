@@ -45,7 +45,7 @@ class DiscordClient
 			details: "In the Menus",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: "Fearsome Funky Night'"
+			largeImageText: "Fearsome Funky Night' - Psych Engine"
 		});
 	}
 

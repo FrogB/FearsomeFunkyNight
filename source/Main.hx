@@ -35,13 +35,12 @@ class Main extends Sprite
 		height: 720, // WINDOW height
 		initialState: TitleState, // initial game state
 		zoom: -1.0, // game state bounds
-		framerate: 144, // default framerate
-		skipSplash: false, // if the default flixel splash screen should be skipped
+		framerate: 60, // default framerate
+		skipSplash: true, // if the default flixel splash screen should be skipped
 		startFullscreen: false // if the game should start at fullscreen mode
 	};
 
 	public static var fpsVar:FPS;
-	public static var changeID:Int = 0; // used for the media shit idk
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -72,6 +71,11 @@ class Main extends Sprite
 		}
 
 		setupGame();
+	}
+
+	public static function toggleFuckedFPS(toggle:Bool)
+	{
+		FPS.fuckFps = toggle;
 	}
 
 	private function setupGame():Void

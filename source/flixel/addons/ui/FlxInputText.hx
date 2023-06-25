@@ -327,7 +327,7 @@ class FlxInputText extends FlxText
 		}
 		#end
 	}
-
+	
 	function mouseOverlapping()
 	{
 		var mousePoint = FlxG.mouse.getScreenPosition(camera);

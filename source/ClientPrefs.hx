@@ -16,21 +16,18 @@ class ClientPrefs {
 	public static var globalAntialiasing:Bool = true;
 	//LATESTRELIC825'S PSYCH ENGINE VARIABLES (temporary ones only since i'll probably remove these options soon except for the judgement counter.)
 	public static var judgementCounter:String = 'Complex';
-	public static var scoreUIType:String = 'FFN';
-	public static var iconBounceType:String = 'Vanilla';
 	public static var healthBarType:String = 'Dave Engine';
 	public static var selfAwareness = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
 	public static var shaders:Bool = true;
-	public static var framerate:Int = 144;
+	public static var framerate:Int = 60;
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var hideTime:Bool = false;
 	public static var timeBarType:String = 'Song + Time Elapsed/Total Time';
@@ -40,8 +37,8 @@ class ClientPrefs {
 	public static var controllerMode:Bool = false;
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
-	public static var comboStacking = true;
 	public static var checkForUpdates:Bool = true;
+	public static var comboStacking = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -92,8 +89,8 @@ class ClientPrefs {
 		'volume_up'		=> [NUMPADPLUS, PLUS],
 		'volume_down'	=> [NUMPADMINUS, MINUS],
 		
-		'debug_1'		=> [SEVEN, SEVEN],
-		'debug_2'		=> [EIGHT, EIGHT]
+		'debug_1'		=> [SEVEN, NONE],
+		'debug_2'		=> [EIGHT, NONE]
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 
@@ -105,19 +102,16 @@ class ClientPrefs {
 	public static function saveSettings() {
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
-		FlxG.save.data.xScroll = xScroll;
 		FlxG.save.data.opponentStrums = opponentStrums;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
+		FlxG.save.data.noteSplashes = noteSplashes;
+		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.judgementCounter = judgementCounter;
-		FlxG.save.data.scoreUIType = scoreUIType;
-		FlxG.save.data.iconBounceType = iconBounceType;
 		FlxG.save.data.healthBarType = healthBarType;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.selfAwareness = selfAwareness;
-		FlxG.save.data.noteSplashes = noteSplashes;
-		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
 		//FlxG.save.data.cursing = cursing;
@@ -126,8 +120,9 @@ class ClientPrefs {
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
 		FlxG.save.data.arrowHSV = arrowHSV;
-		FlxG.save.data.imagesPersist = imagesPersist;
+		FlxG.save.data.hideTime = hideTime;
 		FlxG.save.data.ghostTapping = ghostTapping;
+		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.scoreZoom = scoreZoom;
 		FlxG.save.data.noReset = noReset;
 		FlxG.save.data.healthBarAlpha = healthBarAlpha;
@@ -144,7 +139,6 @@ class ClientPrefs {
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
-		FlxG.save.data.hideTime = hideTime;
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
 	
@@ -164,9 +158,6 @@ class ClientPrefs {
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
 		}
-		if(FlxG.save.data.xScroll != null) {
-			xScroll = FlxG.save.data.xScroll;
-		}
 		if(FlxG.save.data.opponentStrums != null) {
 			opponentStrums = FlxG.save.data.opponentStrums;
 		}
@@ -182,23 +173,17 @@ class ClientPrefs {
 		if(FlxG.save.data.globalAntialiasing != null) {
 			globalAntialiasing = FlxG.save.data.globalAntialiasing;
 		}
+		if(FlxG.save.data.noteSplashes != null) {
+			noteSplashes = FlxG.save.data.noteSplashes;
+		}
 		if(FlxG.save.data.judgementCounter != null) {
 			judgementCounter = FlxG.save.data.judgementCounter;
-		}
-		if(FlxG.save.data.iconBounceType != null) {
-			iconBounceType = FlxG.save.data.iconBounceType;
-		}
-		if(FlxG.save.data.scoreUIType != null) {
-			scoreUIType = FlxG.save.data.scoreUIType;
 		}
 		if(FlxG.save.data.healthBarType != null) {
 			healthBarType = FlxG.save.data.healthBarType;
 		}
 		if(FlxG.save.data.selfAwareness != null) {
 			selfAwareness = FlxG.save.data.selfAwareness;
-		}
-		if(FlxG.save.data.noteSplashes != null) {
-			noteSplashes = FlxG.save.data.noteSplashes;
 		}
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;

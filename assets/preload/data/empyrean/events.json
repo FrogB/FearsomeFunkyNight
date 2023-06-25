@@ -70,13 +70,8 @@
 				88736.8421052631,
 				[
 					[
-						"LUA-Based Eyesores",
-						"1",
-						""
-					],
-					[
-						"turn that fuckin spin on",
-						"1  ",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -85,13 +80,8 @@
 				88894.7368421052,
 				[
 					[
-						"turn that fuckin spin on",
-						"2",
-						""
-					],
-					[
-						"LUA-Based Eyesores",
-						"0",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -100,13 +90,8 @@
 				88973.6842105262,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
-						""
-					],
-					[
-						"LUA-Based Eyesores",
-						"1",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -115,28 +100,8 @@
 				89052.6315789473,
 				[
 					[
-						"LUA-Based Eyesores",
-						"0",
-						""
-					],
-					[
-						"Thunderstorm type black screen",
-						"1",
-						""
-					],
-					[
-						"turn that fuckin spin on",
-						"0",
-						""
-					]
-				]
-			],
-			[
-				89210.5263157894,
-				[
-					[
-						"Thunderstorm type black screen",
-						"0",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -145,78 +110,18 @@
 				89368.4210526315,
 				[
 					[
-						"Hide or Show HUD elements",
-						"0",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
 			],
 			[
-				89388.1578947368,
+				89526.3157894736,
 				[
 					[
-						"Hide or Show HUD elements",
-						"2",
-						""
-					]
-				]
-			],
-			[
-				89407.894736842,
-				[
-					[
-						"Hide or Show HUD elements",
-						"0",
-						""
-					]
-				]
-			],
-			[
-				89427.6315789473,
-				[
-					[
-						"Hide or Show HUD elements",
-						"2",
-						""
-					]
-				]
-			],
-			[
-				89447.3684210525,
-				[
-					[
-						"Hide or Show HUD elements",
-						"0",
-						""
-					]
-				]
-			],
-			[
-				89467.1052631578,
-				[
-					[
-						"Hide or Show HUD elements",
-						"2",
-						""
-					]
-				]
-			],
-			[
-				89486.8421052631,
-				[
-					[
-						"Hide or Show HUD elements",
-						"0",
-						""
-					]
-				]
-			],
-			[
-				89506.5789473683,
-				[
-					[
-						"Hide or Show HUD elements",
-						"2",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -225,83 +130,8 @@
 				89999.9999999999,
 				[
 					[
-						"turn that fuckin spin on",
-						"1",
-						""
-					],
-					[
-						"LUA-Based Eyesores",
-						"1",
-						""
-					]
-				]
-			],
-			[
-				90019.7368421052,
-				[
-					[
-						"turn that fuckin spin on",
-						"2",
-						""
-					]
-				]
-			],
-			[
-				90039.4736842104,
-				[
-					[
-						"turn that fuckin spin on",
-						"1",
-						""
-					]
-				]
-			],
-			[
-				90059.2105263157,
-				[
-					[
-						"turn that fuckin spin on",
-						"2",
-						""
-					]
-				]
-			],
-			[
-				90078.947368421,
-				[
-					[
-						"turn that fuckin spin on",
-						"1",
-						""
-					]
-				]
-			],
-			[
-				90098.6842105262,
-				[
-					[
-						"turn that fuckin spin on",
-						"2",
-						""
-					]
-				]
-			],
-			[
-				90118.4210526315,
-				[
-					[
-						"turn that fuckin spin on",
-						"1",
-						""
-					]
-				]
-			],
-			[
-				90138.1578947368,
-				[
-					[
-						"turn that fuckin spin on",
-						"2",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -310,42 +140,7 @@
 				90157.894736842,
 				[
 					[
-						"Add Camera Zoom",
-						"-0.015",
-						"-0.03"
-					],
-					[
-						"turn that fuckin spin on",
-						"0",
-						""
-					]
-				]
-			],
-			[
-				90177.6315789473,
-				[
-					[
-						"Add Camera Zoom",
-						"",
-						""
-					]
-				]
-			],
-			[
-				90197.3684210525,
-				[
-					[
-						"Add Camera Zoom",
-						"-0.015",
-						"-0.03"
-					]
-				]
-			],
-			[
-				90217.1052631578,
-				[
-					[
-						"Add Camera Zoom",
+						"Toggle Blocked Glitch Effect",
 						"",
 						""
 					]
@@ -355,38 +150,8 @@
 				90236.8421052631,
 				[
 					[
-						"Thunderstorm type black screen",
-						"1",
-						""
-					]
-				]
-			],
-			[
-				90256.5789473683,
-				[
-					[
-						"Thunderstorm type black screen",
-						"0",
-						""
-					]
-				]
-			],
-			[
-				90276.3157894736,
-				[
-					[
-						"Thunderstorm type black screen",
-						"1",
-						""
-					]
-				]
-			],
-			[
-				90296.0526315789,
-				[
-					[
-						"Thunderstorm type black screen",
-						"0",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -395,8 +160,8 @@
 				90315.7894736841,
 				[
 					[
-						"LUA-Based Eyesores",
-						"0",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -405,77 +170,7 @@
 				90631.5789473683,
 				[
 					[
-						"Add Camera Zoom",
-						"-0.015",
-						"-0.03"
-					]
-				]
-			],
-			[
-				90651.3157894736,
-				[
-					[
-						"Add Camera Zoom",
-						"",
-						""
-					]
-				]
-			],
-			[
-				90671.0526315789,
-				[
-					[
-						"Add Camera Zoom",
-						"-0.015",
-						"-0.03"
-					]
-				]
-			],
-			[
-				90690.7894736841,
-				[
-					[
-						"Add Camera Zoom",
-						"",
-						""
-					]
-				]
-			],
-			[
-				90710.5263157894,
-				[
-					[
-						"Add Camera Zoom",
-						"-0.015",
-						"-0.03"
-					]
-				]
-			],
-			[
-				90730.2631578946,
-				[
-					[
-						"Add Camera Zoom",
-						"",
-						""
-					]
-				]
-			],
-			[
-				90749.9999999999,
-				[
-					[
-						"Add Camera Zoom",
-						"-0.015",
-						"-0.03"
-					]
-				]
-			],
-			[
-				90769.7368421052,
-				[
-					[
-						"Add Camera Zoom",
+						"Toggle Blocked Glitch Effect",
 						"",
 						""
 					]
@@ -485,9 +180,9 @@
 				90789.4736842104,
 				[
 					[
-						"Add Camera Zoom",
-						"-0.015",
-						"-0.03"
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
 					]
 				]
 			],
@@ -497,6 +192,36 @@
 					[
 						"Flash effect",
 						"0",
+						""
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.8",
+						""
+					],
+					[
+						"Cinematics",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				131368.421052631,
+				[
+					[
+						"Cinematics",
+						"",
+						"2"
+					],
+					[
+						"Flash effect",
+						"0",
+						""
+					],
+					[
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -1175,8 +900,8 @@
 				169578.947368421,
 				[
 					[
-						"Change the Default Camera Zoom",
-						"0.6",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -1185,8 +910,8 @@
 				169736.842105263,
 				[
 					[
-						"Change the Default Camera Zoom",
-						"0.6",
+						"Add Camera Zoom",
+						"",
 						""
 					]
 				]
@@ -1196,7 +921,7 @@
 				[
 					[
 						"Change the Default Camera Zoom",
-						"0.6",
+						"1",
 						""
 					]
 				]
@@ -1522,21 +1247,21 @@
 				]
 			],
 			[
-				174315.789473684,
+				174631.578947369,
 				[
 					[
-						"LUA-Based Eyesores",
-						"1",
+						"Change the Default Camera Zoom",
+						"0.4",
 						""
 					]
 				]
 			],
 			[
-				174631.578947369,
+				174947.368421053,
 				[
 					[
-						"LUA-Based Eyesores",
-						"0",
+						"Change the Default Camera Zoom",
+						"0.7",
 						""
 					]
 				]
@@ -1545,14 +1270,14 @@
 				175263.157894737,
 				[
 					[
-						"Change Scroll Speed",
-						"1",
-						"0.0001"
-					],
-					[
 						"Add Camera Zoom",
 						"-0.015",
-						""
+						"0.03"
+					],
+					[
+						"Change Scroll Speed",
+						"0.7",
+						"0.0001"
 					]
 				]
 			],
@@ -1695,11 +1420,6 @@
 				176526.315789474,
 				[
 					[
-						"Drain",
-						"0.1",
-						""
-					],
-					[
 						"turn that fuckin spin on",
 						"0",
 						""
@@ -1751,7 +1471,7 @@
 				[
 					[
 						"Switch to Pixel or 3D UI",
-						"2",
+						"1",
 						""
 					]
 				]
@@ -1771,7 +1491,7 @@
 				[
 					[
 						"Switch to Pixel or 3D UI",
-						"2",
+						"1",
 						""
 					]
 				]
@@ -1900,8 +1620,8 @@
 				179052.631578948,
 				[
 					[
-						"LUA-Based Eyesores",
-						"1",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -2220,12 +1940,12 @@
 				179368.421052632,
 				[
 					[
-						"turn that fuckin spin on",
-						"0",
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					],
 					[
-						"LUA-Based Eyesores",
+						"turn that fuckin spin on",
 						"0",
 						""
 					]
@@ -2275,39 +1995,19 @@
 				180631.578947369,
 				[
 					[
-						"BF Fade",
-						"0",
-						"0"
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
 					]
 				]
 			],
 			[
-				180710.52631579,
+				180947.368421053,
 				[
 					[
-						"BF Fade",
-						"0",
-						"1"
-					]
-				]
-			],
-			[
-				180789.473684211,
-				[
-					[
-						"BF Fade",
-						"0",
-						"0"
-					]
-				]
-			],
-			[
-				180868.421052632,
-				[
-					[
-						"BF Fade",
-						"0",
-						"1"
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
 					]
 				]
 			],

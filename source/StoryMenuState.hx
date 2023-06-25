@@ -60,15 +60,15 @@ class StoryMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
-		scoreText.setFormat("Comic Sans MS Bold", 32);
+		scoreText.setFormat("VCR OSD Mono", 32);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
-		txtWeekTitle.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, RIGHT);
+		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Paths.font("comic.ttf"), 32);
+		rankText.setFormat(Paths.font("vcr.ttf"), 32);
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
@@ -155,7 +155,7 @@ class StoryMenuState extends MusicBeatState
 		
 		sprDifficulty = new FlxSprite(0, leftArrow.y);
 		sprDifficulty.antialiasing = ClientPrefs.globalAntialiasing;
-		//difficultySelectors.add(sprDifficulty);
+		difficultySelectors.add(sprDifficulty);
 
 		rightArrow = new FlxSprite(leftArrow.x + 376, leftArrow.y);
 		rightArrow.frames = ui_tex;
@@ -228,7 +228,7 @@ class StoryMenuState extends MusicBeatState
 			}
 
 			//if (controls.UI_RIGHT)
-				//rightArrow.animation.play('press')
+			//	rightArrow.animation.play('press')
 			//else
 			//	rightArrow.animation.play('idle');
 
@@ -240,9 +240,9 @@ class StoryMenuState extends MusicBeatState
 			//if (controls.UI_RIGHT_P)
 			//	changeDifficulty(1);
 			//else if (controls.UI_LEFT_P)
-			//	changeDifficulty(-1);
-			//else if (upP || downP)
-			//	changeDifficulty();
+				//changeDifficulty(-1);
+			else if (upP || downP)
+				changeDifficulty();
 
 			if(FlxG.keys.justPressed.CONTROL)
 			{
@@ -291,8 +291,13 @@ class StoryMenuState extends MusicBeatState
 
 				grpWeekText.members[curWeek].startFlashing();
 
-				var bf:MenuCharacter = grpWeekCharacters.members[1];
-				if(bf.character != '' && bf.hasConfirmAnimation) grpWeekCharacters.members[1].animation.play('confirm');
+				for (char in grpWeekCharacters.members)
+				{
+					if (char.character != '' && char.hasConfirmAnimation)
+					{
+						char.animation.play('confirm');
+					}
+				}
 				stopspamming = true;
 			}
 

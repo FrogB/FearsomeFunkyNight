@@ -40,7 +40,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
-
+		
 		var option:Option = new Option('Controller Mode',
 			'Check this if you want to play with\na controller instead of using your Keyboard.',
 			'controllerMode',
@@ -55,13 +55,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool', //Variable type
 			false); //Default value
 		addOption(option);
-
-		/*var option:Option = new Option('Cross-scroll',
-			'If checked, opponents notes will be the opposite scroll type.',
-			'xScroll',
-			'bool',
-			true);
-		addOption(option);*/
 
 		var option:Option = new Option('Middlescroll',
 			'If checked, your notes get centered.',
