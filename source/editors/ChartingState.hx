@@ -95,6 +95,7 @@ class ChartingState extends MusicBeatState
 		['Toggle Eyesores', "Value 1: When it ends (curStep)\nValue 2: How fast should it be (ex.: 1 is normal, go beyond one for faster speed)"],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"],
 		['Quick note spin', "Does a quick note spin"],
+		['Toggle Eyesores', "If eyesores are on, the screen will flash multiple colors like in Polygonized.\nValue 1: (0: Off, 1: On)"],
 		['Flash effect', "Does a flash effect  (if the Flashing setting is enabled)\nOn Value 1:\n\n0: White Game cam flash\n1: for Black Game cam flash.\n2: for White HUD cam Flash\n3: for Black HUD cam Flash"],
 		['Hide or Show HUD elements', "(On Value 1: 0 to hide all of the hud elements\n| 1 to show only strums\n| 2 to show the hud elements if it was hidden previously)"],
 		['Hide or Show HUD elements with Fade', "(On Value 1: 0 to hide all of the hud elements with fade\n| 1 to show the hud elements if it was hidden\n with fade previously)"],

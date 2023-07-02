@@ -6,7 +6,7 @@
 				80
 			],
 			"loop": false,
-			"fps": 4,
+			"fps": 24,
 			"anim": "idle",
 			"indices": [],
 			"name": "God Ex idle"
@@ -17,7 +17,7 @@
 				42
 			],
 			"loop": false,
-			"fps": 4,
+			"fps": 24,
 			"anim": "singLEFT",
 			"indices": [],
 			"name": "God Ex left"
@@ -28,7 +28,7 @@
 				-152
 			],
 			"loop": false,
-			"fps": 4,
+			"fps": 24,
 			"anim": "singDOWN",
 			"indices": [],
 			"name": "God Ex down"
@@ -39,7 +39,7 @@
 				107
 			],
 			"loop": false,
-			"fps": 4,
+			"fps": 24,
 			"anim": "singUP",
 			"indices": [],
 			"name": "God Ex up"
@@ -50,7 +50,7 @@
 				123
 			],
 			"loop": false,
-			"fps": 4,
+			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
 			"name": "God Ex right"

@@ -198,7 +198,7 @@ class PlayState extends MusicBeatState
 	var funnySideFloatyBoys:Array<String> = ['bombu', 'bombu-expunged'];
 	var canSlide:Bool = true;
 	
-	var dontDarkenChar:Array<String> = ['bambi-god', 'bambi-god2d', 'hell-expunged-ffn-phase-1', 'hell-expunged-phase-2'];
+	var dontDarkenChar:Array<String> = ['bambi-god', 'bambi-god2d', 'hell-expunged-ffn-phase-1', 'hell-expunged-phase-2', 'god-expunged'];
 
 	public var notes:FlxTypedGroup<Note>;
 	public var unspawnNotes:Array<Note> = [];
@@ -214,6 +214,7 @@ class PlayState extends MusicBeatState
 
 	public static var TURNTHATSHITON = false;
 
+	public var shakeCam:Bool = false;
 	public static var eyesoreson:Bool = true;
 
 	public static var screenshader:Shaders.PulseEffect = new PulseEffect(); //eyesores
@@ -456,6 +457,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		eyesoreson = ClientPrefs.flashing;
+
 		switch (SONG.song.toLowerCase())
 		{
 			case 'nether':
@@ -2159,7 +2162,7 @@ class PlayState extends MusicBeatState
 	
 		#if desktop
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		DiscordClient.changePresence(detailsText, SONG.song, iconP2.getCharacter());
 		#end
 
 		if(!ClientPrefs.controllerMode)
@@ -3360,7 +3363,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
+		DiscordClient.changePresence(detailsText, SONG.song, iconP2.getCharacter(), true, songLength);
 		#end
 		setOnLuas('songLength', songLength);
 		callOnLuas('onSongStart', []);
@@ -3791,11 +3794,11 @@ class PlayState extends MusicBeatState
 			#if desktop
 			if (startTimer != null && startTimer.finished)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				DiscordClient.changePresence(detailsText, SONG.song, iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence(detailsText, SONG.song, iconP2.getCharacter());
 			}
 			#end
 		}
@@ -3810,11 +3813,11 @@ class PlayState extends MusicBeatState
 		{
 			if (Conductor.songPosition > 0.0)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				DiscordClient.changePresence(detailsText, SONG.song, iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence(detailsText, SONG.song, iconP2.getCharacter());
 			}
 		}
 		#end
@@ -3827,7 +3830,7 @@ class PlayState extends MusicBeatState
 		#if desktop
 		if (health > 0 && !paused)
 		{
-			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+			DiscordClient.changePresence(detailsPausedText, SONG.song, iconP2.getCharacter());
 		}
 		#end
 
@@ -3859,21 +3862,23 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if(disableTheTripperAt == curStep)
-                                   {
-	                 disableTheTripper = true;
-                                   }
-                                  if(isDead)
-                                  {
-	               disableTheTripper = true;
-                                 }
+		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
+		if (shakeCam && eyesoreson)
+		{
+			// var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
+			FlxG.camera.shake(0.010, 0.010);
+		}
 
-                                FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]);
-                                screenshader.update(elapsed);
-                                if(disableTheTripper)
-                               {
-	             screenshader.shader.uampmul.value[0] -= (elapsed / 2);
-                               }
+		screenshader.shader.uTime.value[0] += elapsed;
+		if (shakeCam && eyesoreson)
+		{
+			screenshader.shader.uampmul.value[0] = 1;
+		}
+		else
+		{
+			screenshader.shader.uampmul.value[0] -= (elapsed / 2);
+		}
+		screenshader.Enabled = shakeCam && eyesoreson;
 
 		if (curbg != null)
 		{
@@ -4237,8 +4242,8 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 
-		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.8)),Std.int(FlxMath.lerp(150, iconP1.height, 0.8)));
-		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.8)),Std.int(FlxMath.lerp(150, iconP2.height, 0.8)));
+		iconP1.centerOffsets();
+		iconP2.centerOffsets();
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
@@ -4586,7 +4591,7 @@ class PlayState extends MusicBeatState
 		//}
 
 		#if desktop
-		DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		DiscordClient.changePresence(detailsPausedText, SONG.song, iconP2.getCharacter());
 		#end
 	}
 
@@ -4613,6 +4618,8 @@ class PlayState extends MusicBeatState
 				deathCounter++;
 
 				paused = true;
+
+				shakeCam = false;
 
 				vocals.stop();
 				FlxG.sound.music.stop();
@@ -4645,7 +4652,7 @@ class PlayState extends MusicBeatState
 					];
 					CoolSystemStuff.generateTextFile(expungedLines[FlxG.random.int(0, expungedLines.length)], 'HELLO');
 				}
-				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song, iconP2.getCharacter());
 				#end
 				isDead = true;
 				return true;
@@ -4683,20 +4690,13 @@ class PlayState extends MusicBeatState
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
 			case 'Toggle Eyesores':
-				var timeRainbow:Int = Std.parseInt(value1);
-				var speedRainbow:Float = Std.parseFloat(value2);
-				disableTheTripper = false;
-				disableTheTripperAt = timeRainbow;
-				FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]);
-				screenshader.waveAmplitude = 1;
-				screenshader.waveFrequency = 2;
-				screenshader.waveSpeed = speedRainbow;
-				screenshader.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000, 100000);
-				screenshader.shader.uampmul.value[0] = 1;
-				if(!ClientPrefs.flashing) {
-					screenshader.Enabled = false; //to make it so people dont die
-				} else {
-					screenshader.Enabled = true;
+				var a1000YOMAMAjokesCanYouWatchThemAllquestionmarkId:Int = Std.parseInt(value1);
+				switch (a1000YOMAMAjokesCanYouWatchThemAllquestionmarkId)
+				{
+                    case 0:
+						shakeCam = false;
+					case 1: 
+						shakeCam = true;
 				}
 			
 			case 'Quick note spin':
@@ -6683,18 +6683,28 @@ class PlayState extends MusicBeatState
 	    }
 
 
-		var funny2:Float = (healthBar.percent * 0.01) + 0.01;
-			if (curBeat % 2 == 0) // Bambi's Purgatory: The Revival (Cancelled Build Gameplay)
-			{
-				FlxTween.angle(iconP1, -20, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
-				FlxTween.angle(iconP2, 20, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+	//health icon bounce but epic
+		if (curBeat % gfSpeed == 0) {
+			curBeat % (gfSpeed * 2) == 0 ? {
+				iconP1.scale.set(1.1, 1.3);
+				iconP2.scale.set(1.1, 0.8);
+
+				FlxTween.angle(iconP1, -15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+				FlxTween.angle(iconP2, 15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+			} : {
+				iconP1.scale.set(1.1, 1.3);
+				iconP2.scale.set(1.1, 0.8);
+
+				FlxTween.angle(iconP2, -15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+				FlxTween.angle(iconP1, 15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
 			}
 
-			iconP1.setGraphicSize(Std.int(iconP1.width + (50 * (2 - funny2))),Std.int(iconP1.height - (25 * (2 - funny2))));
-			iconP2.setGraphicSize(Std.int(iconP2.width + (50 * (2 - funny2))),Std.int(iconP2.height - (25 * (2 - funny2))));
+			FlxTween.tween(iconP1, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
+			FlxTween.tween(iconP2, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
 
 			iconP1.updateHitbox();
 			iconP2.updateHitbox();
+		}
 
 		if (gf != null && curBeat % Math.round(gfSpeed * gf.danceEveryNumBeats) == 0 && gf.animation.curAnim != null && !gf.animation.curAnim.name.startsWith("sing") && !gf.stunned)
 		{

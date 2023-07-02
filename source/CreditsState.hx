@@ -65,7 +65,7 @@ class CreditsState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		stupidshit = new FlxBackdrop(Paths.image('checkeredBG'), 8, 8, true, true, 1, 1);
+		stupidshit = new FlxBackdrop(Paths.image('checkeredBG'), XY);
         stupidshit.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
         stupidshit.screenCenter();
         stupidshit.alpha = 0.4;
@@ -73,9 +73,11 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description/Quote - Link - Role - Color
 			['D&B: FFN Team + Psych Engine Team'],
-			['Vs. Dave and Bambi',		'daveandbambi',		'The Original Mod by\nSupport it by pressing ENTER',	'https://gamebanana.com/mods/43201',	'',    '613BE0'],
-			['Ayo',		        	'ayo',		    	"'S'",								           				'https://www.youtube.com/@3Kingszz', 'Co-Owner/Director/Artist/Composer',	'01FFFF'],
-			['FrogB',		'frogb',		'oh my god somebody pinch me i think im dreaming',					'https://linktr.ee/FrogB',	'Director/Main Programmer', 'FFCB6C'],
+			['Vs. Dave and Bambi',		'daveandbambi',		'The Original Mod by\nSupport it by pressing ENTER',		'https://gamebanana.com/mods/43201',	'',    '613BE0'],
+			['Ayo',		        	'ayo',		    	"'S'",								           					'https://www.youtube.com/@3Kingszz', 'Co-Owner/Director/Artist/Composer.',	'01FFFF'],
+			['Pianoo',		        'pianoo',		    'i suck at code :sob:',											'https://www.roblox.com/users/1171454574/profile', 'Director/Musician/Semi-Programmer.',	'FFFFFF'],
+			['FrogB',		'frogb',		'oh my god somebody pinch me i think im dreaming',							'https://linktr.ee/FrogB',	'Director/Main Programmer.', 'FFCB6C'],
+			['CXyon3',		        'cxyon3',		    'I have obtained HEAVEN!',								                    	'',					'Composer',		'5D1B01'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_', '',	'444444'],
 			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/RiverOaken',	'',	'B42F71'],
 			['shubs',				'shubs',			'Additional Programmer of Psych Engine',						'https://twitter.com/yoshubs',		'',	'5E99DF'],

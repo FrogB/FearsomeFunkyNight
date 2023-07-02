@@ -7,7 +7,7 @@
 				-13
 			],
 			"anim": "singDOWN",
-			"fps": 4,
+			"fps": 24,
 			"name": "Hell expunged phase 2 Down",
 			"indices": []
 		},
@@ -18,7 +18,7 @@
 				50
 			],
 			"anim": "singUP",
-			"fps": 4,
+			"fps": 24,
 			"name": "Hell expunged phase 2 Up",
 			"indices": []
 		},
@@ -29,7 +29,7 @@
 				-6
 			],
 			"anim": "singRIGHT",
-			"fps": 4,
+			"fps": 24,
 			"name": "Hell expunged phase 2 Right",
 			"indices": []
 		},
@@ -40,7 +40,7 @@
 				3
 			],
 			"anim": "singLEFT",
-			"fps": 4,
+			"fps": 24,
 			"name": "Hell expunged phase 2 Left",
 			"indices": []
 		},
@@ -50,7 +50,7 @@
 				0
 			],
 			"loop": true,
-			"fps": 3,
+			"fps": 24,
 			"anim": "idle",
 			"indices": [],
 			"name": "Hell expunged phase 2 Idle"
