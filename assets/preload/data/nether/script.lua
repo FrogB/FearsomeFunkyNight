@@ -39,3 +39,7 @@ function onBeatHit()
 		woah = false
 	end
 end
+
+function onCreatePost()
+    setProperty('gf.alpha', 0)
+end

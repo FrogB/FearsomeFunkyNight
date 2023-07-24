@@ -7,7 +7,7 @@
 				-170
 			],
 			"anim": "singDOWN",
-			"fps": 24,
+			"fps": 12,
 			"name": "hell-expunged-FFN down",
 			"indices": []
 		},
@@ -18,7 +18,7 @@
 				-20
 			],
 			"anim": "singUP",
-			"fps": 24,
+			"fps": 12,
 			"name": "hell-expunged-FFN up",
 			"indices": []
 		},
@@ -29,7 +29,7 @@
 				-6
 			],
 			"anim": "singRIGHT",
-			"fps": 24,
+			"fps": 12,
 			"name": "hell-expunged-FFN right",
 			"indices": []
 		},
@@ -40,7 +40,7 @@
 				53
 			],
 			"anim": "singLEFT",
-			"fps": 24,
+			"fps": 12,
 			"name": "hell-expunged-FFN left",
 			"indices": []
 		},
@@ -50,7 +50,7 @@
 				0
 			],
 			"loop": true,
-			"fps": 24,
+			"fps": 12,
 			"anim": "idle",
 			"indices": [],
 			"name": "hell-expunged-FFN idle"
