@@ -242,6 +242,7 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
+	private var displayedHealth:Float = 1;
 	public var combo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
@@ -253,6 +254,7 @@ class PlayState extends MusicBeatState
 	public var timeBar:FlxBar;
 
 	public var ratingsData:Array<Rating> = [];
+	public var perfects:Int = 0;
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
@@ -331,7 +333,9 @@ class PlayState extends MusicBeatState
 	var halloweenWhite:BGSprite;
 
 	var evilTrail:FlxTrail;
+	//kill me for doing this
 	var evilTrail2:FlxTrail;
+	var evilTrail3:FlxTrail;
 
 	var phillyLightsColors:Array<FlxColor>;
 	var phillyWindow:BGSprite;
@@ -490,7 +494,13 @@ class PlayState extends MusicBeatState
 		];
 
 		//Ratings
-		ratingsData.push(new Rating('sick')); //default rating
+		if (!ClientPrefs.removePerfects) ratingsData.push(new Rating('perfect')); //default rating, ported from os engine :smirk: -frogb
+
+		var rating:Rating = new Rating('sick');
+		rating.ratingMod = 1;
+		rating.score = 350;
+		rating.noteSplash = true;
+		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
@@ -1826,7 +1836,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+			'displayedHealth', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
@@ -1890,17 +1900,16 @@ class PlayState extends MusicBeatState
 		judgementCounter.screenCenter(Y);
 		if(ClientPrefs.judgementCounter == 'Simple')
 		{
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';			
+			judgementCounter.text = 'Perfects: ${perfects}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';			
 		}
 		else if(ClientPrefs.judgementCounter == 'Complex')
 		{
-			judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+			judgementCounter.text = 'Total Notes: ${tnh}\nPerfects: ${perfects}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
 		}
 		if(ClientPrefs.judgementCounter == 'Disabled')
 		{
 			judgementCounter.visible = false;
 		}
-		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
 		add(judgementCounter);
 		judgementCounter.cameras = [camHUD];
 
@@ -1972,6 +1981,7 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		blackScreendeez.cameras = [camHUD];
+		blackScreen.cameras = [camHUD];
 
 		if (SONG.song.toLowerCase() == 'nether')
 		{
@@ -3951,6 +3961,15 @@ class PlayState extends MusicBeatState
 						showshit();
 						FlxTween.tween(camHUD, {alpha:1}, 1);
 				}
+			
+			case 'empyrean':
+				switch (curStep)
+				{
+					case 0:
+						blackScreendeez.alpha = 1;
+					case 1:
+						FlxTween.tween(blackScreendeez, {alpha:0}, 18);
+				}
 
 			case 'ecstatic': // probably will do 3d shit here
 				switch(curStep)
@@ -4218,6 +4237,8 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
+		displayedHealth = FlxMath.lerp(displayedHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
+
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
 
@@ -4249,8 +4270,9 @@ class PlayState extends MusicBeatState
 		iconP2.updateHitbox();
 
 		var iconOffset:Int = 26;
-		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
+		var percent = 1 - (displayedHealth / 2);
+		iconP1.x = 0 + healthBar.x + (healthBar.width * percent) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = 0 + healthBar.x + (healthBar.width * percent) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
 
 		if (health > 2)
 			health = 2;
@@ -6586,25 +6608,21 @@ class PlayState extends MusicBeatState
 			case 'empyrean': //doing subtitles for this later im just putting the song name here so that i can remember
 				switch(curStep)
 				{
-					case 259:
-						subtitleManager.addSubtitle("Imma blocking you. I'm blocking you..", 0.02, 1);
-					case 282:
-						subtitleManager.addSubtitle("That's it, I'm blocking you.", 0.02, 1);
-					case 306:
-						subtitleManager.addSubtitle("Haha you loser Alison.", 0.02, 2);
-					case 345:
-						subtitleManager.addSubtitle("STOP.", 0.02, 0.5, {subtitleSize: 45});
-					case 359:
-						subtitleManager.addSubtitle("FUCKING.", 0.02, 0.5, {subtitleSize: 45});
-					case 373:
-						subtitleManager.addSubtitle("CALLING ME!", 0.02, 0.5, {subtitleSize: 45});
-					case 640:
+					case 384:
 						remove(evilTrail); //so that i dont have to use AUUGHHH-
 						switch(dad.curCharacter)
 						{
 							case 'god-expunged':
 								evilTrail2 = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
 								insert(members.indexOf(dadGroup) - 1, evilTrail2);
+						}
+					case 2308:
+						remove(evilTrail2); //so that i dont have to use AUUGHHH-
+						switch(dad.curCharacter)
+						{
+							case 'hell-expunged-FFN-phase-1' | 'hell-expunged-phase-2' : // i honestly have no fucking idea lmao -frogb
+								evilTrail3 = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
+								insert(members.indexOf(dadGroup) - 1, evilTrail3);
 						}
 				}
 			case 'nether':
@@ -6998,11 +7016,11 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingFC', ratingFC);
 		if(ClientPrefs.judgementCounter == 'Simple')
 		{
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';			
+			judgementCounter.text = 'Perfects: ${perfects}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';			
 		}
 		else if(ClientPrefs.judgementCounter == 'Complex')
 		{
-			judgementCounter.text = 'Total Notes: ${tnh}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
+			judgementCounter.text = 'Total Notes: ${tnh}\nPerfects: ${perfects}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo: ${combo}\nCombo Breaks: ${songMisses}\n';
 		}
 	}
 

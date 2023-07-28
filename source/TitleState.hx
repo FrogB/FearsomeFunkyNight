@@ -453,7 +453,7 @@ class TitleState extends MusicBeatState
 			case 7:
 				createCoolText(['Fearsome Funky Night by']);
 			case 8:
-				addMoreText('ayo, FrogB, FyriDev, BarGames\nGecko, Pianoo, Bide, BoxHaze,\nCXYon3, Gabito, Noobo, MelonMan\n...and many more of our contributors!');
+				addMoreText('ayo, FrogB, FyriDev, BarGames,\nGecko, Pianoo, BoxHaze, poly_rug,\nCXYon3, Gabito, Noobo, MelonMan,\n...and many more of our contributors!');
 			case 9:
 				deleteCoolText();
 			case 10:

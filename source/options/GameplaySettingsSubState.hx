@@ -34,6 +34,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		title = 'Gameplay Settings';
 		rpcTitle = 'Gameplay Settings Menu'; //for Discord Rich Presence
 
+		var option:Option = new Option('Remove Perfect! Rating',
+			"If checked, removes the 'Perfect!' Rating in-game.",
+			'removePerfects',
+			'bool',
+			false);
+		addOption(option);
+		
+
 		var option:Option = new Option('Self-Awareness and OS Functions',
 			"If checked, uses your Operating System in certain parts of the mod.\n(Ex. Nether/Exploitation gets your computer's username.)",
 			'selfAwareness',

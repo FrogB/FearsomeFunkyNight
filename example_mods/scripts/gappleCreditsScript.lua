@@ -109,7 +109,7 @@ function onCreatePost() -- IN SONG ORDER
     end
 
     if songName == "Hypercube" then
-        composer = "PurpleSigh192
+        composer = "PurpleSigh192"
         visuals = "Wasted2, ayo,\n& Pianoo"
         charter = "BarGames\n& FrogB"
         allowinspiration = false

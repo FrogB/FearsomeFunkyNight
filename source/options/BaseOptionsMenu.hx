@@ -90,8 +90,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		for (i in 0...optionsArray.length)
 		{
 			var optionText:Alphabet = new Alphabet(290, 260, optionsArray[i].name, false);
-			optionText.isMenuItem = false;
-			optionText.itemType = 'Vertical';
+			optionText.isPauseItem = true;
+			optionText.itemType = 'Classic';
 			/*optionText.forceX = 300;
 			optionText.yMult = 90;*/
 			optionText.targetY = i;
