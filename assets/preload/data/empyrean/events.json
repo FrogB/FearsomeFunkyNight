@@ -36,7 +36,27 @@
 					],
 					[
 						"Change the Default Camera Zoom",
-						"0.7",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				73142.8571428572,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				73214.2857142858,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
 						""
 					]
 				]
@@ -142,6 +162,126 @@
 				]
 			],
 			[
+				77714.2857142858,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				77785.7142857143,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				77857.1428571429,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				77928.5714285715,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				78000.0000000001,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				78071.4285714286,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				78142.8571428572,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				78214.2857142858,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				78285.7142857143,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				78357.1428571429,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				80000.0000000001,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				80071.4285714286,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
 				80357.1428571429,
 				[
 					[
@@ -152,7 +292,27 @@
 				]
 			],
 			[
+				80392.8571428572,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
 				80428.5714285715,
+				[
+					[
+						"Toggle Blocked Glitch Effect",
+						"",
+						""
+					]
+				]
+			],
+			[
+				80464.2857142858,
 				[
 					[
 						"Toggle Blocked Glitch Effect",
@@ -176,13 +336,18 @@
 					],
 					[
 						"Change the Default Camera Zoom",
-						"0.5",
+						"0.6",
 						""
 					],
 					[
 						"Flash effect",
 						"2",
 						""
+					],
+					[
+						"Cinematics",
+						"",
+						"2"
 					]
 				]
 			],
@@ -197,6 +362,36 @@
 					[
 						"Flash effect",
 						"0",
+						""
+					]
+				]
+			],
+			[
+				173714.285714285,
+				[
+					[
+						"Change the Default Camera Zoom",
+						"0.8",
+						""
+					],
+					[
+						"Flash effect",
+						"0",
+						""
+					]
+				]
+			],
+			[
+				182857.142857142,
+				[
+					[
+						"Flash effect",
+						"0",
+						""
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
 						""
 					]
 				]

@@ -110,14 +110,14 @@ function onCreatePost() -- IN SONG ORDER
 
     if songName == "Hypercube" then
         composer = "PurpleSigh192"
-        visuals = "Wasted2, ayo,\n& Pianoo"
-        charter = "BarGames\n& FrogB"
+        visuals = "WhatsDown,\nayo & Pianoo"
+        charter = "FrogB"
         allowinspiration = false
     end
 
     if songName == "Empyrean" then
-        composer = "Pianoo"
-        visuals = "Wasted2, ayo,\n& Pianoo"
+        composer = "BoxHaze &\nMelonMan"
+        visuals = "Wasted2,\nWhatsDown, ayo & Pianoo"
         charter = "Gecko & FrogB"
         allowinspiration = false
     end

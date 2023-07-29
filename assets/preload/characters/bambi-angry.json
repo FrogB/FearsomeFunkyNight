@@ -36,17 +36,6 @@
 		{
 			"loop": false,
 			"offsets": [
-				10,
-				50
-			],
-			"anim": " singUP",
-			"fps": 24,
-			"name": "a_bambi up",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
 				6,
 				10
 			],
@@ -64,6 +53,28 @@
 			"anim": "singLEFT",
 			"fps": 24,
 			"name": "a_bambi left",
+			"indices": []
+		},
+		{
+			"offsets": [
+				150,
+				22
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singThrow",
+			"indices": [],
+			"name": "a_bambi throw"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				71,
+				90
+			],
+			"anim": "singSMASH",
+			"fps": 24,
+			"name": "a_bambi phone",
 			"indices": []
 		}
 	],

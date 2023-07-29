@@ -16,21 +16,25 @@ function opponentNoteHit(id, noteData, noteType, isSustainNote)
 end
 
 function onCreatePost()
-    initLuaShader("vcr")
-    
-    makeLuaSprite("temporaryShader")
-    makeGraphic("temporaryShader", screenWidth, screenHeight)
-    
-    setSpriteShader("temporaryShader", "vcr")
-    
-    addHaxeLibrary("ShaderFilter", "openfl.filters")
-    runHaxeCode([[
-        trace(ShaderFilter);
-        game.camHUD.setFilters([new ShaderFilter(game.getLuaObject("temporaryShader").shader)]);
-    ]])
+    if getPropertyFromClass('ClientPrefs', 'shaders') then
+        initLuaShader("vcr")
+        
+        makeLuaSprite("temporaryShader")
+        makeGraphic("temporaryShader", screenWidth, screenHeight)
+        
+        setSpriteShader("temporaryShader", "vcr")
+        
+        addHaxeLibrary("ShaderFilter", "openfl.filters")
+        runHaxeCode([[
+            trace(ShaderFilter);
+            game.camHUD.setFilters([new ShaderFilter(game.getLuaObject("temporaryShader").shader)]);
+        ]])
+    end
 end
 
 function onUpdate(elapsed)
-    Chromacrap = math.lerp(Chromacrap, 0, boundTo(elapsed * 20, 0, 1))
-    setChrome(Chromacrap)
+    if getPropertyFromClass('ClientPrefs', 'shaders') then
+        Chromacrap = math.lerp(Chromacrap, 0, boundTo(elapsed * 20, 0, 1))
+        setChrome(Chromacrap)
+    end
 end

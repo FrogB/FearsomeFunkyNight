@@ -470,6 +470,7 @@ class PlayState extends MusicBeatState
 		}
 		//trace('Playback Rate: ' + playbackRate);
 		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
 
 		// for lua
 		instance = this;
@@ -5509,7 +5510,7 @@ class PlayState extends MusicBeatState
 		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(note, noteDiff / playbackRate);
 
-		tnh = sicks + goods + bads + shits + 1;
+		tnh = perfects + sicks + goods + bads + shits + 1;
 
 		totalNotesHit += daRating.ratingMod;
 		note.ratingMod = daRating.ratingMod;
@@ -6999,6 +7000,7 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
+			if (perfects > 0) ratingFC = "PFC";
 			if (sicks > 0) ratingFC = "SFC";
 			if (goods > 0) ratingFC = "SDG";
 			if (goods > 9) ratingFC = "GFC";
@@ -7006,8 +7008,9 @@ class PlayState extends MusicBeatState
 			if (bads > 9 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
 			if (songMisses >= 10) ratingFC = "Clear";
+			if (songMisses >= 50) ratingFC = "Clear - Skill issue";
 			if (songMisses >= 100) ratingFC = "TDSB";
-			if (songMisses >= 1000) ratingFC = "QDSB";
+			if (songMisses >= 1000) ratingFC = "QDSB - vers good";
 			if (songMisses >= 100000) ratingFC = "STDCB";
 			else if (songMisses >= 10000000) ratingFC = "SPDCB"; //how, just how?
 		}
