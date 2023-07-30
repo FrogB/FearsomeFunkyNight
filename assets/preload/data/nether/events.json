@@ -2,6 +2,21 @@
 	"song": {
 		"events": [
 			[
+				9365.85365853659,
+				[
+					[
+						"Cinematics",
+						"1",
+						""
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.7",
+						""
+					]
+				]
+			],
+			[
 				28097.5609756098,
 				[
 					[
@@ -10,13 +25,13 @@
 						""
 					],
 					[
-						"Change the Default Camera Zoom",
-						"0.7",
-						""
+						"Cinematics",
+						"",
+						"2"
 					],
 					[
-						"Cinematics",
-						"1",
+						"Change the Default Camera Zoom",
+						"0.5",
 						""
 					]
 				]
@@ -368,6 +383,11 @@
 						"Quick note spin",
 						"",
 						""
+					],
+					[
+						"Thunderstorm type black screen",
+						"1",
+						""
 					]
 				]
 			],
@@ -378,6 +398,11 @@
 						"Add Camera Zoom",
 						"-0.03",
 						"-0.06"
+					],
+					[
+						"Thunderstorm type black screen",
+						"0",
+						""
 					]
 				]
 			],
@@ -388,6 +413,11 @@
 						"Add Camera Zoom",
 						"0.03",
 						"0.06"
+					],
+					[
+						"Thunderstorm type black screen",
+						"0",
+						""
 					]
 				]
 			],
@@ -398,6 +428,11 @@
 						"Add Camera Zoom",
 						"-0.03",
 						"-0.06"
+					],
+					[
+						"Thunderstorm type black screen",
+						"0",
+						""
 					]
 				]
 			],
@@ -566,7 +601,7 @@
 				[
 					[
 						"Change the Default Camera Zoom",
-						"0.4",
+						"0.3",
 						""
 					]
 				]
@@ -576,7 +611,7 @@
 				[
 					[
 						"Change the Default Camera Zoom",
-						"0.9",
+						"1",
 						""
 					]
 				]
@@ -586,7 +621,7 @@
 				[
 					[
 						"Change the Default Camera Zoom",
-						"0.7",
+						"0.5",
 						""
 					]
 				]
@@ -767,6 +802,21 @@
 					[
 						"Add Camera Zoom",
 						"",
+						""
+					]
+				]
+			],
+			[
+				46829.2682926829,
+				[
+					[
+						"Cinematics",
+						"1",
+						""
+					],
+					[
+						"Change the Default Camera Zoom",
+						"0.6",
 						""
 					]
 				]
