@@ -40,6 +40,9 @@ class ClientPrefs {
 	public static var removePerfects:Bool = false;
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
+	//bamis purgatory
+	public static var noteCombo = true;
+	public static var cameraFollowsNote = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -145,6 +148,8 @@ class ClientPrefs {
 		FlxG.save.data.pauseMusic = pauseMusic;
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
+		FlxG.save.data.noteCombo = noteCombo;
+		FlxG.save.data.cameraFollowsNote = cameraFollowsNote;
 	
 		FlxG.save.flush();
 
@@ -299,6 +304,12 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.comboStacking != null)
 			comboStacking = FlxG.save.data.comboStacking;
+
+		if (FlxG.save.data.noteCombo != null)
+			noteCombo = FlxG.save.data.noteCombo;
+
+		if (FlxG.save.data.cameraFollowsNote != null)
+			cameraFollowsNote = FlxG.save.data.cameraFollowsNote;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

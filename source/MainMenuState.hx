@@ -229,9 +229,8 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		var pressR:FlxText = new FlxText(150, 10, 0, "Press R to reset your data", 12);
+		var pressR:FlxText = new FlxText(10, 10, 0, "Press R to reset your data", 12);
 		pressR.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		pressR.x -= versionShit.textField.textWidth;
 		pressR.antialiasing = true;
 		pressR.alpha = 0;
 		pressR.scrollFactor.set();
@@ -346,7 +345,7 @@ class MainMenuState extends MusicBeatState
 					switch (optionShit[curSelected])
 					{
 						case 'discord':
-							CoolUtil.browserLoad('https://discord.gg/jGNTgcjq');
+							CoolUtil.browserLoad('https://discord.gg/wjUUVqxya4');
 						case 'ost':
 							CoolUtil.browserLoad('https://www.youtube.com/playlist?list=PLjOIzvG4OFJftGgKFzQ4GB87BoSxJMaB3');
 					}

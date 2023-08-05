@@ -3871,6 +3871,14 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
 
+	function truncateFloat(number:Float, precision:Int):Float
+	{
+		var num = number;
+		num = num * Math.pow(10, precision);
+		num = Math.round(num) / Math.pow(10, precision);
+		return num;
+	}
+
 	override public function update(elapsed:Float)
 	{
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
@@ -3967,9 +3975,17 @@ class PlayState extends MusicBeatState
 				switch (curStep)
 				{
 					case 0:
+						FlxTween.tween(gf, {alpha:0}, 0.0001); //i did NOT want to make a seperate function for this lol
 						blackScreendeez.alpha = 1;
 					case 1:
 						FlxTween.tween(blackScreendeez, {alpha:0}, 18);
+				}
+
+			case 'cypher' | 'deceit' | 'nether' | 'evocation' | 'hypercube' :
+				switch (curStep)
+				{
+					case 0:
+						FlxTween.tween(gf, {alpha:0}, 0.0001);
 				}
 
 			case 'ecstatic': // probably will do 3d shit here
@@ -4197,7 +4213,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if(!inCutscene) {
-			var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4 * cameraSpeed * playbackRate, 0, 1);
+			var lerpVal:Float = CoolUtil.boundTo(elapsed * 3.125 * cameraSpeed * playbackRate, 0, 1);
 			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 			if(!startingSong && !endingSong && boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name.startsWith('idle')) {
 				boyfriendIdleTime += elapsed;
@@ -4210,9 +4226,23 @@ class PlayState extends MusicBeatState
 		}
 
 		if (ratingName == '?') {
-            scoreTxt.text = 'NPS: 0 (Max 0) // Score: 0 // Combo Breaks: 0 // Accuracy: 0% // N/A';
+			if (SONG.song.toLowerCase() == 'nether')
+			{
+            	scoreTxt.text = 'nPS: 0 (mAx 0) // Sc0r3: ' + (songScore * FlxG.random.int(1,9)) + " // C0mb0 Br3akS: " + (songMisses * FlxG.random.int(1,9)) + " // AccuRacy: " + (${Highscore.floorDecimal(ratingPercent * 100, 2)} * FlxG.random.int(1,9)) + '% // N/A';
+			}
+			else
+			{
+				scoreTxt.text = 'NPS: 0 (Max 0) // Score: 0 // Combo Breaks: 0 // Accuracy: 0% // N/A';
+			}
         } else {
-            scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxnps + ') // Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' // (' + ratingFC + ') ' + ratingName;
+			if (SONG.song.toLowerCase() == 'nether')
+			{
+				scoreTxt.text = 'nPS: ' + (nps * FlxG.random.int(1,9)) + " (mAx " + (maxnps * FlxG.random.int(1,9)) + ") // Sc0r3: " + (songScore * FlxG.random.int(1,9)) + " // C0mb0 Br3akS: " + (songMisses * FlxG.random.int(1,9)) + " // AccuRacy: " + (${Highscore.floorDecimal(ratingPercent * 100, 2)} * FlxG.random.int(1,9)) + '% // N/A';
+			}
+			else
+			{
+            	scoreTxt.text = 'NPS: ' + nps + ' (Max ' + maxnps + ') // Score: ' + songScore + ' // Combo Breaks: ' + songMisses + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ' // (' + ratingFC + ') ' + ratingName;
+			}
         }
 
 		{
@@ -6027,7 +6057,7 @@ class PlayState extends MusicBeatState
 
 				var camPower = 25;
 				moveCameraSection();
-				if (!SONG.notes[curSection].mustHitSection) {
+				if (!SONG.notes[curSection].mustHitSection && ClientPrefs.cameraFollowsNote) {
 					switch (note.noteData) {
 						case 0:
 							camFollow.x -= camPower;
@@ -6121,7 +6151,7 @@ class PlayState extends MusicBeatState
 			{
 				combo += 1;
 				if(combo > 9999) combo = 9999;
-				notesHitArray.unshift(Date.now());
+				notesHitArray.unshift(Date.now()); //nps thing
 				popUpScore(note);
 			}
 			health += note.hitHealth * healthGain;
@@ -6144,7 +6174,7 @@ class PlayState extends MusicBeatState
 
 					var camPower = 25;
 					moveCameraSection();
-					if (SONG.notes[curSection].mustHitSection) {
+					if (SONG.notes[curSection].mustHitSection && ClientPrefs.cameraFollowsNote) {
 						switch (note.noteData) {
 							case 0:
 								camFollow.x -= camPower;
@@ -6535,7 +6565,7 @@ class PlayState extends MusicBeatState
 	var lastStepHit:Int = -1;
 	override function stepHit()
 	{
-		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat) //restricting it to move every stephit would break the cam and the cam movement on arrow system, setting it to restrict only to floating people
+		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat && !SONG.notes[curSection].mustHitSection) //restricting it to move every stephit would break the cam and the cam movement on arrow system, setting it to restrict only to floating people
 		{
 			moveCameraSection();
 		}

@@ -130,7 +130,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		for (i in 0...optionsArray.length)
 		{
 			var optionText:Alphabet = new Alphabet(200, 360, optionsArray[i].name, true);
-			optionText.isMenuItem = true;
+			optionText.isPauseItem = true;
+			optionText.itemType = 'Classic';
 			optionText.scaleX = 0.8;
 			optionText.scaleY = 0.8;
 			optionText.targetY = i;
