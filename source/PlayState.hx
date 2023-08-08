@@ -321,6 +321,8 @@ class PlayState extends MusicBeatState
 	var notesHitArray:Array<Date> = [];
 
 	var blackBG:FlxSprite = new FlxSprite(-120, -120).makeGraphic(Std.int(FlxG.width * 100), Std.int(FlxG.height * 150), FlxColor.BLACK);
+	var expungedBG2:FlxSprite = new FlxSprite(-100, 0).loadGraphic(Paths.image('expunged/exploiter/EXPLOITER1'));
+	var expungedFRONT2:FlxSprite = new FlxSprite(-100, 0).loadGraphic(Paths.image('expunged/exploiter/EXPLOITER2'));
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
@@ -1125,15 +1127,37 @@ class PlayState extends MusicBeatState
 				defaultCamZoom = 0.5;
 				curStage = 'desktop';
 
-				var expungedBG:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('expunged/creepyRoom'));
-				expungedBG.setPosition(0, 200);
-				expungedBG.setGraphicSize(Std.int(expungedBG.width * 2));
-				expungedBG.scrollFactor.set();
+				var expungedBG:FlxSprite = new FlxSprite(0, 100).loadGraphic(Paths.image('expunged/exploiter/EXPLOITER1'));
+				expungedBG.setGraphicSize(Std.int(expungedBG.width * 3.5));
 				expungedBG.antialiasing = false;
+				expungedBG.active = true;
+				expungedBG.visible = true;
 
-				voidShaderAlt(expungedBG);
+				var expungedFRONT:FlxSprite = new FlxSprite(0, 100).loadGraphic(Paths.image('expunged/exploiter/EXPLOITER2'));
+				expungedFRONT.setGraphicSize(Std.int(expungedFRONT.width * 3.5));
+				expungedFRONT.antialiasing = false;
+				expungedFRONT.active = true;
+				expungedFRONT.visible = true;
+
+				expungedBG2 = new FlxSprite(0, 100).loadGraphic(Paths.image('expunged/exploiter/EXPLOITER1'));
+				expungedBG2.setGraphicSize(Std.int(expungedBG.width * 3.5));
+				expungedBG2.antialiasing = false;
+				expungedBG2.visible = true;
+
+				expungedFRONT2 = new FlxSprite(0, 100).loadGraphic(Paths.image('expunged/exploiter/EXPLOITER2'));
+				expungedFRONT2.setGraphicSize(Std.int(expungedFRONT.width * 3.5));
+				expungedFRONT2.antialiasing = false;
+				expungedFRONT2.visible = true;
+
+				var testshader2:Shaders.GlitchEffectP = new Shaders.GlitchEffectP(1, 5, 0.1);
+				
+				expungedBG.shader = testshader2.shader;
+				voidShaderAlt(expungedFRONT);
 
 				add(expungedBG);
+				add(expungedFRONT);
+				add(expungedBG2);
+				add(expungedFRONT2);
 			}
 
 			case 'bambersHell': // the basic shit
@@ -1161,32 +1185,6 @@ class PlayState extends MusicBeatState
 				bgshit.shader = testshader.shader;
 				curbg = bgshit;
 			}
-
-			case 'bambersHell2': // duplicate of bambershell in hopes of tackling the flxtrail issue for expunged
-			{
-				defaultCamZoom = 0.7;
-				curStage = 'bambersHell2';
-				var bg:BGSprite = new BGSprite('purgatory/shine', -600, -200, 0.2, 0.2);
-				bg.antialiasing = false;
-				bg.scrollFactor.set(0.05, 0.05);
-				bg.active = true;
-				add(bg);
-	
-				var bgshit:BGSprite = new BGSprite('purgatory/Grid_BG', -600, -300, 0.7, 0.7);
-				bgshit.antialiasing = false;
-				bgshit.scrollFactor.set(0, 0);
-				bgshit.active = true;
-				bgshit.alpha = 0.5;
-				add(bgshit);
-	
-				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-				testshader.waveAmplitude = 0.1;
-				testshader.waveFrequency = 5;
-				testshader.waveSpeed = 0.95;
-				
-				bgshit.shader = testshader.shader;
-				curbg = bgshit;
-			}		
 			
 			
 			case 'spooky': //Week 2
@@ -3980,6 +3978,17 @@ class PlayState extends MusicBeatState
 					case 1:
 						FlxTween.tween(blackScreendeez, {alpha:0}, 18);
 				}
+			
+			case 'nether':
+				switch (curStep)
+				{
+					case 0:
+						FlxTween.tween(gf, {alpha:0}, 0.0001); //i did NOT want to make a seperate function for this lol
+						blackScreendeez.alpha = 1;
+					case 1:
+						if(ClientPrefs.flashing) camHUD.flash(FlxColor.RED, 3);
+						FlxTween.tween(blackScreendeez, {alpha:0}, 7);
+				}
 
 			case 'cypher' | 'deceit' | 'nether' | 'evocation' | 'hypercube' :
 				switch (curStep)
@@ -6659,6 +6668,9 @@ class PlayState extends MusicBeatState
 			case 'nether':
 				switch(curStep)
 				{
+					case 384:
+						expungedBG2.visible = false;
+						expungedFRONT2.visible = false;
 					case 1337:
 						FlxTween.tween(camHUD, {angle: 180}, 0.20, {ease: FlxEase.quadOut});
 					case 1340:

@@ -1,4 +1,4 @@
-local dalapsed = 0.0;	
+
 function onCreate()
 	makeLuaSprite('cubes', 'expunged/cyphercubes', -200, -400);
 	setScrollFactor('cubes', 0.5, 0.5);
@@ -10,13 +10,4 @@ function onCreate()
 
 	addLuaSprite('cubes', false)
 	addLuaSprite('platform', false)
-end
-
-function onCreatePost()
-    setProperty('gf.alpha', 0)
-end
-
-function onUpdatePost(elapsed)
-    dalapsed = dalapsed + elapsed;
-    setProperty('cubes.y', -165 + 100 * math.sin((dalapsed - 10) * 0.5));
 end

@@ -57,6 +57,10 @@ class CreditsState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
+		FlxG.sound.playMusic(Paths.music('creditsSong'));
+		//thanks wiliam.
+		FreeplayState.destroyFreeplayVocals();
+
 		persistentUpdate = true;
 
 		FlxG.mouse.visible = true;
@@ -327,6 +331,8 @@ class CreditsState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
+				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true); //swtiches backt to the main menu music instead of letting the credits theme overlap the entire background lmao
+				persistentUpdate = false;
 			}
 		}
 

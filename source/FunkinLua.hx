@@ -326,6 +326,7 @@ class FunkinLua {
 					{
 						PlayState.instance.addShaderToCamera(camera, new Shaders.VCRDistortionEffect(glitchFactor, distortion, perspectiveOn, vignetteMoving));
 					});
+					
 		
 		//okay back to frag shader shit
 		

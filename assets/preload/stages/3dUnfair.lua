@@ -1,4 +1,4 @@
-local dalapsed = 0.0;	
+
 function onCreate()
 	makeLuaSprite('cubes', 'expunged/deceitcube', -200, 0);
 	setScrollFactor('cubes', 0.5, 0.5);
@@ -24,8 +24,4 @@ function onCreate()
 	addLuaSprite('cubes2', false)
 	addLuaSprite('spikes', false)
 	addLuaSprite('platform', false)
-end
-
-function onCreatePost()
-	setProperty('gf.alpha', 0)
 end
