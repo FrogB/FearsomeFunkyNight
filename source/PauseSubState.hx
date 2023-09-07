@@ -235,6 +235,14 @@ class PauseSubState extends MusicBeatSubstate
 					practiceText.visible = PlayState.instance.practiceMode;
 				case "Restart Song":
 					restartSong();
+					if (PlayState.SONG.song.toLowerCase() == "nether")
+					{
+						if (PlayState.window != null)
+						{
+							PlayState.instance.closeExpungedWindow();
+						}
+					}
+					PlayState.instance.shakeCam = false;
 				case "Leave Charting Mode":
 					restartSong();
 					PlayState.chartingMode = false;
@@ -263,6 +271,15 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
 				case "Exit to Options Menu":
+					PlayState.instance.shakeCam = false;
+					if (PlayState.SONG.song.toLowerCase() == "nether")
+					{
+						Main.toggleFuckedFPS(false);
+						if (PlayState.window != null)
+						{
+							PlayState.instance.closeExpungedWindow();
+						}
+					}
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 
@@ -274,6 +291,15 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.chartingMode = false;
 
 				case "Exit to menu":
+					PlayState.instance.shakeCam = false;
+					if (PlayState.SONG.song.toLowerCase() == "nether")
+					{
+						Main.toggleFuckedFPS(false);
+						if (PlayState.window != null)
+						{
+							PlayState.instance.closeExpungedWindow();
+						}
+					}
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 

@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				121,
+				-20
+			],
+			"anim": "singDOWN",
+			"fps": 12,
+			"name": "Hellpungffn down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				9,
+				0
+			],
+			"anim": "singUP",
+			"fps": 12,
+			"name": "Hellpungffn up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-112,
+				-6
+			],
+			"anim": "singRIGHT",
+			"fps": 12,
+			"name": "Hellpungffn right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				75,
+				-7
+			],
+			"anim": "singLEFT",
+			"fps": 12,
+			"name": "Hellpungffn left",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 12,
+			"anim": "idle",
+			"indices": [],
+			"name": "Hellpungffn idle"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Hellpungffn",
+	"position": [
+		-260,
+		30
+	],
+	"healthicon": "icon-hell-expunged",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		60,
+		-90
+	],
+	"sing_duration": 6.1,
+	"scale": 1.5
+}

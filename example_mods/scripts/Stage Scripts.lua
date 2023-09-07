@@ -1,10 +1,4 @@
 local dalapsed = 0.0;
-function onCreatePost()
-    if songName == 'Cypher' or 'Deceit' or 'Nether' or 'Evocation' or 'Hypercube' or 'Empyrean' then
-        setProperty('gf.alpha', 0)
-    end
-end
-
 function onUpdatePost(elapsed)
     if songName == 'Cypher' or 'Deceit' or 'Nether' or 'Evocation' or 'Hypercube' or 'Empyrean' then
         dalapsed = dalapsed + elapsed;

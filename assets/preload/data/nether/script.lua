@@ -1,3 +1,6 @@
+--you delete this script = you have a skill issue
+--frogb
+
 local bop = 1;
 local woah = false;
 
@@ -12,6 +15,11 @@ function onSongStart()
   
 		table.insert(defaultNotePos, {x,y})
 	end
+end
+
+function onCreate()
+	windowX2 = getPropertyFromClass('openfl.Lib', 'application.window.x')
+	windowY2 = getPropertyFromClass('openfl.Lib', 'application.window.y')
 end
 
 function onBeatHit()
