@@ -3112,7 +3112,7 @@ class PlayState extends MusicBeatState
 				//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 			}
 
-			startedCountdown = true;
+			startedCountdown = true; 
 			Conductor.songPosition = -Conductor.crochet * 5;
 			setOnLuas('startedCountdown', true);
 			callOnLuas('onCountdownStarted', []);
@@ -3177,6 +3177,7 @@ class PlayState extends MusicBeatState
 					case 0:
 						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
 						moveCamera(false);
+						timeAnim();
 					case 1:
 						countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 						countdownReady.cameras = [camHUD];
@@ -3387,7 +3388,9 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+		timeTxt.scale.x = 1.5;
+		timeTxt.scale.y = 1.5;
+		FlxTween.tween(timeTxt, {"scale.x": 1, "scale.y": 1}, 1, {ease: FlxEase.expoOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
 		switch(curStage)
@@ -3763,6 +3766,21 @@ class PlayState extends MusicBeatState
 			strumLineNotes.add(babyArrow);
 			babyArrow.postAddedToGroup();
 		}
+	}
+
+	function timeAnim()
+	{
+		timeBar.scale.x = 0.01;
+			timeBarBG.scale.x = 0.01;
+
+			//alpha tweens
+			FlxTween.tween(timeBarBG, {alpha: 1}, 1, {ease: FlxEase.circOut});
+			FlxTween.tween(timeBar, {alpha: 1}, 1, {ease: FlxEase.circOut});
+
+			//scale tweens
+			FlxTween.tween(timeBar, {"scale.x": 1}, 1.5, {ease: FlxEase.elasticOut});
+			FlxTween.tween(timeBarBG, {"scale.x": 1}, 1.5, {ease: FlxEase.elasticOut});
+
 	}
 
 	override function openSubState(SubState:FlxSubState)
