@@ -34,6 +34,30 @@ class FFNSettingsSubState extends BaseOptionsMenu
 		title = 'FFN-Related Settings';
 		rpcTitle = 'FFN-Related Settings Menu'; //for Discord Rich Presence
 
+		var option:Option = new Option('Judgement Counter:',
+			"Shows a judgement counter at the left-side of your screen.\nYou can also select how informative you want the counter to be.",
+			'judgementCounter',
+			'string',
+			'Complex',
+			['Disabled', 'Simple', 'Complex']);
+		addOption(option);
+
+		var option:Option = new Option('UI Type:',
+			"Changes which UI style is shown\nduring gameplay",
+			'UIType',
+			'string',
+			'FFN',
+			['FFN', 'Purgatory', 'Kade Engine', 'Psych Engine', 'Dave Engine']);
+		addOption(option);
+
+		var option:Option = new Option('Health Bar UI Style:',
+			"Which Health Bar UI style do you want the game to show?",
+			'healthBarType',
+			'string',
+			'Dave Engine',
+			['Dave Engine', 'Vanilla']);
+		addOption(option);
+
 		var option:Option = new Option('Camera Follows on Note Hit',
 			'If checked, the camera follows the direction of the note hit.',
 			'cameraFollowsNote',

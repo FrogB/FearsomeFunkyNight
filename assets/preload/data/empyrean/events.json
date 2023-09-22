@@ -352,6 +352,36 @@
 				]
 			],
 			[
+				128000,
+				[
+					[
+						"Cinematics",
+						"1",
+						""
+					],
+					[
+						"Flash effect",
+						"0",
+						""
+					]
+				]
+			],
+			[
+				146285.714285714,
+				[
+					[
+						"Flash effect",
+						"0",
+						""
+					],
+					[
+						"Cinematics",
+						"",
+						"2"
+					]
+				]
+			],
+			[
 				164571.428571428,
 				[
 					[
@@ -392,6 +422,16 @@
 					[
 						"Change the Default Camera Zoom",
 						"0.7",
+						""
+					]
+				]
+			],
+			[
+				193142.857142857,
+				[
+					[
+						"Hide or Show HUD elements with Fade",
+						"0",
 						""
 					]
 				]

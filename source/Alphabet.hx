@@ -37,6 +37,7 @@ class Alphabet extends FlxSpriteGroup
 	public var yAdd:Float = 0;
 	public var changeX:Bool = true;
 	public var changeY:Bool = true;
+	public var isCredItem:Bool = false;
 
 	public var alignment(default, set):Alignment = LEFT;
 	public var scaleX(default, set):Float = 1;
@@ -168,17 +169,24 @@ class Alphabet extends FlxSpriteGroup
 		var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
 		
 		if (isMenuItem)
-		{
-			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-
-			var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
-			y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.48) + yAdd, lerpVal);
-			if(forceX != Math.NEGATIVE_INFINITY) {
-				x = forceX;
-			} else {
-				x = FlxMath.lerp(x, (targetY * 20) + 90 + xAdd, lerpVal);
+			{
+				var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
+				if(changeX)
+					x = FlxMath.lerp(x, (targetY * distancePerItem.x) + startPosition.x, lerpVal);
+				if(changeY)
+					y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
 			}
-		}
+			super.update(elapsed);
+
+
+		if (isCredItem)
+			{
+				var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
+				if(changeX)
+					x = FlxMath.lerp(x, (targetY * 20) + 20, 0.30);
+				if(changeY)
+					y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
+			}
 
 		if (isPauseItem)
 		{
@@ -219,6 +227,10 @@ class Alphabet extends FlxSpriteGroup
 	
 				if (x < -900)
 					x = -900;
+
+			case "Custom":
+				y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.48), 0.16); 
+				x = FlxMath.lerp(x, (targetY * 60) + 90, 0.16);
 		}
 		super.update(elapsed);
 	}

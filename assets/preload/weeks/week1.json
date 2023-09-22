@@ -16,7 +16,7 @@
 	"storyName": "THE TRIO",
 	"weekBefore": "tutorial",
 	"weekName": "Week 1 - The Trio",
-	"weekDifficulties": "Normal",
+	"difficulties": "Normal",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

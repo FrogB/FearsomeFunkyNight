@@ -34,22 +34,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
 
-		var option:Option = new Option('Judgement Counter:',
-			"Shows a judgement counter at the left-side of your screen.\nYou can also select how informative you want the counter to be.",
-			'judgementCounter',
-			'string',
-			'Complex',
-			['Disabled', 'Simple', 'Complex']);
-		addOption(option);
-
-		var option:Option = new Option('Health Bar UI Style:',
-			"Which Health Bar UI style do you want the game to show?",
-			'healthBarType',
-			'string',
-			'Dave Engine',
-			['Dave Engine', 'Vanilla']);
-		addOption(option);
-
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
 			'noteSplashes',

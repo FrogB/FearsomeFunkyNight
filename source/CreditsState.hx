@@ -77,15 +77,19 @@ class CreditsState extends MusicBeatState
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description/Quote - Link - Role - Color
 			['D&B: FFN Team + Psych Engine Team'],
-			['Vs. Dave and Bambi',		'daveandbambi',		'The Original Mod by\nSupport it by pressing ENTER',		'https://gamebanana.com/mods/43201',	'',    '613BE0'],
-			['Ayo',		        	'ayo',		    	"'S'",								           					'https://www.youtube.com/@3Kingszz', 'Co-Owner/Director/Artist/Composer.',	'01FFFF'],
-			['FrogB',		'frogb',		'oh my god somebody pinch me i think im dreaming',							'https://linktr.ee/FrogB',	'Director/Main Programmer.', 'FFCB6C'],
-			['Pianoo',		        'pianoo',		    'i suck at code :sob:',											'https://www.roblox.com/users/1171454574/profile', 'Director/Composer/Semi-Programmer.',	'FFFFFF'],
-			['Reg. Reborn',		        'reginald',		    '47 likes and wheatdown finishes hell\nexpunged faces after 6 months',											'https://www.youtube.com/@ReginaldReborn', 'Quality Assurance/Artist',	'005F19'],
+			['Vs. Dave and Bambi',		'daveandbambi',		'The Original Mod by\nSupport it by pressing ENTER!',		'https://gamebanana.com/mods/43201',	'',    '613BE0'],
+			["Bambi's Purgatory",        'purgatory',          "This mod is a spin-off of Bambi's Purgatory\nMake sure to check it out!",       'https://discord.gg/bambispurgatory',   '',  '420000'],
+			['Ayo',		        	'ayo',		    	"'S'",								           					'https://www.youtube.com/@3Kingszz', 'Co-Owner/Director/Artist/Composer',	'01FFFF'],
+			['FrogB',		'frogb',		'oh my god somebody pinch me i think im dreaming',							'https://linktr.ee/FrogB',	'Director/Main Programmer', 'FFCB6C'],
+			['Pianoo',		        'pianoo',		    'i suck at code :sob:',											'https://www.roblox.com/users/1171454574/profile', 'Director/Composer/Semi-Programmer',	'FFFFFF'],
+			['Reginald. R',		        'reginald',		    '47 likes and wheatdown finishes hell\nexpunged faces after 6 months',											'https://www.youtube.com/@ReginaldReborn', 'Quality Assurance/Artist',	'005F19'],
 			['WhatsDown',		        'whatsdown',		    'THEY MADE BOMBU BLACK???',											'https://www.youtube.com/@WhatsDown', 'Quality Assurance/Artist',	'A85FF5'],
 			['BoxHaze',		        'boxhaze',		    '',								                    	'https://www.youtube.com/@BoxHaze',					'Composer',		'5D1B01'],
 			['CXyon3',		        'cxyon3',		    'I have obtained HEAVEN!',								                    	'',					'Composer',		'5D1B01'],
-			['MelonMan',		        'melonman',		    'Tide pods taste better when you\nshare them with friends!',					'https://www.youtube.com/@RealMelonMan', 'Composer.',	'FFFFFF'],
+			['MelonMan',		        'melonman',		'Tide pods taste better when you\nshare them with friends!',					'https://www.youtube.com/@RealMelonMan', 'Composer',	'FFFFFF'],
+			['Sr.Wiliam',		        'wiliam',		'My Boy Cypher got 1,000 views!',					'https://www.youtube.com/@SrWiliamGH', 'Composer',	'FF0055'],
+			['PurpleSigh192',		        'purplesigh',		'',					'https://www.youtube.com/@purplesigh192', 'Composer',	'5914A7'],
+			['BarGames',		        'bar',		    'ship part was cool',								                    	'https://www.youtube.com/channel/UC8uWXChGuhURNfuKOKqWahA',					'Charter',		'FF0000'],
 			['Gecko',		        'gecko',		    'Garrett deserved better',								                    	'https://www.youtube.com/@geckofnfreal',					'Charter',		'00E4FD'],
 			['L_gunn',		        'gunndude',		    'Baldi loves poland',								                    	'https://www.youtube.com/@YepasBottles',					'Charter',		'C01823'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_', '',	'444444'],
@@ -270,8 +274,8 @@ class CreditsState extends MusicBeatState
 
 		//i mean come on, what else could i have fucking done? -frogb
 		var LMAO:String = creditsStuff[curSelected][0];
-		if (LMAO.startsWith('Vs. '))
-			charText.text = "The OG D&B Mod(s) Credits";
+		if (LMAO.startsWith('Vs. ') || LMAO.startsWith("Bambi's"))
+			charText.text = "D&B + Bambi's Purgatory Credits";
 		else if (LMAO.startsWith('Ayo') || LMAO.startsWith('L_gunn'))
 			charText.text = "Fearsome Funky Night' Team";
 		else if (LMAO.startsWith('Shadow') || LMAO.startsWith('Smokey'))

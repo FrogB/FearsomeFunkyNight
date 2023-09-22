@@ -90,15 +90,14 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		for (i in 0...optionsArray.length)
 		{
 			var optionText:Alphabet = new Alphabet(290, 260, optionsArray[i].name, false);
-			optionText.isPauseItem = true;
-			optionText.itemType = 'Classic';
+			optionText.isMenuItem = true;
 			/*optionText.forceX = 300;
 			optionText.yMult = 90;*/
 			optionText.targetY = i;
 			grpOptions.add(optionText);
 
 			if(optionsArray[i].type == 'bool') {
-				var checkbox:CheckboxThingie = new CheckboxThingie(optionText.x + 210, optionText.y, optionsArray[i].getValue() == true);
+				var checkbox:CheckboxThingie = new CheckboxThingie(optionText.x - 105, optionText.y, optionsArray[i].getValue() == true);
 				checkbox.sprTracker = optionText;
 				checkbox.ID = i;
 				checkboxGroup.add(checkbox);
@@ -260,10 +259,13 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			}
 		}
 
+		if(boyfriend != null && boyfriend.animation.curAnim.finished) {
+			boyfriend.dance();
+		}
+
 		if(nextAccept > 0) {
 			nextAccept -= 1;
 		}
-
 		super.update(elapsed);
 	}
 

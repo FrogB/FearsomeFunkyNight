@@ -16,6 +16,7 @@ class ClientPrefs {
 	public static var globalAntialiasing:Bool = true;
 	//LATESTRELIC825'S PSYCH ENGINE VARIABLES (temporary ones only since i'll probably remove these options soon except for the judgement counter.)
 	public static var judgementCounter:String = 'Complex';
+	public static var UIType:String = 'FFN';
 	public static var healthBarType:String = 'Dave Engine';
 	public static var selfAwareness = true;
 	public static var noteSplashes:Bool = true;
@@ -115,6 +116,7 @@ class ClientPrefs {
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.judgementCounter = judgementCounter;
 		FlxG.save.data.healthBarType = healthBarType;
+		FlxG.save.data.UIType = UIType;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.selfAwareness = selfAwareness;
 		FlxG.save.data.shaders = shaders;
@@ -190,6 +192,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.healthBarType != null) {
 			healthBarType = FlxG.save.data.healthBarType;
+		}
+		if(FlxG.save.data.UIType != null) {
+			UIType = FlxG.save.data.UIType;
 		}
 		if(FlxG.save.data.selfAwareness != null) {
 			selfAwareness = FlxG.save.data.selfAwareness;

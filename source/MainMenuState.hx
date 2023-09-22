@@ -357,7 +357,8 @@ class MainMenuState extends MusicBeatState
 
 					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
-					FlxTween.tween(FlxG.camera, {zoom:1.35}, 1.45, {ease: FlxEase.expoIn});
+					FlxTween.tween(FlxG.camera, {zoom:2.5}, 3, {ease: FlxEase.backInOut, type: ONESHOT});
+
 					menuItems.forEach(function(spr:FlxSprite)
 					{
 						if (curSelected != spr.ID)

@@ -15,7 +15,7 @@
 	"storyName": "HELLFIRE HELLSCAPE",
 	"weekBefore": "week2",
 	"weekName": "Week 3",
-	"weekDifficulties": "Normal",
+	"difficulties": "Normal",
 	"startUnlocked": true,
 
 	"hideStoryMode": false,

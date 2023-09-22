@@ -334,6 +334,7 @@ class TitleState extends MusicBeatState
 
 				if(ClientPrefs.flashing) { FlxG.camera.flash(FlxColor.WHITE, 1, null, true); }
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+				FlxTween.tween(FlxG.camera, {zoom:2.5}, 3, {ease: FlxEase.backInOut, type: ONESHOT});
 
 				transitioning = true;
 				// FlxG.sound.music.stop();
@@ -343,7 +344,7 @@ class TitleState extends MusicBeatState
 	
 				MainMenuState.firstStart = true;
 
-				new FlxTimer().start(0.1, function(tmr:FlxTimer)
+				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					MusicBeatState.switchState(new MainMenuState());
 					closedState = true;
@@ -453,7 +454,7 @@ class TitleState extends MusicBeatState
 			case 7:
 				createCoolText(['Fearsome Funky Night by']);
 			case 8:
-				addMoreText('ayo, FrogB, FyriDev, BarGames,\nGecko, Pianoo, BoxHaze, poly_rug,\nCXYon3, Gabito, Noobo, MelonMan,\n...and many more of our contributors!');
+				addMoreText('ayo, FrogB, FyriDev, BarGames,\nGecko, Pianoo, BoxHaze, poly_rug,\nCXYon3, Sr.Wiliam, Noobo, MelonMan,\n...and many more of our contributors!');
 			case 9:
 				deleteCoolText();
 			case 10:
